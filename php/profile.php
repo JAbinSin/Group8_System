@@ -1,4 +1,4 @@
-<?php 
+<?php
     //Include the database to the webpage to access it
     include_once("../inc/database.php");
 
@@ -51,8 +51,8 @@
 
         <!-- Container for the profile information -->
         <div class="container p-3 mb-2 bg-dark text-white text-center w-50 rounded-3 overflow-auto">
-            <!-- This is an edit button to change some information --> 
-            <?php 
+            <!-- This is an edit button to change some information -->
+            <?php
                 //Only the clients can change their profile
                 //The admin cannot change their profile
                 //Change directly in the database for the admin

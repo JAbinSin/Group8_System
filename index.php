@@ -1,4 +1,4 @@
-<?php 
+<?php
         //This page would only act as a redirector
 
     //Connect to the database

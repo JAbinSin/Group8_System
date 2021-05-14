@@ -1,0 +1,16 @@
+Accounts
+
+Admin:
+	Username: admin123123
+	Password: admin123123
+
+
+
+
+Client:
+	Username: LoliShlong
+	Password: password
+
+
+	Username: user123123
+	Password: password

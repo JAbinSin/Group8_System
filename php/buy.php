@@ -52,6 +52,12 @@
             <?php
                 $userId = $_SESSION["userId"];
 
+                if(empty($_SESSION["cartItemId"]) {
+                  echo "<div class='alert alert-warning text-center h2' role='alert'>
+                          Items Failed to Purchase.
+                        </div>";
+                }
+
                 for($i=0; $i < (1 + @max(array_keys($_SESSION["cartItemId"]))); $i++){
                     if(!empty($_SESSION["cartItemId"][$i])) {
                         $sessItemId = $_SESSION["cartItemId"][$i];
@@ -85,6 +91,10 @@
 
                   unset($_SESSION["cartItemId"]); //Clear All the Session for cartItemId
                   unset($_SESSION["cartItemQuantity"]); //Clear All the Session for cartItemQuantity
+
+                  echo "<div class='alert alert-primary text-center h2' role='alert'>
+                          Items Successfully Purchase.
+                        </div>";
               }
             ?>
         </div>

@@ -1,4 +1,4 @@
-<?php 
+<?php
     //Include the database to the webpage to access it
     include_once("../inc/database.php");
 
@@ -45,7 +45,7 @@
         <!-- Container  -->
         <div class="container p-3 mb-2 bg-dark text-white rounded-3 w-50">
             <h1 class="text-center mb-2">Menu</h1>
-            <?php 
+            <?php
                 //Check if the input is blank
                 //This is just a safety measure if it happens
                 if(empty($itemQuantity)) {
@@ -61,7 +61,7 @@
                 if($testError == false) {
 
                     //Call session_start() before using $_SESSION Variables
-                    if(empty($_SESSION["cartItemId"])){ // check if the cart is empty
+                    if(!isset($_SESSION["cartItemId"])) { // check if the cart is not set
                         $_SESSION["cartItemId"] = array();
                         $_SESSION["cartItemQuantity"] = array();
                     }

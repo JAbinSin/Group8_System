@@ -16,6 +16,7 @@
     //Redirect the user if they pick the clear option
     if($choice == "Clear") {
         header("Location: clear.php");
+        exit();
     }
 ?>
 
@@ -52,50 +53,49 @@
             <?php
                 $userId = $_SESSION["userId"];
 
-                if(empty($_SESSION["cartItemId"]) {
+                if(empty($_SESSION["cartItemId"])) {
                   echo "<div class='alert alert-warning text-center h2' role='alert'>
                           Items Failed to Purchase.
                         </div>";
-                }
+                } else {
+                  for($i=0; $i < (1 + @max(array_keys($_SESSION["cartItemId"]))); $i++){
+                      if(isset($_SESSION["cartItemId"][$i])) {
+                          $sessItemId = $_SESSION["cartItemId"][$i];
+                          $sessItemQuantity = $_SESSION["cartItemQuantity"][$i];
 
-                for($i=0; $i < (1 + @max(array_keys($_SESSION["cartItemId"]))); $i++){
-                    if(!empty($_SESSION["cartItemId"][$i])) {
-                        $sessItemId = $_SESSION["cartItemId"][$i];
-                        $sessItemQuantity = $_SESSION["cartItemQuantity"][$i];
+                          //Query and Execute for the item information
+                          $querySelectItemInfo = "SELECT * FROM tbl_items WHERE id = $sessItemId";
+                          $executeQuerySelectItemInfo = mysqli_query($con, $querySelectItemInfo);
 
-                        //Query and Execute for the item information
-                        $querySelectItemInfo = "SELECT * FROM tbl_items WHERE id = $sessItemId";
-                        $executeQuerySelectItemInfo = mysqli_query($con, $querySelectItemInfo);
+                          $itemInfo = mysqli_fetch_assoc($executeQuerySelectItemInfo);
 
-                        $itemInfo = mysqli_fetch_assoc($executeQuerySelectItemInfo);
+                          $itemPrice = $itemInfo["price"] * $sessItemQuantity;
 
-                        $itemPrice = $itemInfo["price"] * $sessItemQuantity;
+                          $queryInsert = "
+                          INSERT INTO tbl_history(
+                              user,
+                              item,
+                              quantity,
+                              price
+                          )
+                          VALUES (
+                              '$userId',
+                              '$sessItemId',
+                              '$sessItemQuantity',
+                              '$itemPrice'
+                          )
+                          ";
 
-                        $queryInsert = "
-                        INSERT INTO tbl_history(
-                            user,
-                            item,
-                            quantity,
-                            price
-                        )
-                        VALUES (
-                            '$userId',
-                            '$sessItemId',
-                            '$sessItemQuantity',
-                            '$itemPrice'
-                        )
-                        ";
+                          $executeQueryInsert = mysqli_query($con, $queryInsert);
 
-                        $executeQueryInsert = mysqli_query($con, $queryInsert);
+                          unset($_SESSION["cartItemId"][$i]); //Clear All the Session for cartItemId
+                          unset($_SESSION["cartItemQuantity"][$i]); //Clear All the Session for cartItemQuantity
+                      }
                   }
-
-                  unset($_SESSION["cartItemId"]); //Clear All the Session for cartItemId
-                  unset($_SESSION["cartItemQuantity"]); //Clear All the Session for cartItemQuantity
-
                   echo "<div class='alert alert-primary text-center h2' role='alert'>
                           Items Successfully Purchase.
                         </div>";
-              }
+                }
             ?>
         </div>
     </body>

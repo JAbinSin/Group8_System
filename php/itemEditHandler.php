@@ -1,4 +1,4 @@
-<?php 
+<?php
     //Include the database to the webpage to access it
     include_once("../inc/database.php");
 
@@ -54,12 +54,12 @@
         <!-- Container for the output messafe of the edit handler -->
         <div class="container p-3 mb-2 bg-dark text-white rounded-3 w-50">
             <h1 class="text-center mb-2">Item Edit</h1>
-            <?php 
+            <?php
                 //This check if the user input a blank input because space count as an input for some reasons.
                 foreach($arrayPost as $label => $value) {
                     if(empty($value)) {
-                        echo 
-                            "<div class='alert alert-danger text-center h2' role='alert'>" 
+                        echo
+                            "<div class='alert alert-danger text-center h2' role='alert'>"
                                 . $label . " Input Empty/Invalid." .
                             "</div>
                         ";
@@ -127,14 +127,14 @@
                         $target_file = $target_dir . $fileName;
                         move_uploaded_file($_FILES["itemPicture"]["tmp_name"], $target_file);
                     }
-                    
+
 
                     //Query for the Update of the User
                     //This is the Query for the edit with image upload
                     if($uploadedImage == true) {
-                        $queryUpdate = "UPDATE 
+                        $queryUpdate = "UPDATE
                                             tbl_items
-                                        SET 
+                                        SET
                                             name = '$itemName',
                                             price = '$itemPrice',
                                             description = '$itemDescription',
@@ -155,9 +155,9 @@
                         ";
                     } else {
                         //This is the Query for the edit without image upload
-                        $queryUpdate = "UPDATE 
+                        $queryUpdate = "UPDATE
                                             tbl_items
-                                        SET 
+                                        SET
                                             name = '$itemName',
                                             price = '$itemPrice',
                                             description = '$itemDescription'

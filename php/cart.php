@@ -1,4 +1,4 @@
-<?php 
+<?php
     //Include the database to the webpage to access it
     include_once("../inc/database.php");
 
@@ -40,7 +40,7 @@
         <div class="container p-3 mb-2 bg-dark text-white rounded-3">
             <h1 class="text-center mb-2">Cart</h1>
 
-            <?php 
+            <?php
             //Check if the Cart is Empty
             if(empty($_SESSION["cartItemId"])) {
                 echo "
@@ -51,7 +51,7 @@
 
             //If the Cart is not empty, list all the current item in cart
             for($i=0; $i < (1 + @max(array_keys($_SESSION["cartItemId"]))); $i++){
-                if(!empty($_SESSION["cartItemId"][$i])) {
+                if(isset($_SESSION["cartItemId"][$i])) {
                     $sessItemId = $_SESSION["cartItemId"][$i];
                     $sessItemQuantity = $_SESSION["cartItemQuantity"][$i];
 
@@ -97,7 +97,7 @@
                                 </div>
                             </div>
                         </form>
-                    ";    
+                    ";
                 }
             }
 

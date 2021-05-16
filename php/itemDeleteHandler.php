@@ -1,4 +1,4 @@
-<?php 
+<?php
     //Include the database to the webpage to access it
     include_once("../inc/database.php");
 
@@ -18,7 +18,10 @@
     $executeQueryPicture = mysqli_query($con, $queryPictureDelete);
     $infoItemPicture = mysqli_fetch_assoc($executeQueryPicture);
     $path = "../img/items/" . $infoItemPicture["picture"];
-    unlink($path);
+    //This remove the image if the image is not the default.png
+    if(($infoItemPicture["picture"] != "default.png")) {
+        unlink($path);
+    }
 
     //Ready the query and execute it to delete the item
     $deleteQuery = "DELETE FROM tbl_items WHERE id = '$itemId'";

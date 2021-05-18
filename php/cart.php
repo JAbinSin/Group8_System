@@ -50,7 +50,7 @@
             }
 
             //If the Cart is not empty, list all the current item in cart
-            for($i=0; $i < (1 + @max(array_keys($_SESSION["cartItemId"]))); $i++){
+            for($i=0; $i < (1 + @max(array_keys($_SESSION["cartItemId"]))); $i++) {
                 if(isset($_SESSION["cartItemId"][$i])) {
                     $sessItemId = $_SESSION["cartItemId"][$i];
                     $sessItemQuantity = $_SESSION["cartItemQuantity"][$i];

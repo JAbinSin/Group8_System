@@ -1,4 +1,4 @@
-<?php 
+<?php
     //Include the database to the webpage to access it
     include_once("../inc/database.php");
 
@@ -55,7 +55,7 @@
         <!-- Container for the form of delete user -->
         <div class="container p-3 mb-2 bg-dark text-white rounded-3 w-50">
             <h1 class="text-center mb-2">Item Delete</h1>
-            <div class="alert alert-danger text-center overflow-auto" role="alert">
+            <div class="alert alert-danger text-center h2 overflow-auto" role="alert">
                 <?php
                     echo "
                         Delete Item: <strong>" . $itemName . "</strong>"

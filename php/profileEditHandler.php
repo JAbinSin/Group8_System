@@ -1,4 +1,4 @@
-<?php 
+<?php
     //Include the database to the webpage to access it
     include_once("../inc/database.php");
 
@@ -56,12 +56,12 @@
         <div class="container p-3 mb-2 bg-dark text-white w-50 rounded-3">
             <!-- php for the verifications and execution to the database  -->
             <h1 class="text-center mb-2">Update Profile Info</h1>
-            <?php 
+            <?php
                 //This check if the user input a blank input because space count as an input for some reasons.
                 foreach($arrayPost as $label => $value) {
                     if(empty($value)) {
-                        echo 
-                            "<div class='alert alert-danger text-center h2' role='alert'>" 
+                        echo
+                            "<div class='alert alert-danger text-center h2' role='alert'>"
                                 . $label . " Input Empty/Invalid." .
                             "</div>
                         ";
@@ -137,13 +137,13 @@
                         $target_file = $target_dir . $fileName;
                         move_uploaded_file($_FILES["profilePicture"]["tmp_name"], $target_file);
                     }
-                    
+
                     //Query for the Update of the User
                     //This is the Query for the edit with image upload
                     if($uploadedImage == true) {
-                        $queryUpdate = "UPDATE 
+                        $queryUpdate = "UPDATE
                                             tbl_users
-                                        SET 
+                                        SET
                                             first_name = '$userFirstName',
                                             last_name = '$userLastName',
                                             email = '$userEmail',
@@ -166,9 +166,9 @@
                         ";
                     } else {
                         //This is the Query for the edit without image upload
-                        $queryUpdate = "UPDATE 
+                        $queryUpdate = "UPDATE
                                             tbl_users
-                                        SET 
+                                        SET
                                             first_name = '$userFirstName',
                                             last_name = '$userLastName',
                                             email = '$userEmail',

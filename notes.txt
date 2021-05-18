@@ -14,3 +14,8 @@ Client:
 
 	Username: user123123
 	Password: password
+
+3 Types of Users
+	Admin
+	Client
+	Guest

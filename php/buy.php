@@ -52,6 +52,7 @@
             <h1 class="text-center mb-2">Cart</h1>
             <?php
                 $userId = $_SESSION["userId"];
+                $itemStatus = "pending";
 
                 if(empty($_SESSION["cartItemId"])) {
                   echo "<div class='alert alert-warning text-center h2' role='alert'>
@@ -76,13 +77,15 @@
                               user,
                               item,
                               quantity,
-                              price
+                              price,
+                              status
                           )
                           VALUES (
                               '$userId',
                               '$sessItemId',
                               '$sessItemQuantity',
-                              '$itemPrice'
+                              '$itemPrice',
+                              '$itemStatus'
                           )
                           ";
 

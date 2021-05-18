@@ -77,16 +77,16 @@
                             echo"
                                 <div class='col text-center mx-auto itemList-card-admin'>
                                     <div class='card h-100 border border-secondary border-3 card-color'>
-                                        <div class='card-footer'>
-                                            <a href='itemEdit.php?id=$itemId' class='link-primary'>Edit</a> |
-                                            <a href='itemDelete.php?id=$itemId' class='link-danger'> Delete</a>
-                                        </div>
                                             <a href='item.php?id=$itemId'><img src='../img/items/$itemPicture' class='card-img-top m-2 rounded-3 itemList-card-image-admin' alt='Image Unavailable'></a>
                                         <div class='card-body text-break'>
                                             <h5 class='card-title module line-clamp p-1'><a href='item.php?id=$itemId' class='text-reset text-decoration-none'>$itemName</a></h5>
                                         </div>
                                         <div class='card-footer'>
                                             <strong>₱$itemPrice</strong>
+                                        </div>
+                                        <div class='card-footer'>
+                                            <a href='itemEdit.php?id=$itemId' class='link-primary'>Edit</a> |
+                                            <a href='itemDelete.php?id=$itemId' class='link-danger'> Delete</a>
                                         </div>
                                     </div>
                                 </div>

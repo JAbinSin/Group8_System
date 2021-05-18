@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 20, 2021 at 12:53 AM
+-- Generation Time: May 18, 2021 at 07:40 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.10
 
@@ -32,8 +32,20 @@ CREATE TABLE `tbl_history` (
   `user` int(25) NOT NULL COMMENT 'int(25)\r\nFor id',
   `item` int(25) NOT NULL COMMENT 'int(25)\r\nFor id',
   `quantity` int(25) NOT NULL COMMENT 'int(25)',
-  `price` int(25) NOT NULL COMMENT 'int(25)'
+  `price` decimal(11,2) NOT NULL COMMENT 'decimal(11,2)',
+  `time` timestamp NOT NULL DEFAULT current_timestamp(),
+  `status` varchar(255) NOT NULL COMMENT 'varchar(255)'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tbl_history`
+--
+
+INSERT INTO `tbl_history` (`id`, `user`, `item`, `quantity`, `price`, `time`, `status`) VALUES
+(47, 6, 11, 1, '35.00', '2021-05-16 12:28:36', 'pending'),
+(48, 6, 10, 1, '20.00', '2021-05-16 12:28:36', 'pending'),
+(49, 6, 11, 1, '35.00', '2021-05-17 05:54:11', ''),
+(50, 6, 10, 1, '20.00', '2021-05-17 05:54:11', '');
 
 -- --------------------------------------------------------
 
@@ -57,8 +69,7 @@ INSERT INTO `tbl_items` (`id`, `name`, `description`, `price`, `picture`) VALUES
 (8, 'Hotdog', 'Masarap na Hotdog Mainit-init at magulay pa', '25.00', '8_picture.jpg'),
 (10, 'Siomai', 'Pork Siomai Na may Chili Sauce', '20.00', '10_picture.jpg'),
 (11, 'Burger', 'The Best Burger in Town', '35.00', '11_picture.jpg'),
-(12, 'Pizza', 'The Best Family Pizza', '100.00', '12_picture.jpg'),
-(13, 'Siopao', 'Asado', '20.00', '13_picture.jpg');
+(12, 'Pizza', 'The Best Family Pizza', '100.00', '12_picture.jpg');
 
 -- --------------------------------------------------------
 
@@ -83,9 +94,12 @@ CREATE TABLE `tbl_users` (
 --
 
 INSERT INTO `tbl_users` (`id`, `first_name`, `last_name`, `username`, `password`, `email`, `phone_number`, `profile_picture`, `user_type`) VALUES
-(5, 'zate', 'niemo', 'LoliShlong', '$2y$10$uxyfbkAwItGq.g6RQ0tXJ.ArB3UHnb.Ud5yFQ1NcGqAN4QPneB9vq', 'exmapleqwe@email.com', '09123231432', '5_profile.jpg', 'client'),
-(6, 'testing', 'master', 'user123123', '$2y$10$yoRKELcTsVZD9j/V0qg2GOdvzhruXAFABf6Ju2htMN/JJieTyhuP2', 'kdsofksdokso@wekofdksf', '09123123423', 'default.png', 'client'),
-(7, 'Severino', 'Norbert', 'admin123123', '$2y$10$wKj6Gjq0gvWW3yCHPXcdNuMq8M7LlCfWm9tq3tFo7XSsNBdYdeXT2', 'admin@admin123', '11111111110', 'default.png', 'admin');
+(6, 'boop', 'beep', 'user123123', '$2y$10$yoRKELcTsVZD9j/V0qg2GOdvzhruXAFABf6Ju2htMN/JJieTyhuP2', 'kdsofksdokso@wekofdksfl', '09123123123', '6_profile.jpg', 'client'),
+(7, 'Severino', 'Norbert', 'admin123123', '$2y$10$wKj6Gjq0gvWW3yCHPXcdNuMq8M7LlCfWm9tq3tFo7XSsNBdYdeXT2', 'admin@admin123', '11111111110', 'default.png', 'admin'),
+(8, 'Leonardo', 'Da Vinci', 'LeonardoDaVinci', '$2y$10$h30oCJbperkS3EVjHHeHdeDCiNFrPIhSLvEvf9/j53qfnFesN/WCO', 'leonardodavinci123@gmai.com', '09333059211', 'default.png', 'client'),
+(9, 'Severino', 'Norbert', 'admin', '$2y$10$qd9wmNeI4YuW1VOje7rE7.MovFYmGBSSg7q4K5fd2AP0z19zwawcK', 'admin@admin', '11111111111', 'default.png', 'admin'),
+(10, 'Severino', 'Norbert', 'admin123456', '$2y$10$h.VvajekjcYOMrqlJ6clRuSl6TOb8qFu8C9eO73jh7QjlvqeBn9wy', 'admin123456@admin', '11111123421', 'default.png', 'admin'),
+(11, 'booper', 'beeper', 'BooperBeeper', '$2y$10$A9CJCeq0IxxRgLEH5BNvROPmwbBRMscnwA4GWyYyr6zb8U3HASwAe', 'boop@beeper.com', '12392371845', 'default.png', 'client');
 
 --
 -- Indexes for dumped tables
@@ -117,19 +131,19 @@ ALTER TABLE `tbl_users`
 -- AUTO_INCREMENT for table `tbl_history`
 --
 ALTER TABLE `tbl_history`
-  MODIFY `id` int(25) NOT NULL AUTO_INCREMENT COMMENT 'int(25)';
+  MODIFY `id` int(25) NOT NULL AUTO_INCREMENT COMMENT 'int(25)', AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT for table `tbl_items`
 --
 ALTER TABLE `tbl_items`
-  MODIFY `id` int(25) NOT NULL AUTO_INCREMENT COMMENT 'int(25)', AUTO_INCREMENT=20;
+  MODIFY `id` int(25) NOT NULL AUTO_INCREMENT COMMENT 'int(25)', AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `tbl_users`
 --
 ALTER TABLE `tbl_users`
-  MODIFY `id` int(25) NOT NULL AUTO_INCREMENT COMMENT 'int(25)', AUTO_INCREMENT=8;
+  MODIFY `id` int(25) NOT NULL AUTO_INCREMENT COMMENT 'int(25)', AUTO_INCREMENT=12;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

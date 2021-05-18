@@ -58,8 +58,15 @@
                   echo "<div class='alert alert-warning text-center h2' role='alert'>
                           Items Failed to Purchase.
                         </div>";
+                  exit();
                 } else {
-                  for($i=0; $i < (1 + @max(array_keys($_SESSION["cartItemId"]))); $i++){
+                  //Query and Execute for the Order Id
+                  $querySelectOrderId = "SELECT max(order_id) AS order_id FROM tbl_history";
+                  $executeQuerySelectOrderId = mysqli_query($con, $querySelectOrderId);
+                  $orderIdInfo = mysqli_fetch_assoc($executeQuerySelectOrderId);
+                  @$orderId = $orderIdInfo["order_id"] + 1;
+
+                  for($i=0; $i < (1 + @max(array_keys($_SESSION["cartItemId"]))); $i++) {
                       if(isset($_SESSION["cartItemId"][$i])) {
                           $sessItemId = $_SESSION["cartItemId"][$i];
                           $sessItemQuantity = $_SESSION["cartItemQuantity"][$i];
@@ -67,9 +74,7 @@
                           //Query and Execute for the item information
                           $querySelectItemInfo = "SELECT * FROM tbl_items WHERE id = $sessItemId";
                           $executeQuerySelectItemInfo = mysqli_query($con, $querySelectItemInfo);
-
                           $itemInfo = mysqli_fetch_assoc($executeQuerySelectItemInfo);
-
                           $itemPrice = $itemInfo["price"] * $sessItemQuantity;
 
                           $queryInsert = "
@@ -78,14 +83,16 @@
                               item,
                               quantity,
                               price,
-                              status
+                              status,
+                              order_id
                           )
                           VALUES (
                               '$userId',
                               '$sessItemId',
                               '$sessItemQuantity',
                               '$itemPrice',
-                              '$itemStatus'
+                              '$itemStatus',
+                              '$orderId'
                           )
                           ";
 

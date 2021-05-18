@@ -78,7 +78,7 @@
                                     </div>
                                     <div class='col-md-8'>
                                         <div class='card-body text-break text-white'>
-                                            <h1 class='card-title text-primary'>$itemName</h1>
+                                            <h2 class='card-title text-primary'>$itemName</h2>
                                             <hr>
                                             <p class='h5'>Item Total Price: ₱$itemPrice</p>
                                             <div class='row mt-4'>

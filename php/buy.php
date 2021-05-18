@@ -76,10 +76,14 @@
                           $executeQuerySelectItemInfo = mysqli_query($con, $querySelectItemInfo);
                           $itemInfo = mysqli_fetch_assoc($executeQuerySelectItemInfo);
                           $itemPrice = $itemInfo["price"] * $sessItemQuantity;
+                          $itemPicture = $itemInfo["picture"];
+                          $itemName = $itemInfo["name"];
 
                           $queryInsert = "
                           INSERT INTO tbl_history(
                               user,
+                              picture,
+                              name,
                               item,
                               quantity,
                               price,
@@ -88,6 +92,8 @@
                           )
                           VALUES (
                               '$userId',
+                              '$itemPicture',
+                              '$itemName',
                               '$sessItemId',
                               '$sessItemQuantity',
                               '$itemPrice',

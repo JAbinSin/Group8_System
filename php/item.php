@@ -1,4 +1,4 @@
-<?php 
+<?php
     //Include the database to the webpage to access it
     include_once("../inc/database.php");
 
@@ -65,7 +65,7 @@
                     </div>
                     <div class="col-md-8">
                         <div class="card-body text-break text-white">
-                            <h1 class="card-title text-primary"><?php echo "$itemName"?></h1>
+                            <h2 class="card-title text-primary"><?php echo "$itemName"?></h2>
                             <hr>
                             <p class="h5">Item Price: ₱<?php echo "$itemPrice"?></p>
                             <?php
@@ -105,7 +105,7 @@
                 <div class="text-white text-break mt-3">
                     <hr>
                     <h1 class="text-primary">Description</h1>
-                    <p class="h5 mt-4"><?php echo nl2br($itemDescription)?></p>
+                    <p class="h5 mt-4 lh-base"><?php echo nl2br($itemDescription)?></p>
                 </div>
             </div>
         </div>

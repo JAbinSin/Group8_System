@@ -38,9 +38,68 @@
 
         <!-- Container  -->
         <div class="container p-3 mb-2 bg-dark text-white rounded-3">
-            <h1 class="text-center mb-2">History</h1>
+            <h1 class="text-center mb-5">History</h1>
+            <?php
+                //Use a variable to be able to use it in the Query Conditions
+                $user = $_SESSION["userId"];
 
+                //Query and Execute for the history information
+                $querySelectHistory = "SELECT * FROM tbl_history WHERE user = $user ORDER BY order_id DESC";
+                $executeQuerySelectHistory = mysqli_query($con, $querySelectHistory);
 
+                //Set a null to hold the Order Id
+                $historyOrderId = null;
+                //Uses loop to echo all the items the user selected
+                while($historyInfo = mysqli_fetch_assoc($executeQuerySelectHistory)) {
+                    //Uses this so that it would be Group by the Order Id
+                    if($historyInfo["order_id"] != $historyOrderId) {
+                        $historyOrderId = $historyInfo["order_id"];
+
+                        echo "
+                            <div class='card bg-dark'>
+                                <div class='card-header text-center'>
+                                    Order Id: $historyOrderId
+                                </div>
+                        ";
+                    }
+                    $historyItem = $historyInfo["item"];
+                    $historyPicture = $historyInfo["picture"];
+                    $historyQuantity = $historyInfo["quantity"];
+                    $historyName = $historyInfo["name"];
+                    $historyPrice = $historyInfo["price"];
+                    $historyTime = $historyInfo["time"];
+                    $historyStatus = $historyInfo["status"];
+
+                    echo "
+                        <div class='card-body'>
+                            <div class='card mb-3 text-dark bg-transparent mx-auto' style='max-width: 50rem; border: 0;'>
+                                <div class='row g-0 border border-secondary border-2' style='margin-bottom: 1rem;'>
+                                    <div class='col-md-4 p-0 bg-transparent' style='max-height: 16rem; min-height: 16rem;'>
+                                        <a href='item.php?id=$historyItem'>
+                                            <img src='../img/items/$historyPicture' alt='Image Unavailable' style='width: 100%; height: 100%;'>
+                                        </a>
+                                    </div>
+                                    <div class='col-md-8'>
+                                        <div class='card-body text-break text-white'>
+                                            <h2 class='card-title text-primary'>$historyName</h2>
+                                            <hr>
+                                            <div class='row mt-4'>
+                                                <h5>Item Total Price: ₱$historyPrice</h5>
+                                                <h5>Item Quantity: $historyQuantity</h5>
+                                                <h5>Order Status: ". ($historyStatus == 'pending' ? '<span class="badge bg-warning text-dark">Pending</span>' : '<span class="badge bg-success">Confirmed</span>') ."</h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class='card-footer text-muted text-center'>
+                            Time Purchase: $historyTime
+                        </div>
+                    <div>
+                    ";
+                }
+            ?>
         </div>
     </body>
 </html>

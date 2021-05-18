@@ -1,4 +1,4 @@
-<?php 
+<?php
     //Include the database to the webpage to access it
     include_once("../inc/database.php");
 ?>
@@ -31,9 +31,9 @@
         <?php include_once("../inc/navBar.php"); ?>
 
         <!-- Container for the whole list of items -->
-        <div class="container p-3 mb-2 bg-dark text-dark rounded-3">
+        <div class="container p-3 mb-2 bg-dark text-white rounded-3">
             <h1 class="text-center mb-2 text-white">Menu</h1>
-            
+
             <!-- Spotlight would be implemented later
             <div id="carouselExampleCaptions" class="carousel slide mb-5 rounded-3" data-bs-ride="carousel" style="height:35rem;">
                 <div class="carousel-indicators">
@@ -62,7 +62,7 @@
 
 
             <div class="row row-cols-1 row-cols-md-3 g-4">
-                <?php 
+                <?php
                     //Query and Execute for the user information
                     $querySelectItem = "SELECT * FROM tbl_items";
                     $executeQuerySelectItem = mysqli_query($con, $querySelectItem);
@@ -72,11 +72,11 @@
                         $itemName = $itemInfo["name"];
                         $itemPrice = $itemInfo["price"];
                         $itemPicture = $itemInfo["picture"];
-                        
+
                         if(@$_SESSION['userType'] == "admin") {
                             echo"
                                 <div class='col text-center mx-auto itemList-card-admin'>
-                                    <div class='card h-100 border border-primary border-3'>
+                                    <div class='card h-100 border border-secondary border-3 card-color'>
                                         <div class='card-footer'>
                                             <a href='itemEdit.php?id=$itemId' class='link-primary'>Edit</a> |
                                             <a href='itemDelete.php?id=$itemId' class='link-danger'> Delete</a>
@@ -94,7 +94,7 @@
                         } else {
                             echo"
                                 <div class='col text-center mx-auto itemList-card-client'>
-                                    <div class='card h-100 border border-primary border-3'>
+                                    <div class='card h-100 border border-secondary border-3 card-color'>
                                             <a href='item.php?id=$itemId'><img src='../img/items/$itemPicture' class='card-img-top m-2 rounded-3 itemList-card-image-client' alt='Image Unavailable'></a>
                                         <div class='card-body text-break'>
                                             <h5 class='card-title module line-clamp p-1'><a href='item.php?id=$itemId' class='text-reset text-decoration-none'>$itemName</a></h5>
@@ -107,7 +107,7 @@
                             ";
                         }
                     }
-                    
+
                 ?>
             </div>
         </div>

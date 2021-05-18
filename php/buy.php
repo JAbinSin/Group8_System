@@ -24,7 +24,7 @@
 <html lang="en">
     <head>
         <!-- Title of the site  is set in SESSION from the database.php -->
-        <title><?php echo $_SESSION['siteName']?> | Cart</title>
+        <title><?php echo $_SESSION['siteName']?> | Buy</title>
 
         <!-- The meta tags used in the webpage -->
         <!-- charset="utf-8" to use almost all the character and symbol in the world -->

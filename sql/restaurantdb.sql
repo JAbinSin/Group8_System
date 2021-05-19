@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 18, 2021 at 07:40 AM
+-- Generation Time: May 19, 2021 at 03:57 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.10
 
@@ -30,22 +30,26 @@ SET time_zone = "+00:00";
 CREATE TABLE `tbl_history` (
   `id` int(25) NOT NULL COMMENT 'int(25)',
   `user` int(25) NOT NULL COMMENT 'int(25)\r\nFor id',
+  `picture` varchar(255) NOT NULL COMMENT 'varchar(255)',
+  `name` varchar(255) NOT NULL COMMENT 'varchar(255)',
   `item` int(25) NOT NULL COMMENT 'int(25)\r\nFor id',
   `quantity` int(25) NOT NULL COMMENT 'int(25)',
   `price` decimal(11,2) NOT NULL COMMENT 'decimal(11,2)',
   `time` timestamp NOT NULL DEFAULT current_timestamp(),
-  `status` varchar(255) NOT NULL COMMENT 'varchar(255)'
+  `status` varchar(255) NOT NULL COMMENT 'varchar(255)',
+  `order_id` int(25) NOT NULL COMMENT 'int(25)'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `tbl_history`
 --
 
-INSERT INTO `tbl_history` (`id`, `user`, `item`, `quantity`, `price`, `time`, `status`) VALUES
-(47, 6, 11, 1, '35.00', '2021-05-16 12:28:36', 'pending'),
-(48, 6, 10, 1, '20.00', '2021-05-16 12:28:36', 'pending'),
-(49, 6, 11, 1, '35.00', '2021-05-17 05:54:11', ''),
-(50, 6, 10, 1, '20.00', '2021-05-17 05:54:11', '');
+INSERT INTO `tbl_history` (`id`, `user`, `picture`, `name`, `item`, `quantity`, `price`, `time`, `status`, `order_id`) VALUES
+(84, 6, '11_picture.jpg', 'Burger', 11, 1, '35.00', '2021-05-18 16:58:54', 'pending', 1),
+(85, 6, '10_picture.jpg', 'Siomai', 10, 1, '20.00', '2021-05-18 16:58:54', 'pending', 1),
+(86, 6, '12_picture.jpg', 'Pizza', 12, 1, '100.00', '2021-05-18 16:58:54', 'pending', 1),
+(87, 6, '10_picture.jpg', 'Siomai', 10, 1, '20.00', '2021-05-18 23:41:07', 'pending', 2),
+(88, 6, '11_picture.jpg', 'Burger', 11, 1, '35.00', '2021-05-18 23:41:07', 'pending', 2);
 
 -- --------------------------------------------------------
 
@@ -131,7 +135,7 @@ ALTER TABLE `tbl_users`
 -- AUTO_INCREMENT for table `tbl_history`
 --
 ALTER TABLE `tbl_history`
-  MODIFY `id` int(25) NOT NULL AUTO_INCREMENT COMMENT 'int(25)', AUTO_INCREMENT=51;
+  MODIFY `id` int(25) NOT NULL AUTO_INCREMENT COMMENT 'int(25)', AUTO_INCREMENT=89;
 
 --
 -- AUTO_INCREMENT for table `tbl_items`

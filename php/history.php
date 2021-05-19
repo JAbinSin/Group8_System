@@ -38,7 +38,7 @@
 
         <!-- Container  -->
         <div class="container p-3 mb-2 bg-dark text-white rounded-3">
-            <h1 class="text-center mb-5">History</h1>
+            <h1 class="text-center mb-2">History</h1>
             <?php
                 //Use a variable to be able to use it in the Query Conditions
                 $user = $_SESSION["userId"];
@@ -49,12 +49,22 @@
 
                 //Set a null to hold the Order Id and Change
                 $historyOrderId = null;
+                $isEmpty = true;
+                //$change = null;
+                //$isFirst = true;
                 //Uses loop to echo all the items the user selected
                 while($historyInfo = mysqli_fetch_assoc($executeQuerySelectHistory)) {
+                    //To Check if there is Data from the tbl_history
+                    $isEmpty = false;
+
                     //Uses this so that it would be Group by the Order Id
                     if($historyInfo["order_id"] != $historyOrderId) {
+                        $oldId = $historyOrderId;
                         $historyOrderId = $historyInfo["order_id"];
-
+                        /*if($isFirst == true) {
+                          $isFirst = false;
+                        }
+                        $change = true;*/
 
                         echo "
                             <div class='card history-color mb-5'>
@@ -63,6 +73,8 @@
                                 </div>
                         ";
                     }
+
+
 
                     $historyItem = $historyInfo["item"];
                     $historyPicture = $historyInfo["picture"];
@@ -74,7 +86,7 @@
 
                     echo "
                         <div class='card-body'>
-                            <div class='card mb-3 text-dark bg-transparent mx-auto' style='max-width: 50rem; border: 0;'>
+                            <div class='card text-dark bg-transparent mx-auto' style='max-width: 50rem; border: 0;'>
                                 <div class='row g-0 border border-secondary border-2' style='margin-bottom: 1rem;'>
                                     <div class='col-md-4 p-0 bg-transparent' style='max-height: 16rem; min-height: 16rem;'>
                                         <a href='item.php?id=$historyItem'>
@@ -99,7 +111,21 @@
                             Time Purchase: $historyTime
                         </div>
                     ";
+
+                    //This is for the end of the Order Id list
+                    /*if($change == true) {
+                        $change = false;
+                        echo "</div>";
+                    }*/
                 }
+                //Show an Error for History is Empty
+                if($isEmpty) {
+                    echo "
+                        <div class='alert alert-warning text-center h2' role='alert'>
+                            History is Empty.
+                        </div>";
+                }
+
             ?>
         </div>
     </body>

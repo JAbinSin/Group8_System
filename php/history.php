@@ -50,21 +50,21 @@
                 //Set a null to hold the Order Id and Change
                 $historyOrderId = null;
                 $isEmpty = true;
-                //$change = null;
-                //$isFirst = true;
+                $isFirst = true;
+                $change = null;
                 //Uses loop to echo all the items the user selected
                 while($historyInfo = mysqli_fetch_assoc($executeQuerySelectHistory)) {
                     //To Check if there is Data from the tbl_history
                     $isEmpty = false;
 
                     //Uses this so that it would be Group by the Order Id
-                    if($historyInfo["order_id"] != $historyOrderId) {
-                        $oldId = $historyOrderId;
-                        $historyOrderId = $historyInfo["order_id"];
-                        /*if($isFirst == true) {
-                          $isFirst = false;
+                    if($historyInfo["order_id"] != $historyOrderId) {//1 != null
+                        $oldId = $historyOrderId;//null
+                        $historyOrderId = $historyInfo["order_id"];//1
+
+                        if($isFirst == false) {
+                            echo "</div>";
                         }
-                        $change = true;*/
 
                         echo "
                             <div class='card history-color mb-5'>
@@ -73,8 +73,6 @@
                                 </div>
                         ";
                     }
-
-
 
                     $historyItem = $historyInfo["item"];
                     $historyPicture = $historyInfo["picture"];
@@ -111,12 +109,10 @@
                             Time Purchase: $historyTime
                         </div>
                     ";
-
-                    //This is for the end of the Order Id list
-                    /*if($change == true) {
-                        $change = false;
-                        echo "</div>";
-                    }*/
+                    //Check if the fetch is the first data
+                    if($isFirst == true) {
+                        $isFirst = false;
+                    }
                 }
                 //Show an Error for History is Empty
                 if($isEmpty) {

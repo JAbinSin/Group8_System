@@ -57,6 +57,9 @@
                 if(empty($_SESSION["cartItemId"])) {
                   echo "<div class='alert alert-warning text-center h2' role='alert'>
                           Items Failed to Purchase.
+                        </div>
+                        <div class='col text-center'>
+                            <a class='btn btn-primary' href='itemList.php' role='button'>Home</a>
                         </div>";
                   exit();
                 } else {
@@ -113,6 +116,9 @@
                         </div>";
                 }
             ?>
+            <div class="col text-center">
+                <a class='btn btn-primary' href='itemList.php' role='button'>Home</a>
+            </div>
         </div>
     </body>
 </html>

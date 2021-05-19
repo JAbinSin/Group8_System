@@ -47,7 +47,7 @@
                 $querySelectHistory = "SELECT * FROM tbl_history WHERE user = $user ORDER BY order_id DESC";
                 $executeQuerySelectHistory = mysqli_query($con, $querySelectHistory);
 
-                //Set a null to hold the Order Id
+                //Set a null to hold the Order Id and Change
                 $historyOrderId = null;
                 //Uses loop to echo all the items the user selected
                 while($historyInfo = mysqli_fetch_assoc($executeQuerySelectHistory)) {
@@ -55,13 +55,15 @@
                     if($historyInfo["order_id"] != $historyOrderId) {
                         $historyOrderId = $historyInfo["order_id"];
 
+
                         echo "
-                            <div class='card bg-dark'>
+                            <div class='card history-color mb-5'>
                                 <div class='card-header text-center'>
                                     Order Id: $historyOrderId
                                 </div>
                         ";
                     }
+
                     $historyItem = $historyInfo["item"];
                     $historyPicture = $historyInfo["picture"];
                     $historyQuantity = $historyInfo["quantity"];
@@ -96,7 +98,6 @@
                         <div class='card-footer text-muted text-center'>
                             Time Purchase: $historyTime
                         </div>
-                    <div>
                     ";
                 }
             ?>

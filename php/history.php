@@ -63,7 +63,12 @@
                         $historyOrderId = $historyInfo["order_id"];//1
 
                         if($isFirst == false) {
-                            echo "</div>";
+                            echo "
+                                <div class='card-footer text-muted text-center'>
+                                    Time Purchase: $historyTime
+                                </div>
+                                </div>
+                            ";
                         }
 
                         echo "
@@ -105,9 +110,6 @@
                                 </div>
                             </div>
                         </div>
-                        <div class='card-footer text-muted text-center'>
-                            Time Purchase: $historyTime
-                        </div>
                     ";
                     //Check if the fetch is the first data
                     if($isFirst == true) {
@@ -123,6 +125,9 @@
                 }
 
             ?>
+            <div class='card-footer text-muted text-center'>
+                Time Purchase: <?php echo $historyTime?>
+            </div>
         </div>
     </body>
 </html>

@@ -1,4 +1,4 @@
-<?php 
+<?php
     //Include the database to the webpage to access it
     include_once("../inc/database.php");
 
@@ -37,22 +37,21 @@
         <?php include_once("../inc/navBar.php"); ?>
 
         <!-- This is the container of the form  -->
-        <div class="container p-3 mb-2 bg-dark text-white w-50 rounded-3">
-            <h1 class="text-center mb-2">Login</h1>
+        <div class="container p-3 mb-2 bg-dark text-white w-25 rounded-3 opacity-1">
+            <h1 class="text-center mb-2 opacity-1">Login</h1>
             <!-- This is the form that would need inputs that would be passed to the loginHandler.php -->
             <form action="loginHandler.php" method="post">
                 <div class="mb-3">
                     <label for="username" class="form-label">Username</label>
-                    <input type="text" class="form-control text-light bg-dark" name="username" placeholder="Username" required>
+                    <input type="text" class="form-control text-light bg-dark" name="username" placeholder="Enter Username" required>
                 </div>
                 <div class="mb-3">
                     <label for="password" class="form-label">Password</label>
-                    <input type="password" class="form-control text-light bg-dark" name="password" placeholder="Password" required>
+                    <input type="password" class="form-control text-light bg-dark" name="password" placeholder="Enter Password" required>
                 </div>
                 <div class="col text-center">
-                    <a href="register.php" class="link-primary">Register?</a>
-                    <br>
-                    <button type="submit" class="btn btn-primary mt-2">Login</button>
+                    <button type="submit" class="btn btn-secondary mb-3 rounded-pill shadow-lg">LOGIN</button>
+                    <p class="m-0">Not a member? <a href="register.php">Register now</a></p>
                 </div>
             </form>
         </div>

@@ -1,4 +1,4 @@
-<?php 
+<?php
     //Include the database to the webpage to access it
     include_once("../inc/database.php");
 
@@ -60,7 +60,7 @@
         <?php include_once("../inc/navBar.php"); ?>
 
         <!-- Container for the confirmation of deletion -->
-        <div class="container p-3 mb-2 bg-dark text-white rounded-3 w-50">
+        <div class="container p-3 mb-2 bg-dark text-white rounded-3 w-25 opacity-1">
             <h1 class="text-center mb-2">Delete User</h1>
             <div class="alert alert-danger text-center overflow-auto h2" role="alert">
                 <?php
@@ -73,10 +73,10 @@
             <div class="col text-center">
                 <!-- Form used to pass the data to the adminDeleteUserHandler.php -->
                 <form action="adminDeleteUserHandler.php" method="post">
-                    <input class="btn btn-primary btn-danger" type="submit" value="Delete">
+                    <input class="btn btn-primary btn-danger rounded-pill" type="submit" value="Delete">
                     <input type="hidden" name="userId" value="<?php echo $userId?>">
                 </form>
-                <a class='btn btn-primary mt-2' href='adminListUsers.php' role='button'>Cancel</a>
+                <a class='btn btn-primary mt-2 rounded-pill' href='adminListUsers.php' role='button'>Cancel</a>
             </div>
         </div>
     </body>

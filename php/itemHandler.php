@@ -43,14 +43,14 @@
         <?php include_once("../inc/navBar.php"); ?>
 
         <!-- Container  -->
-        <div class="container p-3 mb-2 bg-dark text-white rounded-3 w-50">
+        <div class="container p-3 mb-2 bg-dark text-white rounded-3 w-25 opacity-1">
             <h1 class="text-center mb-2">Menu</h1>
             <?php
                 //Check if the input is blank
                 //This is just a safety measure if it happens
                 if(empty($itemQuantity)) {
                     echo "
-                        <div class='alert alert-danger text-center h2' role='alert'>
+                        <div class='alert alert-danger text-center h2 overflow-auto' role='alert'>
                             Quantity: Invalid Input/Value.
                         </div>
                     ";
@@ -86,20 +86,20 @@
                     }
 
                     echo "
-                        <div class='alert alert-success text-center h2' role='alert'>
+                        <div class='alert alert-success text-center h2 overflow-auto' role='alert'>
                             Item: Added to Cart.
                         </div>
                     ";
                 } else {
                     echo "
-                        <div class='alert alert-danger text-center h2' role='alert'>
+                        <div class='alert alert-danger text-center h2 overflow-auto' role='alert'>
                             Item: Failed to add in Cart.
                         </div>
                     ";
                 }
             ?>
             <div class="col text-center">
-                <a class='btn btn-primary' href='itemList.php' role='button'>Home</a>
+                <a class='btn btn-secondary rounded-pill' href='itemList.php' role='button'>Home</a>
             </div>
         </div>
     </body>

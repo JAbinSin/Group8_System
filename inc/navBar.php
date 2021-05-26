@@ -1,8 +1,8 @@
 <!-- This is the navigation bar -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <?php 
+  <?php
     //Check for the quantity of the cart
-    $cartQuantity = isset($_SESSION["cartItemId"]) ? count($_SESSION["cartItemId"]) : 0; 
+    $cartQuantity = isset($_SESSION["cartItemId"]) ? count($_SESSION["cartItemId"]) : 0;
 
     //Check the SESSION of what type of user is currently signed in
     if(isset($_SESSION['userType'])) {

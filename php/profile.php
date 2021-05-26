@@ -50,7 +50,7 @@
         <?php include_once("../inc/navBar.php"); ?>
 
         <!-- Container for the profile information -->
-        <div class="container p-3 mb-2 bg-dark text-white text-center w-50 rounded-3 overflow-auto">
+        <div class="container p-3 mb-2 bg-dark text-white text-center w-25 rounded-3 overflow-auto opacity-1">
             <!-- This is an edit button to change some information -->
             <?php
                 //Only the clients can change their profile
@@ -72,7 +72,7 @@
             ?>
             <div class="text-break">
                 <h2 class="mt-4 fw-bold text-info">Profile Picture:</h2>
-                <img src="<?php echo "../img/profile/$userProfilePicture"?>" class="overflow-auto img-fluid rounded-circle mx-auto d-block mt-4" alt="Picture Unavailable" style="width: 13rem; height: 13rem;">
+                <img src="<?php echo "../img/profile/$userProfilePicture"?>" class="overflow-auto img-fluid rounded-circle mx-auto d-block mt-4 profile-picture" alt="Picture Unavailable">
             </div>
             <div class="text-break">
                 <h2 class="mt-4 fw-bold text-info">First Name:</h2>

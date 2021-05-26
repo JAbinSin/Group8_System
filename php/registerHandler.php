@@ -1,4 +1,4 @@
-<?php 
+<?php
     //Include the database to the webpage to access it
     include_once("../inc/database.php");
 
@@ -21,11 +21,11 @@
 
     //An array for easier and faster checking if there is an error in the variable
     $arrayPost = array("First Name:" => $userFirstName, "Last Name:" => $userLastName, "Username:" => $userUsername, "Password:" => $userPassword, "Confirm Password:" => $userConfirmPassword, "Email:" => $userEmail, "Cellphone Number:" => $userPhoneNumber);
-    
+
     //Used as a bool to check if there is an error in the whole validation
     $logsErrorTest = false;
 
-    //Encrypt the password 
+    //Encrypt the password
     //This would be used to be pass to the database instead of the password or confirmpassword
     $passwordHashed = password_hash($userPassword, PASSWORD_DEFAULT);
 ?>
@@ -58,17 +58,17 @@
         <?php include_once("../inc/navBar.php"); ?>
 
         <!-- Container for the register handler -->
-        <div class="container p-3 mb-2 bg-dark text-white w-50 rounded-3">
+        <div class="container p-3 mb-2 bg-dark text-white w-25 rounded-3 opacity-1">
             <h1 class="text-center mb-2">Register</h1>
 
             <!-- php for the verifications and execution to the database  -->
-            <?php 
+            <?php
 
                 //This check if the user input a blank input because space count as an input for some reasons.
                 foreach($arrayPost as $label => $value) {
                     if(empty($value)) {
-                        echo 
-                            "<div class='alert alert-danger text-center h2' role='alert'>" 
+                        echo
+                            "<div class='alert alert-danger text-center h2 overflow-auto' role='alert'>"
                                 . $label . " Input Empty/Invalid." .
                             "</div>
                         ";
@@ -79,7 +79,7 @@
                 //Check if the password and confirmed password is the same.
                 if(!($userPassword === $userConfirmPassword)) {
                     echo "
-                        <div class='alert alert-danger text-center h2' role='alert'> 
+                        <div class='alert alert-danger text-center h2 overflow-auto' role='alert'>
                             Confirm Password: Does not Match.
                         </div>
                     ";
@@ -94,7 +94,7 @@
                     if($userEmail === $userInfo["email"]) {
                         $logsErrorTest = true;
                         echo "
-                            <div class='alert alert-danger text-center h2' role='alert'>
+                            <div class='alert alert-danger text-center h2 overflow-auto' role='alert'>
                                 Email: Already Exist.
                             </div>
                         ";
@@ -102,7 +102,7 @@
                     if($userUsername === $userInfo["username"]) {
                         $logsErrorTest = true;
                         echo "
-                            <div class='alert alert-danger text-center h2' role='alert'>
+                            <div class='alert alert-danger text-center h2 overflow-auto' role='alert'>
                                 Username: Already Exist.
                             </div>
                         ";
@@ -110,7 +110,7 @@
                     if($userPhoneNumber === $userInfo["phone_number"]) {
                         $logsErrorTest = true;
                         echo "
-                            <div class='alert alert-danger text-center h2' role='alert'>
+                            <div class='alert alert-danger text-center h2 overflow-auto' role='alert'>
                                 Cellphone Number: Already Exist.
                             </div>
                         ";
@@ -121,7 +121,7 @@
                 if((strlen($userPassword) < 8) && !empty($userPassword)) {
                     $logsErrorTest = true;
                     echo "
-                        <div class='alert alert-danger text-center h2' role='alert'>
+                        <div class='alert alert-danger text-center h2 overflow-auto' role='alert'>
                             Password: Must be 8 Character and Above.
                         </div>
                     ";
@@ -129,7 +129,7 @@
                 if((strlen($userUsername) < 8) && !empty($userUsername)) {
                     $logsErrorTest = true;
                     echo "
-                        <div class='alert alert-danger text-center h2' role='alert'>
+                        <div class='alert alert-danger text-center h2 overflow-auto' role='alert'>
                             Username: Must be 8 Character and Above.
                         </div>
                     ";
@@ -140,7 +140,7 @@
                 if((strlen($userPhoneNumber) != 11) && !empty($userPhoneNumber)) {
                     $logsErrorTest = true;
                     echo "
-                        <div class='alert alert-danger text-center h2' role='alert'>
+                        <div class='alert alert-danger text-center h2 overflow-auto' role='alert'>
                             Cellphone Number: Must be 11 Digits.
                         </div>
                     ";
@@ -149,22 +149,22 @@
                 //If the following Inputs are valid it would enter the database, and if not it would not.
                 if($logsErrorTest == true) {
                     echo "
-                        <div class='alert alert-danger text-center h2' role='alert'>
+                        <div class='alert alert-danger text-center h2 overflow-auto' role='alert'>
                             Database: No Changes are Made.
                         </div>
 
                         <div class='col text-center'>
-                            <a class='btn btn-primary' href='register.php' role='button'>Register Again</a>
+                            <a class='btn btn-secondary mb-3 rounded-pill shadow-lg' href='register.php' role='button'>Register Again</a>
                         </div>
                     ";
                 } else {
                     echo "
-                        <div class='alert alert-success text-center h2' role='alert'>
+                        <div class='alert alert-success text-center h2 overflow-auto' role='alert'>
                             Database: User Registered.
                         </div>
 
                         <div class='col text-center'>
-                            <a class='btn btn-primary' href='login.php' role='button'>Login</a>
+                            <a class='btn btn-secondary mb-3 rounded-pill shadow-lg' href='login.php' role='button'>Login</a>
                         </div>
                     ";
 
@@ -189,7 +189,7 @@
                         '$userUserType'
                     )
                     ";
-                    
+
                     //Execute the Insert Query Above
                     $executeQueryInsertUser = mysqli_query($con, $queryInsertUser);
                 }

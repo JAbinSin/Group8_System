@@ -1,4 +1,4 @@
-<?php 
+<?php
     //Include the database to the webpage to access it
     include_once("../inc/database.php");
 
@@ -37,7 +37,7 @@
         <?php include_once("../inc/navBar.php"); ?>
 
         <!-- Container for the table of the user list -->
-        <div class="container p-3 mb-2 bg-dark text-white table-responsive rounded-3">
+        <div class="container p-3 mb-2 bg-dark text-white table-responsive rounded-3 opacity-1">
             <h1 class="text-center mb-2">User List</h1>
             <table class="table table-dark table-striped align-middle">
                 <thead class="text-center">
@@ -56,9 +56,9 @@
                     <?php
                         //Query for users in the tbl_users
                         $querySelectInfoUser = "
-                                            SELECT * 
-                                            FROM tbl_users 
-                                            ORDER BY 
+                                            SELECT *
+                                            FROM tbl_users
+                                            ORDER BY
                                                 CASE user_type
                                                     WHEN 'admin'THEN 1
                                                     WHEN 'client' THEN 2
@@ -66,7 +66,7 @@
                                                 END
                                             ";
                         $executeQuerySelectInfoUser = mysqli_query($con, $querySelectInfoUser);
-                        
+
                         //This is a loop for table body list
                         while($userInfo = mysqli_fetch_assoc($executeQuerySelectInfoUser)){
                             echo "
@@ -97,13 +97,13 @@
                                 if(!($userInfo['user_type'] === 'admin')) {
                                     echo"
                                     <td>
-                                        <a class='btn btn-primary' href='adminDeleteUser.php?id={$userInfo['id']}' role='button'>Delete</a>
+                                        <a class='btn btn-danger' href='adminDeleteUser.php?id={$userInfo['id']}' role='button'>Delete</a>
                                     </td>
                                 </tr>";
                                 } else {
                                     echo"
                                     <td>
-                                        <a class='btn btn-primary disabled' href='#' role='button'>Delete</a>
+                                        <a class='btn btn-secondary disabled' href='#' role='button'>Delete</a>
                                     </td>
                                 </tr>";
                                 }

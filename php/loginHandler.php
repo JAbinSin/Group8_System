@@ -1,4 +1,4 @@
-<?php 
+<?php
     //Include the database to the webpage to access it
     include_once("../inc/database.php");
 
@@ -12,7 +12,7 @@
     //Get the input from the form and asign a variable from the register.php
     $userUsername = trim($_POST["username"]);
     $userPassword = trim($_POST["password"]);
-    
+
     //Used as a bool to check if there is an error in the whole validation
     $logsErrorTest = false;
 ?>
@@ -45,16 +45,16 @@
         <?php include_once("../inc/navBar.php"); ?>
 
         <!-- Container  -->
-        <div class="container p-3 mb-2 bg-dark text-white w-50 rounded-3">
-            
+        <div class="container p-3 mb-2 bg-dark text-white w-25 rounded-3 opacity-1">
+
             <!-- php for the verifications and execution to the database  -->
-            <?php 
-                
+            <?php
+
                 //Check if the input is blank or empty because whitespace can bypass the required attribute
                 if(empty($userUsername)) {
                     $logsErrorTest = true;
                     echo "
-                        <div class='alert alert-danger text-center h2' role='alert'>
+                        <div class='alert alert-danger text-center h2 text-wrap overflow-auto' role='alert'>
                             Username: Input Empty/Invalid.
                         </div>
                         ";
@@ -62,7 +62,7 @@
                 if(empty($userPassword)) {
                     $logsErrorTest = true;
                     echo "
-                        <div class='alert alert-danger text-center h2' role='alert'>
+                        <div class='alert alert-danger text-center h2 overflow-auto' role='alert'>
                             Password: Input Empty/Invalid.
                         </div>
                     ";
@@ -83,28 +83,28 @@
                 }
 
                 //Validate if the information provided by the user is correct
-                //If true then the user would be able to login 
+                //If true then the user would be able to login
                 //If false they would need to login again
                 if($logsErrorTest == false) {
                     if($userUsername == @$userUsernametmp) {
                         if(password_verify($userPassword, $userPasswordtmp)) {
-                            
+
                             //Set a session for usertype and id used when accessing webpages
                             $_SESSION["userType"] = $userInfo["user_type"];
                             $_SESSION["userId"] = $userInfo["id"];
-                            
+
                             header("Location: itemList.php");
                             exit();
                         } else {
                             echo "
-                                <div class='alert alert-danger text-center h2' role='alert'>
+                                <div class='alert alert-danger text-center h2 overflow-auto' role='alert'>
                                     Password: Incorect.
                                 </div>
                             ";
                         }
                     } else {
                         echo "
-                            <div class='alert alert-danger text-center h2' role='alert'>
+                            <div class='alert alert-danger text-center h2 overflow-auto' role='alert'>
                                 Username: Does not Exist.
                             </div>
                         ";
@@ -113,7 +113,7 @@
             ?>
 
             <div class="col text-center">
-                <a class="btn btn-primary" href="login.php" role="button">Login Again</a>
+                <a class="btn btn-secondary mb-3 rounded-pill shadow-lg" href="login.php" role="button">Login Again</a>
             </div>
         </div>
     </body>

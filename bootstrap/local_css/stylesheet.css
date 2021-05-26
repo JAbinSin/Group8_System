@@ -5,7 +5,7 @@
 
 
 body {
-    background-image: url(../../img/system/background.png);
+    background-image: url(../../img/system/background1.jpg);
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -52,4 +52,13 @@ body {
 
 .history-color {
     background-color: #282C34;
+}
+
+.opacity-1 {
+    opacity: 0.97;
+}
+
+.profile-picture {
+    width: 11rem;
+    height: 11rem;
 }

@@ -37,7 +37,7 @@
         <?php include_once("../inc/navBar.php"); ?>
 
         <!-- Container  -->
-        <div class="container p-3 mb-2 bg-dark text-white rounded-3">
+        <div class="container p-3 mb-2 bg-dark text-white rounded-3 w-50 opacity-1">
             <h1 class="text-center mb-2">Cart</h1>
 
             <?php
@@ -78,7 +78,7 @@
                         <form action='cartUpdate.php' method='post'>
                             <div class='card mb-3 text-dark bg-transparent mx-auto' style='max-width: 50rem; border: 0;'>
                                 <div class='row g-0 border border-secondary border-2' style='margin-bottom: 1rem;'>
-                                    <div class='col-md-4 p-0 bg-transparent' style='max-height: 16rem; min-height: 16rem;'>
+                                    <div class='col-md-4 p-0 bg-transparent' style='max-height: 16rem; min-height: 17rem;'>
                                         <a href='item.php?id=$sessItemId'>
                                             <img src='../img/items/$itemPicture' alt='Image Unavailable' style='width: 100%; height: 100%;'>
                                         </a>

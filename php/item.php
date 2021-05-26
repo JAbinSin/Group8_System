@@ -58,7 +58,7 @@
         <?php include_once("../inc/navBar.php"); ?>
 
         <!-- Container for the item details -->
-        <div class="container p-3 mb-2 bg-dark text-white rounded-3">
+        <div class="container p-3 mb-2 bg-dark text-white rounded-3 w-50 opacity-1">
             <h1 class="text-center mb-5">Item</h1>
 
             <div class="card mb-3 text-dark bg-transparent mx-auto" style="max-width: 50rem; border: 0;">

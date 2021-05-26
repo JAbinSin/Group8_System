@@ -52,14 +52,14 @@
         <?php include_once("../inc/navBar.php"); ?>
 
         <!-- Container for the output messafe of the edit handler -->
-        <div class="container p-3 mb-2 bg-dark text-white rounded-3 w-50">
+        <div class="container p-3 mb-2 bg-dark text-white rounded-3 w-25 opacity-1">
             <h1 class="text-center mb-2">Item Edit</h1>
             <?php
                 //This check if the user input a blank input because space count as an input for some reasons.
                 foreach($arrayPost as $label => $value) {
                     if(empty($value)) {
                         echo
-                            "<div class='alert alert-danger text-center h2' role='alert'>"
+                            "<div class='alert alert-danger text-center h2 overflow-auto' role='alert'>"
                                 . $label . " Input Empty/Invalid." .
                             "</div>
                         ";
@@ -75,7 +75,7 @@
                     if(($itemName === $itemInfo["name"]) && ($itemId != $itemInfo["id"])) {
                         $logsErrorTest = true;
                         echo "
-                            <div class='alert alert-danger text-center h2' role='alert'>
+                            <div class='alert alert-danger text-center h2 overflow-auto' role='alert'>
                                 Item Name: Already Exist.
                             </div>
                         ";
@@ -86,7 +86,7 @@
                 //Add an exception so it would not check an empty upload
                 if((@exif_imagetype($_FILES["itemPicture"]['tmp_name']) == false) && (@!empty($_FILES["itemPicture"]['tmp_name']))) {
                     echo "
-                        <div class='alert alert-danger text-center h2' role='alert'>
+                        <div class='alert alert-danger text-center h2 overflow-auto' role='alert'>
                             Item Picture: File Uploaded is not an Image Format.
                         </div>
                     ";
@@ -100,11 +100,11 @@
                 //If the following Inputs are valid it would enter the database, and if not it would not.
                 if($logsErrorTest == true) {
                     echo "
-                        <div class='alert alert-danger text-center h2' role='alert'>
+                        <div class='alert alert-danger text-center h2 overflow-auto' role='alert'>
                             Database: Item Update Failed.
                         </div>
                         <div class='col text-center'>
-                            <a class='btn btn-primary' href='itemEdit.php?=$itemId' role='button'>Return</a>
+                            <a class='btn btn-secondary rounded-pill' href='itemEdit.php?=$itemId' role='button'>Return</a>
                         </div>
                     ";
                 } else {
@@ -146,11 +146,11 @@
                         $executeQuery = mysqli_query($con, $queryUpdate);
 
                         echo "
-                            <div class='alert alert-success text-center h2' role='alert'>
+                            <div class='alert alert-success text-center h2 overflow-auto' role='alert'>
                                 Database: Item Updated.
                             </div>
                             <div class='col text-center'>
-                                <a class='btn btn-primary' href='itemList.php' role='button'>Home</a>
+                                <a class='btn btn-secondary rounded-pill' href='itemList.php' role='button'>Home</a>
                             </div>
                         ";
                     } else {
@@ -168,11 +168,11 @@
                         $executeQuery = mysqli_query($con, $queryUpdate);
 
                         echo "
-                            <div class='alert alert-success text-center h2' role='alert'>
+                            <div class='alert alert-success text-center h2 overflow-auto' role='alert'>
                                 Database: Item Updated.
                             </div>
                             <div class='col text-center'>
-                                <a class='btn btn-primary' href='itemList.php' role='button'>Home</a>
+                                <a class='btn btn-secondary rounded-pill' href='itemList.php' role='button'>Home</a>
                             </div>
                         ";
                     }

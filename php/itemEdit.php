@@ -1,4 +1,4 @@
-<?php 
+<?php
     //Include the database to the webpage to access it
     include_once("../inc/database.php");
 
@@ -54,7 +54,7 @@
         <?php include_once("../inc/navBar.php"); ?>
 
         <!-- Container for the item edit -->
-        <div class="container p-3 mb-2 bg-dark text-white rounded-3 w-50">
+        <div class="container p-3 mb-2 bg-dark text-white rounded-3 w-25 opacity-1">
             <h1 class="text-center mb-2">Item Edit</h1>
             <form action="itemEditHandler.php" method="post" enctype="multipart/form-data">
                 <div class="mb-3">
@@ -69,7 +69,7 @@
                     <label for="itemPrice" class="form-label">Item Price</label>
                     <div class="input-group mb-3">
                         <span class="input-group-text">₱</span>
-                        <input type="number" class="form-control text-light bg-dark" aria-label="Peso amount (with dot and two decimal places)" name="itemPrice" placeholder="<?php echo "$itemPrice"?>" value="<?php echo "$itemPrice"?>" step=".01" min="1" max="999999999" required>
+                        <input type="number" class="form-control text-light bg-dark" aria-label="Peso amount (with dot and two decimal places)" name="itemPrice" placeholder="<?php echo "$itemPrice"?>" value="<?php echo "$itemPrice"?>" step=".01" min="1" max="999999999.99" required>
                     </div>
                 </div>
                 <div class="mb-3">
@@ -78,9 +78,9 @@
                 </div>
                 <input type="hidden" name="itemId" value="<?php echo "$itemId"?>">
                 <div class="col text-center">
-                    <input class="btn btn-primary btn-success" type="submit" value="Update Item">
+                    <input class="btn btn-primary btn-success rounded-pill" type="submit" value="Update Item">
                     <br>
-                    <a class='btn btn-primary mt-2' href='itemList.php' role='button'>Cancel</a>
+                    <a class='btn btn-danger mt-2 rounded-pill' href='itemList.php' role='button'>Cancel</a>
                 </div>
             </form>
         </div>

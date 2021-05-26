@@ -48,18 +48,18 @@
         <?php include_once("../inc/navBar.php"); ?>
 
         <!-- Container  -->
-        <div class="container p-3 mb-2 bg-dark text-white rounded-3">
+        <div class="container p-3 mb-2 bg-dark text-white rounded-3 w-25 opacity-1">
             <h1 class="text-center mb-2">Cart</h1>
             <?php
                 $userId = $_SESSION["userId"];
                 $itemStatus = "pending";
 
                 if(empty($_SESSION["cartItemId"])) {
-                  echo "<div class='alert alert-warning text-center h2' role='alert'>
+                  echo "<div class='alert alert-warning text-center h2 overflow-auto' role='alert'>
                           Items Failed to Purchase.
                         </div>
                         <div class='col text-center'>
-                            <a class='btn btn-primary' href='itemList.php' role='button'>Home</a>
+                            <a class='btn btn-secondary rounded-pill' href='itemList.php' role='button'>Home</a>
                         </div>";
                   exit();
                 } else {
@@ -111,13 +111,13 @@
                           unset($_SESSION["cartItemQuantity"][$i]); //Clear All the Session for cartItemQuantity
                       }
                   }
-                  echo "<div class='alert alert-primary text-center h2' role='alert'>
+                  echo "<div class='alert alert-primary text-center h2 overflow-auto' role='alert'>
                           Items Successfully Purchase.
                         </div>";
                 }
             ?>
             <div class="col text-center">
-                <a class='btn btn-primary' href='itemList.php' role='button'>Home</a>
+                <a class='btn btn-secondary rounded-pill' href='itemList.php' role='button'>Home</a>
             </div>
         </div>
     </body>

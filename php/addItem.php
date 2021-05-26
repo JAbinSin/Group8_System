@@ -1,4 +1,4 @@
-<?php 
+<?php
     //Include the database to the webpage to access it
     include_once("../inc/database.php");
 
@@ -37,7 +37,7 @@
         <?php include_once("../inc/navBar.php"); ?>
 
         <!-- Container for the input form of the add item -->
-        <div class="container p-3 mb-2 bg-dark text-white rounded-3 w-50">
+        <div class="container p-3 mb-2 bg-dark text-white rounded-3 w-25 opacity-1">
             <h1 class="text-center mb-2">Add Item</h1>
             <!-- This is the form that would need inputs that would be passed to the addItemHandler.php -->
             <form action="addItemHandler.php" method="post" enctype="multipart/form-data">
@@ -61,7 +61,7 @@
                     <textarea class="form-control bg-dark text-light" rows="3" name="itemDescription" style="max-height: 15rem;" required></textarea>
                 </div>
                 <div class="col text-center">
-                    <button type="submit" class="btn btn-primary mt-2">Add Item</button>
+                    <button type="submit" class="btn btn-primary mt-2 rounded-pill">Add Item</button>
                 </div>
             </form>
         </div>

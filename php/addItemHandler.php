@@ -1,4 +1,4 @@
-<?php 
+<?php
     //Include the database to the webpage to access it
     include_once("../inc/database.php");
 
@@ -50,15 +50,15 @@
         <?php include_once("../inc/navBar.php"); ?>
 
         <!-- Container  -->
-        <div class="container p-3 mb-2 bg-dark text-white rounded-3 w-50">
+        <div class="container p-3 mb-2 bg-dark text-white rounded-3 w-25 opacity-1">
             <h1 class="text-center mb-2">Add Item</h1>
-            <?php 
+            <?php
 
                 //This check if the user input a blank input because space count as an input for some reasons.
                 foreach($arrayPost as $label => $value) {
                     if(empty($value)) {
-                        echo 
-                            "<div class='alert alert-danger text-center h2' role='alert'>" 
+                        echo
+                            "<div class='alert alert-danger text-center h2 overflow-auto' role='alert'>"
                                 . $label . " Input Empty/Invalid." .
                             "</div>
                         ";
@@ -74,7 +74,7 @@
                     if($itemName === $itemInfo["name"]) {
                         $logsErrorTest = true;
                         echo "
-                            <div class='alert alert-danger text-center h2' role='alert'>
+                            <div class='alert alert-danger text-center h2 overflow-auto' role='alert'>
                                 Item Name: Already Exist.
                             </div>
                         ";
@@ -85,7 +85,7 @@
                 //Add an exception so it would not check an empty upload
                 if((@exif_imagetype($_FILES["itemPicture"]['tmp_name']) == false) && (@!empty($_FILES["itemPicture"]['tmp_name']))) {
                     echo "
-                        <div class='alert alert-danger text-center h2' role='alert'>
+                        <div class='alert alert-danger text-center h2 overflow-auto' role='alert'>
                             Item Picture: File Uploaded is not an Image Format.
                         </div>
                     ";
@@ -99,15 +99,15 @@
                 //If the following Inputs are valid it would enter the database, and if not it would not.
                 if($logsErrorTest == true) {
                     echo "
-                        <div class='alert alert-danger text-center h2' role='alert'>
+                        <div class='alert alert-danger text-center h2 overflow-auto' role='alert'>
                             Database: Add Item Failed.
                         </div>
                     ";
                 } else {
                     //This query is to select find the id increment value for the image name
-                    $queryTableStatus = "SHOW TABLE STATUS LIKE 'tbl_items'"; 
+                    $queryTableStatus = "SHOW TABLE STATUS LIKE 'tbl_items'";
                     $executeQueryTableStatus = mysqli_query($con, $queryTableStatus);
-                    $tableInfo = mysqli_fetch_assoc($executeQueryTableStatus); 
+                    $tableInfo = mysqli_fetch_assoc($executeQueryTableStatus);
                     $nextId = $tableInfo["Auto_increment"];
 
 
@@ -119,7 +119,7 @@
                         $target_file = $target_dir . $fileName;
                         move_uploaded_file($_FILES["itemPicture"]["tmp_name"], $target_file);
                     }
-                    
+
 
                     //Query for the new User that would be registered
                     //This query is for an upload without an image
@@ -158,14 +158,14 @@
                     $executeQueryInsert = mysqli_query($con, $queryInsert);
 
                     echo "
-                        <div class='alert alert-success text-center h2' role='alert'>
+                        <div class='alert alert-success text-center h2 overflow-auto' role='alert'>
                             Database: Item Added.
                         </div>
                     ";
                 }
             ?>
             <div class="col text-center">
-                <a class="btn btn-primary" href="itemList.php" role="button">Return</a>
+                <a class="btn btn-secondary rounded-pill" href="itemList.php" role="button">Return</a>
             </div>
         </div>
     </body>

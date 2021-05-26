@@ -21,6 +21,9 @@
     $itemPrice = $itemInfo["price"];
     $itemDescription = $itemInfo["description"];
 
+    //Make variable to Number Format
+    $itemPriceNumber = number_format($itemPrice, 2, '.', ',');
+
     //Redirect the user if the id is invalid
     if(is_null($itemName)) {
         header("Location: ../index.php");
@@ -67,7 +70,7 @@
                         <div class="card-body text-break text-white">
                             <h2 class="card-title text-primary"><?php echo "$itemName"?></h2>
                             <hr>
-                            <p class="h5">Item Price: ₱<?php echo "$itemPrice"?></p>
+                            <p class="h5">Item Price: ₱<?php echo "$itemPriceNumber"?></p>
                             <?php
                                 //Only the admin and client can see the Add to cart button and the Quantity Input
                                 if((@$_SESSION["userType"] == "admin") || (@$_SESSION["userType"] == "client")) {

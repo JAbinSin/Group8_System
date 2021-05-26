@@ -64,7 +64,14 @@
                     $itemPicture = $itemInfo["picture"];
                     $itemName = $itemInfo["name"];
                     $itemPrice = $itemInfo["price"] * $sessItemQuantity;
+                    $itemUnitPrice = $itemInfo["price"];
                     $itemDescription = $itemInfo["description"];
+                    @$totalPrice = $totalPrice + $itemPrice;
+
+                    //Make variable to Number Format
+                    $totalPriceNumber = number_format($totalPrice, 2, '.', ',');
+                    $itemPriceNumber = number_format($itemPrice, 2, '.', ',');
+                    $itemUnitPriceNumber = number_format($itemUnitPrice, 2, '.', ',');
 
 
                     echo "
@@ -80,7 +87,8 @@
                                         <div class='card-body text-break text-white'>
                                             <h2 class='card-title text-primary'>$itemName</h2>
                                             <hr>
-                                            <p class='h5'>Item Total Price: ₱$itemPrice</p>
+                                            <p class='h5'>Item Unit Price: ₱$itemUnitPriceNumber</p>
+                                            <p class='h5'>Item Total Price: ₱$itemPriceNumber</p>
                                             <div class='row mt-4'>
                                                 <label for='itemQuantity' class='col-sm-3 col-form-label h5'>Item Quantity:</label>
                                                 <div class='col-sm-1'>
@@ -104,6 +112,7 @@
             //If the cart is empty the option for Clear and Buy would not be visible/available
             if(!empty(@array_keys($_SESSION["cartItemId"]))) {
                 echo "
+                    <h2 class='text-center'>Total Price: ₱$totalPriceNumber</h2>
                     <form action='buy.php' method='post'>
                         <div class='col text-center'>
                             <input class='btn btn-primary btn-danger btn-lg mt-3' type='submit' name='btnSubmit' value='Clear'>

@@ -66,10 +66,10 @@
             <div class="col text-center">
                 <!-- Form used to pass the data to the adminDeleteUserHandler.php -->
                 <form action="itemDeleteHandler.php" method="post">
-                    <input class="btn btn-primary btn-danger rounded-pill" type="submit" value="Delete">
+                    <input class="btn btn-primary btn-danger rounded-pill" type="submit" value="DELETE">
                     <input type="hidden" name="itemId" value="<?php echo $itemId?>">
                 </form>
-                <a class='btn btn-primary mt-2 rounded-pill' href='itemList.php' role='button'>Cancel</a>
+                <a class='btn btn-primary mt-2 rounded-pill' href='itemList.php' role='button'>CANCEL</a>
             </div>
         </div>
     </body>

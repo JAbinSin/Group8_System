@@ -61,7 +61,7 @@
                 Database: User Deleted.
             </div>
             <div class="col text-center">
-                <a class='btn btn-secondary rounded-pill' href='adminListUsers.php' role='button'>Return</a>
+                <a class='btn btn-secondary rounded-pill' href='adminListUsers.php' role='button'>RETURN</a>
             </div>
         </div>
     </body>

@@ -161,7 +161,7 @@
                                 Database: Account Updated.
                             </div>
                             <div class='col text-center'>
-                                <a class='btn btn-primary' href='profile.php' role='button'>Profile</a>
+                                <a class='btn btn-primary' href='profile.php' role='button'>PROFILE</a>
                             </div>
                         ";
                     } else {
@@ -185,7 +185,7 @@
                                 Database: Account Updated.
                             </div>
                             <div class='col text-center'>
-                                <a class='btn btn-primary' href='profile.php' role='button'>Profile</a>
+                                <a class='btn btn-primary' href='profile.php' role='button'>PROFILE</a>
                             </div>
                         ";
                     }
@@ -195,7 +195,7 @@
                             Database: Account Updated Failed.
                         </div>
                         <div class='col text-center'>
-                            <a class='btn btn-primary' href='profileEdit.php' role='button'>Return</a>
+                            <a class='btn btn-primary' href='profileEdit.php' role='button'>RETURN</a>
                         </div>
                     ";
                 }

@@ -1,4 +1,4 @@
-<?php 
+<?php
     //Include the database to the webpage to access it
     include_once("../inc/database.php");
 
@@ -46,9 +46,9 @@
         <!-- Container  -->
         <div class="container p-3 mb-2 bg-dark text-white rounded-3">
             <h1 class="text-center mb-2">Cart</h1>
-            
-            <?php 
-                if($choice == "Update") {
+
+            <?php
+                if($choice == "UPDATE") {
                     //Check if the input is blank
                     //This is just a safety measure if it happens
                     if(empty($itemQuantity)) {
@@ -81,11 +81,11 @@
                                 Item: Failed to Updated.
                             </div>
                             <div class='col text-center'>
-                                <a class='btn btn-primary' href='cart.php' role='button'>Return</a>
+                                <a class='btn btn-primary' href='cart.php' role='button'>RETURN</a>
                             </div>
-                        "; 
+                        ";
                     }
-                } elseif($choice == "Remove") {
+                } elseif($choice == "REMOVE") {
                     $idTmp = array_search($itemId, $_SESSION["cartItemId"]);
                     unset($_SESSION["cartItemId"][$idTmp]); //Clear the Session for cartItemId
                     unset($_SESSION["cartItemQuantity"][$idTmp]); //Clear the Session for cartItemQuantity

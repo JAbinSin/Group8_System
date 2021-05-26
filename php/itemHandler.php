@@ -99,7 +99,7 @@
                 }
             ?>
             <div class="col text-center">
-                <a class='btn btn-secondary rounded-pill' href='itemList.php' role='button'>Home</a>
+                <a class='btn btn-secondary rounded-pill' href='itemList.php' role='button'>HOME</a>
             </div>
         </div>
     </body>

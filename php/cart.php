@@ -97,8 +97,8 @@
                                             </div>
                                             <div>
                                                 <input type='hidden' name='itemId' value='$sessItemId'>
-                                                <input class='btn btn-primary btn-danger btn-sm mt-3' type='submit' name='btnSubmit' value='Remove'>
-                                                <input class='btn btn-primary btn-primary btn-sm mt-3 ms-3' type='submit' name='btnSubmit' value='Update'>
+                                                <input class='btn btn-primary btn-danger btn-sm mt-3' type='submit' name='btnSubmit' value='REMOVE'>
+                                                <input class='btn btn-primary btn-primary btn-sm mt-3 ms-3' type='submit' name='btnSubmit' value='UPDATE'>
                                             </div>
                                         </div>
                                     </div>
@@ -115,8 +115,8 @@
                     <h2 class='text-center'>Total Price: ₱$totalPriceNumber</h2>
                     <form action='buy.php' method='post'>
                         <div class='col text-center'>
-                            <input class='btn btn-primary btn-danger btn-lg mt-3' type='submit' name='btnSubmit' value='Clear'>
-                            <input class='btn btn-primary btn-primary btn-lg mt-3 ms-3' type='submit' name='btnSubmit' value='Buy'>
+                            <input class='btn btn-primary btn-danger btn-lg mt-3' type='submit' name='btnSubmit' value='CLEAR'>
+                            <input class='btn btn-primary btn-primary btn-lg mt-3 ms-3' type='submit' name='btnSubmit' value='BUY'>
                         </div>
                     </form>
                 ";

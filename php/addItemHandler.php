@@ -165,7 +165,7 @@
                 }
             ?>
             <div class="col text-center">
-                <a class="btn btn-secondary rounded-pill" href="itemList.php" role="button">Return</a>
+                <a class="btn btn-secondary rounded-pill" href="itemList.php" role="button">RETURN</a>
             </div>
         </div>
     </body>

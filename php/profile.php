@@ -59,13 +59,13 @@
                 if($_SESSION['userType'] == "admin") {
                     echo "
                     <div class='col text-center'>
-                        <a class='btn btn-primary disabled' href='profileEdit.php' role='button'>Edit</a>
+                        <a class='btn btn-primary disabled' href='profileEdit.php' role='button'>EDIT</a>
                     </div>
                     ";
                 } else {
                     echo "
                     <div class='col text-center'>
-                        <a class='btn btn-primary' href='profileEdit.php' role='button'>Edit</a>
+                        <a class='btn btn-primary' href='profileEdit.php' role='button'>EDIT</a>
                     </div>
                     ";
                 }

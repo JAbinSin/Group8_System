@@ -1,4 +1,4 @@
-<?php 
+<?php
     //Include the database to the webpage to access it
     include_once("../inc/database.php");
 
@@ -55,7 +55,7 @@
         <?php include_once("../inc/navBar.php"); ?>
 
         <!-- Container for the profile edit -->
-        <div class="container p-3 mb-2 bg-dark text-white w-50 rounded-3">
+        <div class="container p-3 mb-2 bg-dark text-white w-25 rounded-3 opacity-1">
             <form action="profileEditHandler.php" method="post" enctype="multipart/form-data">
                 <h1 class="text-center mb-2">Update Profile Info</h1>
                 <div class="mb-3">
@@ -63,15 +63,15 @@
                     <input class="form-control text-light bg-dark" type="file" accept="image/*" name="profilePicture">
                 </div>
                 <div class="mb-3">
-                    <label for="userFirstName" class="form-label">First Name (Only Characters)</label>
+                    <label for="userFirstName" class="form-label">First Name</label>
                     <input type="text" class="form-control text-light bg-dark" name="userFirstName" placeholder="<?php echo "$userFirstName"?>" value="<?php echo "$userFirstName"?>" pattern="[A-zÀ-ž\s]+" required>
                 </div>
                 <div class="mb-3">
-                    <label for="userLastName" class="form-label">Last Name (Only Characters)</label>
+                    <label for="userLastName" class="form-label">Last Name</label>
                     <input type="text" class="form-control text-light bg-dark" name="userLastName" placeholder="<?php echo "$userLastName"?>" value="<?php echo "$userLastName"?>" pattern="[A-zÀ-ž\s]+" required>
                 </div>
                 <div class="mb-3">
-                    <label for="userUsername" class="form-label">Username (Only Characters and Numbers)</label>
+                    <label for="userUsername" class="form-label">Username</label>
                     <input type="text" class="form-control text-light bg-dark" name="userUsername" placeholder="<?php echo "$userUsername"?>" value="<?php echo "$userUsername"?>" minlength="8" pattern="[a-zA-Z0-9]+" required>
                 </div>
                 <div class="mb-3">
@@ -83,9 +83,9 @@
                     <input type="text" class="form-control text-light bg-dark" name="userPhoneNumber" placeholder="<?php echo "$userPhoneNumber"?>" value="<?php echo "$userPhoneNumber"?>" pattern="[0-9]{11}" maxlength="11" minlength="11" required>
                 </div>
                 <div class="col text-center">
-                    <input class="btn btn-primary btn-success" type="submit" value="Update">
+                    <input class="btn btn-primary btn-success rounded-pill" type="submit" value="UPDATE">
                     <br>
-                    <a class='btn btn-primary mt-2' href='profile.php' role='button'>Cancel</a>
+                    <a class='btn btn-secondary mt-2 rounded-pill' href='profile.php' role='button'>CANCEL</a>
                 </div>
             </form>
         </div>

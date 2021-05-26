@@ -61,7 +61,7 @@
                     <textarea class="form-control bg-dark text-light" rows="3" name="itemDescription" style="max-height: 15rem;" required></textarea>
                 </div>
                 <div class="col text-center">
-                    <button type="submit" class="btn btn-primary mt-2 rounded-pill">Add Item</button>
+                    <button type="submit" class="btn btn-primary mt-2 rounded-pill">ADD ITEM</button>
                 </div>
             </form>
         </div>

@@ -78,9 +78,9 @@
                 </div>
                 <input type="hidden" name="itemId" value="<?php echo "$itemId"?>">
                 <div class="col text-center">
-                    <input class="btn btn-primary btn-success rounded-pill" type="submit" value="Update Item">
+                    <input class="btn btn-primary btn-success rounded-pill" type="submit" value="UPDATE ITEM">
                     <br>
-                    <a class='btn btn-danger mt-2 rounded-pill' href='itemList.php' role='button'>Cancel</a>
+                    <a class='btn btn-danger mt-2 rounded-pill' href='itemList.php' role='button'>CANCEL</a>
                 </div>
             </form>
         </div>

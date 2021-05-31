@@ -11,8 +11,16 @@
     //Get the id from the url
     $userId = $_GET["id"];
 
+    //Query and Execute for the user information
+    $querySelectHistoryInfo = "SELECT user FROM tbl_history WHERE user = $userId";
+    $executeQuerySelectHistoryInfo = mysqli_query($con, $querySelectHistoryInfo);
+
+    $historyInfo = mysqli_fetch_assoc($executeQuerySelectHistoryInfo);
+
+    $userDump = $historyInfo["user"];
+
     //Redirect the user if the id is invalid
-    if(is_null($userId)) {
+    if(is_null($userDump)) {
         header("Location: adminListUsers.php");
     }
 ?>
@@ -84,6 +92,7 @@
                         ";
                     }
 
+                    $historyId = $historyInfo["id"];
                     $historyItem = $historyInfo["item"];
                     $historyPicture = $historyInfo["picture"];
                     $historyQuantity = $historyInfo["quantity"];
@@ -96,32 +105,46 @@
                         <div class='card-body'>
                             <div class='card text-dark bg-transparent mx-auto' style='max-width: 50rem; border: 0;'>
                                 <div class='row g-0 border border-secondary border-2' style='margin-bottom: 1rem;'>
-                                    <div class='col-md-4 p-0 bg-transparent' style='max-height: 16rem; min-height: 16rem;'>
+                                    <div class='col-md-4 p-0 bg-transparent' style='max-height: 18rem; min-height: 18rem;'>
                                         <a href='item.php?id=$historyItem'>
                                             <img src='../img/items/$historyPicture' alt='Image Unavailable' style='width: 100%; height: 100%;'>
                                         </a>
                                     </div>
                                     <div class='col-md-8'>
-                                        <div class='card-body text-break text-white'>
+                                        <div class='card-body text-break text-white pb-0'>
                                             <h2 class='card-title text-primary'>$historyName</h2>
                                             <hr>
                                             <div class='row'>
                                                 <h5>Item Total Price: ₱$historyPrice</h5>
                                                 <h5>Item Quantity: $historyQuantity</h5>
-                                                <h5>Order Status: ".
-                                                    ($historyStatus == 'pending' ? '<span class="badge bg-warning text-dark">Pending</span>' : '<span class="badge bg-success">Confirmed</span>')
+                                                <h5>Status Update: ".
+                                                    ($historyStatus == 'pending' ? '<span class="badge bg-warning text-dark">Pending</span>' :
+                                                        ($historyStatus == 'processing' ? '<span class="badge bg-info text-dark">Processing</span>' :
+                                                            ($historyStatus == 'delivered' ? '<span class="badge bg-success text-dark">Delivered</span>' :
+                                                                '<span class="badge bg-secondary text-dark">Canceled</span>')))
                                                 ."</h5>
-                                                <h5 class='mt-2'>
-                                                    Status Update
-                                                    <div class='dropdown mt-1'>
-                                                      <button class='btn btn-secondary dropdown-toggle' type='button' id='dropdownMenuButton2' data-bs-toggle='dropdown' aria-expanded='false'>Order Status</button>
-                                                      <ul class='dropdown-menu dropdown-menu-dark' aria-labelledby='dropdownMenuButton2'>
-                                                        <li><a class='dropdown-item active' href='#'>Action</a></li>
-                                                        <li><a class='dropdown-item' href='#'>Another action</a></li>
-                                                        <li><a class='dropdown-item' href='#'>Something else here</a></li>
-                                                      </ul>
-                                                    </div>
-                                                </h5>
+                                                <div class='border border-secondary'>
+                                                    <h5 class='mt-2'>
+                                                        <form action='adminOrderStatusHandler.php' method='post'>
+                                                            Update Order Status:
+                                                            <div class='row mt-1'>
+                                                                <div class='col'>
+                                                                    <select class='form-select form-select-sm bg-dark text-white mt-1' name='orderStatus' style='width: 11rem;'>
+                                                                      <option ". ($historyStatus == 'pending' ? 'selected' : '') ." value='pending'>Pending</option>
+                                                                      <option ". ($historyStatus == 'processing' ? 'selected' : '') ." value='processing'>Processing</option>
+                                                                      <option ". ($historyStatus == 'delivered' ? 'selected' : '') ." value='delivered'>Delivered</option>
+                                                                      <option ". ($historyStatus == 'canceled' ? 'selected' : '') ." value='canceled'>Canceled</option>
+                                                                    </select>
+                                                                </div>
+                                                                <div class='col'>
+                                                                    <input type='hidden' name='orderId' value='$historyId'>
+                                                                    <input type='hidden' name='userId' value='$userId'>
+                                                                    <button type='submit' class='btn btn-primary btn-sm' style='width: 10rem;'>Update Status</button>
+                                                                </div>
+                                                            </div>
+                                                        </form>
+                                                    </h5>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

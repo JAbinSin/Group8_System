@@ -104,7 +104,10 @@
                                                 <h5>Item Total Price: ₱$historyPrice</h5>
                                                 <h5>Item Quantity: $historyQuantity</h5>
                                                 <h5>Order Status: ".
-                                                    ($historyStatus == 'pending' ? '<span class="badge bg-warning text-dark">Pending</span>' : '<span class="badge bg-success">Confirmed</span>')
+                                                ($historyStatus == 'pending' ? '<span class="badge bg-warning text-dark">Pending</span>' :
+                                                    ($historyStatus == 'processing' ? '<span class="badge bg-info text-dark">Processing</span>' :
+                                                        ($historyStatus == 'delivered' ? '<span class="badge bg-success text-dark">Delivered</span>' :
+                                                            '<span class="badge bg-secondary text-dark">Canceled</span>')))
                                                 ."</h5>
                                             </div>
                                         </div>

@@ -16,6 +16,13 @@
     $userUsername = trim($_POST["userUsername"]);
     $userPhoneNumber = ($_POST['userPhoneNumber']);
 
+    //Sanitize all the Inputs
+    $userFirstName = filter_var($userFirstName, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+    $userLastName = filter_var($userLastName, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+    $userUsername = filter_var($userUsername, FILTER_SANITIZE_SPECIAL_CHARS);
+    $userEmail = filter_var($userEmail, FILTER_SANITIZE_EMAIL);
+    $userPhoneNumber = filter_var($userPhoneNumber, FILTER_SANITIZE_NUMBER_INT);
+
     //Ths is the id from the session, used this style instead of directly using it because of string formatting in conditionals
     $id = $_SESSION["userId"];
 
@@ -53,7 +60,7 @@
         <?php include_once("../inc/navBar.php"); ?>
 
         <!-- Container for the profile edit handler -->
-        <div class="container p-3 mb-2 bg-dark text-white w-50 rounded-3">
+        <div class="container p-3 mb-2 bg-dark text-white w-25 rounded-3 opacity-1">
             <!-- php for the verifications and execution to the database  -->
             <h1 class="text-center mb-2">Update Profile Info</h1>
             <?php
@@ -61,7 +68,7 @@
                 foreach($arrayPost as $label => $value) {
                     if(empty($value)) {
                         echo
-                            "<div class='alert alert-danger text-center h2' role='alert'>"
+                            "<div class='alert alert-danger text-center h2 overflow-auto' role='alert'>"
                                 . $label . " Input Empty/Invalid." .
                             "</div>
                         ";
@@ -77,7 +84,7 @@
                     if(($userUsername === $userInfo["username"]) && ($id != $userInfo["id"])) {
                         $logsErrorTest = true;
                         echo "
-                            <div class='alert alert-danger text-center h2' role='alert'>
+                            <div class='alert alert-danger text-center h2 overflow-auto' role='alert'>
                                 Username: Already Exist.
                             </div>
                         ";
@@ -85,7 +92,7 @@
                     if(($userEmail === $userInfo["email"]) && ($id != $userInfo["id"])) {
                         $logsErrorTest = true;
                         echo "
-                            <div class='alert alert-danger text-center h2' role='alert'>
+                            <div class='alert alert-danger text-center h2 overflow-auto' role='alert'>
                                 Email: Already Exist.
                             </div>
                         ";
@@ -93,7 +100,7 @@
                     if(($userPhoneNumber === $userInfo["phone_number"]) && ($id != $userInfo["id"])) {
                         $logsErrorTest = true;
                         echo "
-                            <div class='alert alert-danger text-center h2' role='alert'>
+                            <div class='alert alert-danger text-center h2 overflow-auto' role='alert'>
                                 Cellphone Number: Already Exist.
                             </div>
                         ";
@@ -104,7 +111,7 @@
                 //Add an exception so it would not check an empty upload
                 if((@exif_imagetype($_FILES["profilePicture"]['tmp_name']) == false) && (@!empty($_FILES["profilePicture"]['tmp_name']))) {
                     echo "
-                        <div class='alert alert-danger text-center h2' role='alert'>
+                        <div class='alert alert-danger text-center h2 overflow-auto' role='alert'>
                             Profile Picture: File Uploaded is not an Image Format.
                         </div>
                     ";
@@ -157,7 +164,7 @@
                         $executeQuery = mysqli_query($con, $queryUpdate);
 
                         echo "
-                            <div class='alert alert-success text-center h2' role='alert'>
+                            <div class='alert alert-success text-center h2 overflow-auto' role='alert'>
                                 Database: Account Updated.
                             </div>
                             <div class='col text-center'>

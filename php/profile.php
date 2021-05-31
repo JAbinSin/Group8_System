@@ -50,7 +50,7 @@
         <?php include_once("../inc/navBar.php"); ?>
 
         <!-- Container for the profile information -->
-        <div class="container p-3 mb-2 bg-dark text-white text-center w-25 rounded-3 overflow-auto opacity-1">
+        <div class="container p-3 mb-2 bg-dark text-white w-25 rounded-3 overflow-auto opacity-1">
             <!-- This is an edit button to change some information -->
             <?php
                 //Only the clients can change their profile
@@ -70,29 +70,49 @@
                     ";
                 }
             ?>
-            <div class="text-break">
+            <div class="text-break text-center">
                 <h2 class="mt-4 fw-bold text-info">Profile Picture:</h2>
                 <img src="<?php echo "../img/profile/$userProfilePicture"?>" class="overflow-auto img-fluid rounded-circle mx-auto d-block mt-4 profile-picture" alt="Picture Unavailable">
             </div>
-            <div class="text-break">
-                <h2 class="mt-4 fw-bold text-info">First Name:</h2>
-                <h3 class="mt-2"><?php echo "$userFirstName"?></h3>
+            <div class="row justify-content-center mb-3 text-break">
+                <div class="col-6 text-end">
+                  First Name:
+                </div>
+                <div class="col-6">
+                  <?php echo "$userFirstName"?>
+                </div>
             </div>
-            <div class="text-break">
-                <h2 class="mt-4 fw-bold text-info">Last Name:</h2>
-                <h3 class="mt-2"><?php echo "$userLastName"?></h3>
+            <div class="row justify-content-center mb-3 text-break">
+                <div class="col-6 text-end">
+                  Last Name:
+                </div>
+                <div class="col-6">
+                  <?php echo "$userLastName"?>
+                </div>
             </div>
-            <div class="text-break">
-                <h2 class="mt-4 fw-bold text-info">Username:</h2>
-                <h3 class="mt-2"><?php echo "$userUsername"?></h3>
+            <div class="row justify-content-center mb-3 text-break">
+                <div class="col-6 text-end">
+                  Username:
+                </div>
+                <div class="col-6">
+                  <?php echo "$userUsername"?>
+                </div>
             </div>
-            <div class="text-break">
-                <h2 class="mt-4 fw-bold text-info">Email:</h2>
-                <h3 class="mt-2"><?php echo "$userEmail"?></h3>
+            <div class="row justify-content-center mb-3 text-break">
+                <div class="col-6 text-end">
+                  Email:
+                </div>
+                <div class="col-6">
+                  <?php echo "$userEmail"?>
+                </div>
             </div>
-            <div class="text-break">
-                <h2 class="mt-4 fw-bold text-info">Cellphone Number:</h2>
-                <h3 class="mt-2"><?php echo "$userPhoneNumber"?></h3>
+            <div class="row justify-content-center mb-3 text-break">
+                <div class="col-6 text-end">
+                  Cellphone Number:
+                </div>
+                <div class="col-6">
+                  <?php echo "$userPhoneNumber"?>
+                </div>
             </div>
         </div>
     </body>

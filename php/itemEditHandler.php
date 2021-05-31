@@ -15,8 +15,10 @@
     $itemDescription = trim($_POST["itemDescription"]);
     $itemId = $_POST["itemId"];
 
-    //Allow special characters in the Item Description
-    $itemDescription = filter_var($itemDescription, FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_HIGH);
+    //Sanitize all the Inputs
+    $itemName = filter_var($itemName, FILTER_SANITIZE_SPECIAL_CHARS);
+    $itemPrice = filter_var($itemPrice, FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
+    $itemDescription = filter_var($itemDescription, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
     //An array for easier and faster checking if there is an error in the variable
     $arrayPost = array("Item Name:" => $itemName, "Item Price:" => $itemPrice,  "Item Description:" => $itemDescription);

@@ -19,6 +19,16 @@
     $userPhoneNumber = trim($_POST['userPhoneNumber']);
     $userUserType = $_POST['userUsertype'];
 
+    //Sanitize all the Inputs
+    $userFirstName = filter_var($userFirstName, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+    $userLastName = filter_var($userLastName, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+    $userUsername = filter_var($userUsername, FILTER_SANITIZE_SPECIAL_CHARS);
+    $userPassword = filter_var($userPassword, FILTER_SANITIZE_SPECIAL_CHARS)
+    $userConfirmPassword = filter_var($userConfirmPassword, FILTER_SANITIZE_SPECIAL_CHARS)
+    $userEmail = filter_var($userEmail, FILTER_SANITIZE_EMAIL);
+    $userPhoneNumber = filter_var($userPhoneNumber, FILTER_SANITIZE_NUMBER_INT);
+    $userUserType = filter_var($userUserType, FILTER_SANITIZE_NUMBER_INT);
+
     //An array for easier and faster checking if there is an error in the variable
     $arrayPost = array("First Name:" => $userFirstName, "Last Name:" => $userLastName, "Username:" => $userUsername, "Password:" => $userPassword, "Confirm Password:" => $userConfirmPassword, "Email:" => $userEmail, "Cellphone Number:" => $userPhoneNumber);
 

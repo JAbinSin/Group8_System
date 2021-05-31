@@ -40,7 +40,7 @@
 
         <!-- Link the boostrap5 to the webpage -->
         <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
-        <script  type="text/javascript" src="../bootstrap/js/bootstrap.min.js"></script>
+        <script  type="text/javascript" src="../bootstrap/js/bootstrap.bundle.min.js"></script>
 
         <!-- Link the boostrap icon 1.4 to the webpage -->
         <link rel="stylesheet" href="../bootstrap-icons/bootstrap-icons.css">

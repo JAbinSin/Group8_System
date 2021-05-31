@@ -3,9 +3,17 @@
     include_once("../inc/database.php");
 
     //Check if the current user is allowed to access the webpage
-    //Only the admin and client can access this webpage
-    if(!isset($_SESSION['userType'])) {
+    //Only the admin can access this webpage
+    if(($_SESSION['userType'] != "admin") || (empty($_GET["id"]))) {
         header("Location: ../index.php");
+    }
+
+    //Get the id from the url
+    $userId = $_GET["id"];
+
+    //Redirect the user if the id is invalid
+    if(is_null($userId)) {
+        header("Location: adminListUsers.php");
     }
 ?>
 
@@ -13,7 +21,7 @@
 <html lang="en">
     <head>
         <!-- Title of the site  is set in SESSION from the database.php -->
-        <title><?php echo $_SESSION['siteName']?> | History</title>
+        <title><?php echo $_SESSION['siteName']?> | Admin Order Status</title>
 
         <!-- The meta tags used in the webpage -->
         <!-- charset="utf-8" to use almost all the character and symbol in the world -->
@@ -38,13 +46,10 @@
 
         <!-- Container  -->
         <div class="container p-3 mb-2 bg-dark text-white rounded-3 w-50 opacity-1">
-            <h1 class="text-center mb-2">History</h1>
+            <h1 class="text-center mb-2">Admin Order Status</h1>
             <?php
-                //Use a variable to be able to use it in the Query Conditions
-                $user = $_SESSION["userId"];
-
                 //Query and Execute for the history information
-                $querySelectHistory = "SELECT * FROM tbl_history WHERE user = $user ORDER BY order_id DESC";
+                $querySelectHistory = "SELECT * FROM tbl_history WHERE user = $userId ORDER BY order_id DESC";
                 $executeQuerySelectHistory = mysqli_query($con, $querySelectHistory);
 
                 //Set a null to hold the Order Id and Change
@@ -100,12 +105,23 @@
                                         <div class='card-body text-break text-white'>
                                             <h2 class='card-title text-primary'>$historyName</h2>
                                             <hr>
-                                            <div class='row mt-4'>
+                                            <div class='row'>
                                                 <h5>Item Total Price: ₱$historyPrice</h5>
                                                 <h5>Item Quantity: $historyQuantity</h5>
                                                 <h5>Order Status: ".
                                                     ($historyStatus == 'pending' ? '<span class="badge bg-warning text-dark">Pending</span>' : '<span class="badge bg-success">Confirmed</span>')
                                                 ."</h5>
+                                                <h5 class='mt-2'>
+                                                    Status Update
+                                                    <div class='dropdown mt-1'>
+                                                      <button class='btn btn-secondary dropdown-toggle' type='button' id='dropdownMenuButton2' data-bs-toggle='dropdown' aria-expanded='false'>Order Status</button>
+                                                      <ul class='dropdown-menu dropdown-menu-dark' aria-labelledby='dropdownMenuButton2'>
+                                                        <li><a class='dropdown-item active' href='#'>Action</a></li>
+                                                        <li><a class='dropdown-item' href='#'>Another action</a></li>
+                                                        <li><a class='dropdown-item' href='#'>Something else here</a></li>
+                                                      </ul>
+                                                    </div>
+                                                </h5>
                                             </div>
                                         </div>
                                     </div>

@@ -117,7 +117,7 @@
                                             <div class='row'>
                                                 <h5>Item Total Price: ₱$historyPrice</h5>
                                                 <h5>Item Quantity: $historyQuantity</h5>
-                                                <h5>Status Update: ".
+                                                <h5>Order Status: ".
                                                     ($historyStatus == 'pending' ? '<span class="badge bg-warning text-dark">Pending</span>' :
                                                         ($historyStatus == 'processing' ? '<span class="badge bg-info text-dark">Processing</span>' :
                                                             ($historyStatus == 'delivered' ? '<span class="badge bg-success text-dark">Delivered</span>' :

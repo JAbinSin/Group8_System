@@ -12,12 +12,12 @@
     $userId = $_GET["id"];
 
     //Query and Execute for the user information
-    $querySelectHistoryInfo = "SELECT user FROM tbl_history WHERE user = $userId";
+    $querySelectHistoryInfo = "SELECT id FROM tbl_users WHERE id = $userId";
     $executeQuerySelectHistoryInfo = mysqli_query($con, $querySelectHistoryInfo);
 
     $historyInfo = mysqli_fetch_assoc($executeQuerySelectHistoryInfo);
 
-    $userDump = $historyInfo["user"];
+    $userDump = $historyInfo["id"];
 
     //Redirect the user if the id is invalid
     if(is_null($userDump)) {
@@ -163,12 +163,14 @@
                         <div class='alert alert-warning text-center h2' role='alert'>
                             History is Empty.
                         </div>";
+                } else {
+                  echo "
+                      <div class='card-footer text-muted text-center'>
+                          Time Purchase: $historyTime
+                      </div>
+                  ";
                 }
-
             ?>
-            <div class='card-footer text-muted text-center'>
-                Time Purchase: <?php echo $historyTime?>
-            </div>
         </div>
     </body>
 </html>

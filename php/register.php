@@ -66,6 +66,14 @@
                     <input type="text" class="form-control text-light bg-dark" name="userEmail" placeholder="Enter Email" required>
                 </div>
                 <div class="mb-3">
+                    <label for="userAddress" class="form-label">Address</label>
+                    <input type="text" class="form-control text-light bg-dark" name="userAddress" placeholder="Enter Address" required>
+                </div>
+                <div class="mb-3">
+                    <label for="userZipCode" class="form-label">Zip Code</label>
+                    <input type="number" class="form-control text-light bg-dark" name="userZipCode" placeholder="Enter Zip Code" required>
+                </div>
+                <div class="mb-3">
                     <label for="userPhoneNumber" class="form-label">Cellphone Number (11-Digits)</label>
                     <input type="text" class="form-control text-light bg-dark" name="userPhoneNumber" placeholder="Enter Cellphone Number" pattern="[0-9]{11}" maxlength="11" minlength="11" required>
                 </div>

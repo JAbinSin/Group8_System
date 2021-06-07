@@ -37,7 +37,7 @@
         <?php include_once("../inc/navBar.php"); ?>
 
         <!-- This is the container of the form  -->
-        <div class="container p-3 mb-2 bg-dark text-white w-25 rounded-3 opacity-1">
+        <div class="container p-3 mb-2 bg-normal-92 text-white w-25 rounded-3">
             <h1 class="text-center mb-2 opacity-1">Login</h1>
             <!-- This is the form that would need inputs that would be passed to the loginHandler.php -->
             <form action="loginHandler.php" method="post">

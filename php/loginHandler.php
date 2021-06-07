@@ -45,7 +45,7 @@
         <?php include_once("../inc/navBar.php"); ?>
 
         <!-- Container  -->
-        <div class="container p-3 mb-2 bg-dark text-white w-25 rounded-3 opacity-1">
+        <div class="container p-3 mb-2 bg-dark text-white w-25 rounded-3">
 
             <!-- php for the verifications and execution to the database  -->
             <?php

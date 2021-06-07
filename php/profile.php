@@ -14,6 +14,7 @@
 
     $userInfo = mysqli_fetch_assoc($executeQuerySelectInfoUser);
 
+    $userId = $userInfo["id"];
     $userProfilePicture = $userInfo["profile_picture"];
     $userFirstName = $userInfo["first_name"];
     $userLastName = $userInfo["last_name"];
@@ -60,6 +61,9 @@
                     <p class="mt-3 mb-3 h5">@<?php echo $userUsername?></p>
                     <p class="m-0 display-6"><?php echo $userFirstName?></p>
                     <p class="display-6"><?php echo $userLastName?></p>
+                    <div class="col text-center">
+                        <a class="btn btn-secondary mb-3 rounded-pill shadow-lg" href="profileEdit.php?id=<?php echo $userId ?>" role="button" style="width: 7rem; font-size: 1.1rem;">Edit</a>
+                    </div>
                 </div>
                 <div class="col-7 border-end-0 bg-dark">
                     <p class="h3">Personal Details:</p>
@@ -74,7 +78,7 @@
                             <dt class="col-sm-4 mt-3">Email: </dt>
                             <dd class="col-sm-8 mt-3"><?php echo $userEmail?></dd>
                             <dt class="col-sm-4 mt-3">Email Status: </dt>
-                            <dd class="col-sm-8 mt-3 text-light"><?php echo $userValidated == 'verified' ? '<span class="badge bg-success">Verified</span>' : '<span class="badge bg-danger">Not Yet Verified</span>' ?></dd>
+                            <dd class="col-sm-8 mt-3 text-light"><?php echo $userValidated == 'yes' ? '<span class="badge bg-success">Verified</span>' : '<span class="badge bg-danger">Not Yet Verified</span>' ?></dd>
                         </dl>
                     </div>
                 <div>

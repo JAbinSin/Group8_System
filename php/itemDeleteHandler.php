@@ -56,7 +56,7 @@
         <?php include_once("../inc/navBar.php"); ?>
 
         <!-- Container for the message output of the handler -->
-        <div class="container p-3 mb-2 bg-dark text-white rounded-3 w-25 opacity-1">
+        <div class="container p-3 mb-2 bg-dark text-white rounded-3 w-25">
             <h1 class="text-center mb-2">Item Delete</h1>
             <div class="alert alert-success text-center h2 overflow-auto" role="alert">
                 Database: Item Deleted.

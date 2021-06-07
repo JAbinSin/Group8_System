@@ -60,7 +60,7 @@
         <?php include_once("../inc/navBar.php"); ?>
 
         <!-- Container for the profile edit handler -->
-        <div class="container p-3 mb-2 bg-dark text-white w-25 rounded-3 opacity-1">
+        <div class="container p-3 mb-2 bg-dark text-white w-25 rounded-3">
             <!-- php for the verifications and execution to the database  -->
             <h1 class="text-center mb-2">Update Profile Info</h1>
             <?php

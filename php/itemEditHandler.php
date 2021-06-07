@@ -54,7 +54,7 @@
         <?php include_once("../inc/navBar.php"); ?>
 
         <!-- Container for the output messafe of the edit handler -->
-        <div class="container p-3 mb-2 bg-dark text-white rounded-3 w-25 opacity-1">
+        <div class="container p-3 mb-2 bg-dark text-white rounded-3 w-25">
             <h1 class="text-center mb-2">Item Edit</h1>
             <?php
                 //This check if the user input a blank input because space count as an input for some reasons.

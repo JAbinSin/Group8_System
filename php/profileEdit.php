@@ -55,7 +55,7 @@
         <?php include_once("../inc/navBar.php"); ?>
 
         <!-- Container for the profile edit -->
-        <div class="container p-3 mb-2 bg-dark text-white w-25 rounded-3 opacity-1">
+        <div class="container p-3 mb-2 bg-normal-92 text-white w-25 rounded-3">
             <form action="profileEditHandler.php" method="post" enctype="multipart/form-data">
                 <h1 class="text-center mb-2">Update Profile Info</h1>
                 <div class="mb-3">

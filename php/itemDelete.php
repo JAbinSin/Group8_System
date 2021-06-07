@@ -53,7 +53,7 @@
         <?php include_once("../inc/navBar.php"); ?>
 
         <!-- Container for the form of delete user -->
-        <div class="container p-3 mb-2 bg-dark text-white rounded-3 w-25 opacity-1">
+        <div class="container p-3 mb-2 bg-normal-92 text-white rounded-3 w-25">
             <h1 class="text-center mb-2">Item Delete</h1>
             <div class="alert alert-danger text-center h2 overflow-auto" role="alert">
                 <?php

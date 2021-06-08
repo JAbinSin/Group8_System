@@ -5,5 +5,5 @@
     include_once("inc/database.php");
 
     //Redirect the user to the itemList.php because every user can access this webpage
-    header("Location: php/itemList.php");
+    header("Location: php/categoryList.php");
 ?>

@@ -50,6 +50,9 @@
         <!-- Title of the site  is set in SESSION from the database.php -->
         <title><?php echo $_SESSION['siteName']?> | Register</title>
 
+        <!-- Add a logo for the title head -->
+        <link rel="icon" href="../img/logo/logo-test.ico" type="image/ico">
+
         <!-- The meta tags used in the webpage -->
         <!-- charset="utf-8" to use almost all the character and symbol in the world -->
         <!-- viewport to make the webpage more responsive -->
@@ -168,7 +171,7 @@
                         </div>
 
                         <div class='col text-center'>
-                            <a class='btn btn-secondary mb-3 rounded-pill shadow-lg' href='register.php' role='button'>Register Again</a>
+                            <a class='btn btn-secondary mb-3 shadow-lg' href='register.php' role='button'>Register Again</a>
                         </div>
                     ";
                 } else {
@@ -178,7 +181,7 @@
                         </div>
 
                         <div class='col text-center'>
-                            <a class='btn btn-secondary mb-3 rounded-pill shadow-lg' href='login.php' role='button'>Login</a>
+                            <a class='btn btn-secondary mb-3 shadow-lg' href='login.php' role='button'>Login</a>
                         </div>
                     ";
 

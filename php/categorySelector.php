@@ -7,13 +7,23 @@
     if(!($_SESSION['userType'] == "admin")) {
         header("Location: ../index.php");
     }
+
+    //Check if the current session allowed the user to acces this site and redirect if not
+    if(empty($_GET["op"])) {
+        header("Location: ../index.php");
+    }
+
+    //Get the id from the url
+    $operation = $_GET["op"];
+
+
 ?>
 
 <!doctype html>
 <html lang="en">
     <head>
         <!-- Title of the site  is set in SESSION from the database.php -->
-        <title><?php echo $_SESSION['siteName']?> | Add Item</title>
+        <title><?php echo $_SESSION['siteName']?> | Edit Category</title>
 
         <!-- Add a logo for the title head -->
         <link rel="icon" href="../img/logo/logo-test.ico" type="image/ico">
@@ -41,49 +51,43 @@
 
         <!-- Container for the input form of the add item -->
         <div class="container p-3 mb-2 bg-normal-92 text-white rounded-3 w-25">
-            <h1 class="text-center mb-2">Add Item</h1>
-            <!-- This is the form that would need inputs that would be passed to the addItemHandler.php -->
-            <form action="addItemHandler.php" method="post" enctype="multipart/form-data">
+            <?php
+                //This is the form for the edit operation
+                if($operation == 'edit') {
+                    echo "
+                        <h1 class='text-center mb-2'>Edit Category</h1>
+                        <form action='editCategory.php' method='post'>
+                    ";
+                } else {
+                    //This is the form for the delete operation
+                    echo "
+                        <h1 class='text-center mb-2'>Delete Category</h1>
+                        <form action='deleteCategory.php' method='post'>
+                    ";
+                }
+            ?>
                 <div class="mb-3">
-                    <label for="itemPicture" class="form-label">Item Picture</label>
-                    <input class="form-control text-light bg-dark" type="file" accept="image/*" name="itemPicture">
-                </div>
-                <div class="mb-3">
-                    <label for="itemName" class="form-label">Item Name (Only Characters and Number Are Allowed)</label>
-                    <input type="text" class="form-control text-light bg-dark" name="itemName" placeholder="e.g Hotdog" pattern="[A-z0-9À-ž\s]+" required>
-                </div>
-                <div class="mb-3">
-                    <label for="itemCategory" class="form-label">Item Category</label>
-                    <select class='form-select bg-dark text-white mt-1' name='itemCategory' required>
+                    <label for="category" class="form-label">Category Name</label>
+                    <select class='form-select bg-dark text-white mt-1' name='category' required>
                         <option value="" disabled selected hidden>Please Choose...</option>
                         <?php
                             //Query and Execute for the category
-                            $querySelectCategoryInfo = "SELECT name FROM tbl_category";
+                            $querySelectCategoryInfo = "SELECT id, name FROM tbl_category ORDER BY name";
                             $executeQuerySelectCategoryInfo = mysqli_query($con, $querySelectCategoryInfo);
 
                             while($categoryInfo = mysqli_fetch_assoc($executeQuerySelectCategoryInfo)) {
                                 $categoryName = $categoryInfo["name"];
+                                $categoryId = $categoryInfo["id"];
 
                                 echo "
-                                    <option value='$categoryName'>$categoryName</option>
+                                    <option value='$categoryId|$categoryName'>$categoryName</option>
                                 ";
                             }
-                        ?>
-                    </select>
-                </div>
-                <div class="mb-3">
-                    <label for="itemPrice" class="form-label">Item Price</label>
-                    <div class="input-group mb-3">
-                        <span class="input-group-text">₱</span>
-                        <input type="number" class="form-control text-light bg-dark" aria-label="Peso amount (with dot and two decimal places)" name="itemPrice" placeholder="e.g 25.00" step=".01" min="1" max="999999999" required>
-                    </div>
-                </div>
-                <div class="mb-3">
-                    <label for="itemDescription" class="form-label">Item Description</label>
-                    <textarea class="form-control bg-dark text-light" rows="3" name="itemDescription" style="max-height: 15rem;" required></textarea>
+                          ?>
+                      </select>
                 </div>
                 <div class="col text-center">
-                    <button type="submit" class="btn btn-primary mt-2">ADD ITEM</button>
+                    <button type="submit" class="btn btn-primary mt-2">SELECT CATEGORY</button>
                 </div>
             </form>
         </div>

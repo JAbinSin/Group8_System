@@ -15,6 +15,9 @@
         <!-- Title of the site  is set in SESSION from the database.php -->
         <title><?php echo $_SESSION['siteName']?> | Cart</title>
 
+        <!-- Add a logo for the title head -->
+        <link rel="icon" href="../img/logo/logo-test.ico" type="image/ico">
+
         <!-- The meta tags used in the webpage -->
         <!-- charset="utf-8" to use almost all the character and symbol in the world -->
         <!-- viewport to make the webpage more responsive -->
@@ -80,7 +83,7 @@
                                 <div class='row g-0 border border-secondary border-2' style='margin-bottom: 1rem;'>
                                     <div class='col-md-4 p-0 bg-transparent' style='max-height: 16rem; min-height: 17rem;'>
                                         <a href='item.php?id=$sessItemId'>
-                                            <img src='../img/items/$itemPicture' alt='Image Unavailable' style='width: 100%; height: 100%;'>
+                                            <img class='border-end border-2 border-secondary' src='../img/items/$itemPicture' alt='Image Unavailable' style='width: 100%; height: 100%;'>
                                         </a>
                                     </div>
                                     <div class='col-md-8'>

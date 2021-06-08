@@ -10,23 +10,21 @@
     }
 
     //Get the userId from the previous form
-    $itemId = $_POST["itemId"];
+    $categoryId = $_POST["categoryId"];
 
-    //Use to delete the picture from the img/items folder
+    //Use to delete the picture from the img/category folder
     //Run this first before deleteing the whole column from the table
-    $queryItemInfo = "SELECT picture, category FROM tbl_items WHERE id = '$itemId'";
-    $executeQueryItemInfo = mysqli_query($con, $queryItemInfo);
-    $itemInfo = mysqli_fetch_assoc($executeQueryItemInfo);
-    $path = "../img/items/" . $itemInfo["picture"];
+    $queryPictureDelete = "SELECT category_picture FROM tbl_category WHERE id = '$categoryId'";
+    $executeQueryPicture = mysqli_query($con, $queryPictureDelete);
+    $infoCategoryPicture = mysqli_fetch_assoc($executeQueryPicture);
+    $path = "../img/category/" . $infoCategoryPicture["category_picture"];
     //This remove the image if the image is not the default.png
-    if(($itemInfo["picture"] != "default.png")) {
+    if(($infoCategoryPicture["category_picture"] != "default.png")) {
         unlink($path);
     }
 
-    $itemCategory = $itemInfo["category"];
-
     //Ready the query and execute it to delete the item
-    $deleteQuery = "DELETE FROM tbl_items WHERE id = '$itemId'";
+    $deleteQuery = "DELETE FROM tbl_category WHERE id = '$categoryId'";
     $deleteUserInfo = mysqli_query($con, $deleteQuery);
 ?>
 
@@ -34,7 +32,7 @@
 <html lang="en">
     <head>
         <!-- Title of the site  is set in SESSION from the database.php -->
-        <title><?php echo $_SESSION['siteName']?> | Item Delete</title>
+        <title><?php echo $_SESSION['siteName']?> | Category Delete</title>
 
         <!-- Add a logo for the title head -->
         <link rel="icon" href="../img/logo/logo-test.ico" type="image/ico">
@@ -62,12 +60,12 @@
 
         <!-- Container for the message output of the handler -->
         <div class="container p-3 mb-2 bg-dark text-white rounded-3 w-25">
-            <h1 class="text-center mb-2">Item Delete</h1>
+            <h1 class="text-center mb-2">Category Delete</h1>
             <div class="alert alert-success text-center h2 overflow-auto" role="alert">
-                Database: Item Deleted.
+                Database: Category Deleted.
             </div>
             <div class="col text-center">
-                <a class='btn btn-secondary' href='itemList.php?category=<?php echo $itemCategory?>' role='button'>RETURN</a>
+                <a class='btn btn-secondary' href='../index.php' role='button'>HOME</a>
             </div>
         </div>
     </body>

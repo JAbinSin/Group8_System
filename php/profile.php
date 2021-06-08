@@ -8,13 +8,21 @@
         header("Location: ../index.php");
     }
 
+    //Set the id from url or session
+    $type = $_SESSION['userType'];
+    @$id = $_GET["id"];
+    if(empty($id)) {
+        $id = $_SESSION['userId'];
+    }
+
     //Query and Execute for the user information
-    $querySelectInfoUser = "SELECT * FROM tbl_users WHERE id =" . $_SESSION['userId'];
+    $querySelectInfoUser = "SELECT * FROM tbl_users WHERE id = $id";
     $executeQuerySelectInfoUser = mysqli_query($con, $querySelectInfoUser);
 
     $userInfo = mysqli_fetch_assoc($executeQuerySelectInfoUser);
 
     $userId = $userInfo["id"];
+    $userType = $userInfo["user_type"];
     $userProfilePicture = $userInfo["profile_picture"];
     $userFirstName = $userInfo["first_name"];
     $userLastName = $userInfo["last_name"];
@@ -24,6 +32,19 @@
     $userZipCode = $userInfo["zip_code"];
     $userPhoneNumber = $userInfo["phone_number"];
     $userValidated = $userInfo["validated"];
+
+    //Only the admin can access each person profile
+    //Each client can only view their own profile
+    if(($type != "admin") && ($userId != $_SESSION['userId'])) {
+        header("Location: ../index.php");
+        exit();
+    }
+
+    //Redirect if user didn't exist
+    if(empty($userId)) {
+        header("Location: ../index.php");
+        exit();
+    }
 ?>
 
 <!doctype html>
@@ -31,6 +52,9 @@
     <head>
         <!-- Title of the site  is set in SESSION from the database.php -->
         <title><?php echo $_SESSION['siteName']?> | Profile</title>
+
+        <!-- Add a logo for the title head -->
+        <link rel="icon" href="../img/logo/logo-test.ico" type="image/ico">
 
         <!-- The meta tags used in the webpage -->
         <!-- charset="utf-8" to use almost all the character and symbol in the world -->
@@ -61,12 +85,30 @@
                     <p class="mt-3 mb-3 h5">@<?php echo $userUsername?></p>
                     <p class="m-0 display-6"><?php echo $userFirstName?></p>
                     <p class="display-6"><?php echo $userLastName?></p>
-                    <div class="col text-center">
-                        <a class="btn btn-secondary mb-3 rounded-pill shadow-lg" href="profileEdit.php?id=<?php echo $userId ?>" role="button" style="width: 7rem; font-size: 1.1rem;">Edit</a>
-                    </div>
+                    <?php
+                        if($userType == "admin") {
+                          echo "
+                          <div class='col text-center'>
+                              <a class='btn btn-secondary mb-3 rounded-pill shadow-lg disabled' href='profileEdit.php?id=<?php echo $userId ?>' role='button' style='width: 7rem; font-size: 1.1rem;'>Edit</a>
+                          </div>
+                          ";
+                        } elseif($userId != $_SESSION['userId']) {
+                          echo "
+                          <div class='col text-center'>
+                              <a class='btn btn-secondary mb-3 rounded-pill shadow-lg disabled' href='profileEdit.php?id=<?php echo $userId ?>' role='button' style='width: 7rem; font-size: 1.1rem;'>Edit</a>
+                          </div>
+                          ";
+                        } else {
+                          echo "
+                              <div class='col text-center'>
+                                  <a class='btn btn-secondary mb-3 rounded-pill shadow-lg' href='profileEdit.php?id=<?php echo $userId ?>' role='button' style='width: 7rem; font-size: 1.1rem;'>Edit</a>
+                              </div>
+                          ";
+                        }
+                    ?>
                 </div>
                 <div class="col-7 border-end-0 bg-dark">
-                    <p class="h3">Personal Details:</p>
+                    <p class="h3 mt-2">Personal Details:</p>
                     <div>
                         <dl class="row h5">
                             <dt class="col-sm-4 mt-3">Address: </dt>

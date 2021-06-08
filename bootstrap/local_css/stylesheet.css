@@ -22,6 +22,14 @@ body {
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.line-clamp-category {
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 .itemList-card-admin {
@@ -61,4 +69,14 @@ body {
 .profile-picture {
     width: 11rem;
     height: 11rem;
+}
+
+.category-card {
+    max-width: 26rem;
+    max-height:10.4rem;
+    min-height:10.4rem;
+}
+
+.category-card-img {
+    height: 10rem;
 }

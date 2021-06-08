@@ -38,6 +38,9 @@
         <!-- Title of the site  is set in SESSION from the database.php -->
         <title><?php echo $_SESSION['siteName']?> | Profile Edit</title>
 
+        <!-- Add a logo for the title head -->
+        <link rel="icon" href="../img/logo/logo-test.ico" type="image/ico">
+
         <!-- The meta tags used in the webpage -->
         <!-- charset="utf-8" to use almost all the character and symbol in the world -->
         <!-- viewport to make the webpage more responsive -->

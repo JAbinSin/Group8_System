@@ -15,6 +15,9 @@
         <!-- Title of the site  is set in SESSION from the database.php -->
         <title><?php echo $_SESSION['siteName']?> | History</title>
 
+        <!-- Add a logo for the title head -->
+        <link rel="icon" href="../img/logo/logo-test.ico" type="image/ico">
+
         <!-- The meta tags used in the webpage -->
         <!-- charset="utf-8" to use almost all the character and symbol in the world -->
         <!-- viewport to make the webpage more responsive -->
@@ -93,7 +96,7 @@
                                 <div class='row g-0 border border-secondary border-2' style='margin-bottom: 1rem;'>
                                     <div class='col-md-4 p-0 bg-transparent' style='max-height: 16rem; min-height: 16rem;'>
                                         <a href='item.php?id=$historyItem'>
-                                            <img src='../img/items/$historyPicture' alt='Image Unavailable' style='width: 100%; height: 100%;'>
+                                            <img class='border-end border-2 border-secondary' src='../img/items/$historyPicture' alt='Image Unavailable' style='width: 100%; height: 100%;'>
                                         </a>
                                     </div>
                                     <div class='col-md-8'>
@@ -107,7 +110,7 @@
                                                 ($historyStatus == 'pending' ? '<span class="badge bg-warning text-dark">Pending</span>' :
                                                     ($historyStatus == 'processing' ? '<span class="badge bg-info text-dark">Processing</span>' :
                                                         ($historyStatus == 'delivered' ? '<span class="badge bg-success text-dark">Delivered</span>' :
-                                                            '<span class="badge bg-secondary text-dark">Canceled</span>')))
+                                                            '<span class="badge bg-secondary text-dark">Cancelled</span>')))
                                                 ."</h5>
                                             </div>
                                         </div>
@@ -122,17 +125,20 @@
                     }
                 }
                 //Show an Error for History is Empty
+                //Show an Error for History is Empty
                 if($isEmpty) {
                     echo "
                         <div class='alert alert-warning text-center h2' role='alert'>
                             History is Empty.
                         </div>";
+                } else {
+                  echo "
+                      <div class='card-footer text-muted text-center'>
+                          Time Purchase: $historyTime
+                      </div>
+                  ";
                 }
-
             ?>
-            <div class='card-footer text-muted text-center'>
-                Time Purchase: <?php echo $historyTime?>
-            </div>
         </div>
     </body>
 </html>

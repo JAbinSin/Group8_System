@@ -2,9 +2,9 @@
     //Include the database to the webpage to access it
     include_once("../inc/database.php");
 
-    //Check if the current user is allowed to access the webpage
-    //Only the guest can access this webpage
-    if(isset($_SESSION['userType'])) {
+    //Check if the current session allowed the user to acces this site and redirect if not
+    //Only the admin can access this webpage
+    if(!($_SESSION['userType'] == "admin")) {
         header("Location: ../index.php");
     }
 ?>
@@ -13,7 +13,7 @@
 <html lang="en">
     <head>
         <!-- Title of the site  is set in SESSION from the database.php -->
-        <title><?php echo $_SESSION['siteName']?> | Login</title>
+        <title><?php echo $_SESSION['siteName']?> | Add Category</title>
 
         <!-- Add a logo for the title head -->
         <link rel="icon" href="../img/logo/logo-test.ico" type="image/ico">
@@ -36,25 +36,24 @@
     </head>
 
     <body class="d-grid gap-5 bg-secondary">
-        <!-- Include the navigation bar to the webpage -->
+        <!-- Include the navigation bar to the webpage-->
         <?php include_once("../inc/navBar.php"); ?>
 
-        <!-- This is the container of the form  -->
-        <div class="container p-3 mb-2 bg-normal-92 text-white w-25 rounded-3">
-            <h1 class="text-center mb-2 opacity-1">Login</h1>
-            <!-- This is the form that would need inputs that would be passed to the loginHandler.php -->
-            <form action="loginHandler.php" method="post">
+        <!-- Container for the input form of the add item -->
+        <div class="container p-3 mb-2 bg-normal-92 text-white rounded-3 w-25">
+            <h1 class="text-center mb-2">Add Category</h1>
+            <!-- This is the form that would need inputs that would be passed to the addCategoryHandler.php -->
+            <form action="addCategoryHandler.php" method="post" enctype="multipart/form-data">
                 <div class="mb-3">
-                    <label for="username" class="form-label">Username</label>
-                    <input type="text" class="form-control text-light bg-dark" name="username" placeholder="Enter Username" required>
+                    <label for="categoryPicture" class="form-label">Category Picture</label>
+                    <input class="form-control text-light bg-dark" type="file" accept="image/*" name="categoryPicture">
                 </div>
                 <div class="mb-3">
-                    <label for="password" class="form-label">Password</label>
-                    <input type="password" class="form-control text-light bg-dark" name="password" placeholder="Enter Password" required>
+                    <label for="categoryName" class="form-label">Category Name (Only Characters and Number Are Allowed)</label>
+                    <input type="text" class="form-control text-light bg-dark" name="categoryName" placeholder="e.g Hotdog" pattern="[A-z0-9À-ž\s]+" required>
                 </div>
                 <div class="col text-center">
-                    <button type="submit" class="btn btn-secondary mb-3 rounded-pill shadow-lg">LOGIN</button>
-                    <p class="m-0">Not a member? <a href="register.php">Register now</a></p>
+                    <button type="submit" class="btn btn-primary mt-2">ADD CATEGORY</button>
                 </div>
             </form>
         </div>

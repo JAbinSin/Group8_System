@@ -26,7 +26,12 @@
                   </a>
                   <ul class='dropdown-menu dropdown-menu-dark' aria-labelledby='navbarDropdown'>
                     <li><a class='dropdown-item' href='adminListUsers.php'><i class='bi bi-person-lines-fill'></i></i> User List</a></li>
+                    <li><hr class='dropdown-divider'></li>
                     <li><a class='dropdown-item' href='addItem.php'><i class='bi bi-bag-plus'></i> Add Item</a></li>
+                    <li><hr class='dropdown-divider'></li>
+                    <li><a class='dropdown-item' href='addCategory.php'><i class='bi bi-folder-plus'></i> Add Category</a></li>
+                    <li><a class='dropdown-item' href='categorySelector.php?op=edit'><i class='bi bi-pencil-square'></i> Edit Category</a></li>
+                    <li><a class='dropdown-item' href='categorySelector.php?op=delete'><i class='bi bi-trash'></i> Delete Category</a></li>
                   </ul>
                 </li>
                 <li class='nav-item dropdown'>
@@ -102,6 +107,5 @@
         </div>
       ";
     }
-
   ?>
 </nav>

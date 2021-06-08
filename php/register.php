@@ -15,6 +15,9 @@
         <!-- Title of the site  is set in SESSION from the database.php -->
         <title><?php echo $_SESSION['siteName']?> | Register</title>
 
+        <!-- Add a logo for the title head -->
+        <link rel="icon" href="../img/logo/logo-test.ico" type="image/ico">
+
         <!-- The meta tags used in the webpage -->
         <!-- charset="utf-8" to use almost all the character and symbol in the world -->
         <!-- viewport to make the webpage more responsive -->
@@ -50,8 +53,8 @@
                     <input type="text" class="form-control text-light bg-dark" name="userLastName" placeholder="Enter Last Name" pattern="[A-zÀ-ž\s]+" required>
                 </div>
                 <div class="mb-3">
-                    <label for="userUsername" class="form-label">Username</label>
-                    <input type="text" class="form-control text-light bg-dark" name="userUsername" placeholder="Enter Username" pattern="[a-zA-Z0-9]+" minlength="8" required>
+                    <label for="userUsername" class="form-label">Username (Space are not Allowed)</label>
+                    <input type="text" class="form-control text-light bg-dark" name="userUsername" placeholder="Enter Username" pattern="[A-z0-9À-ž]+" minlength="8" required>
                 </div>
                 <div class="mb-3">
                     <label for="userPassword" class="form-label">Password</label>

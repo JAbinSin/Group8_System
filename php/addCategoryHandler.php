@@ -10,19 +10,12 @@
     }
 
     //Set the variable names for the values receive from the register.php
-    $itemName = trim($_POST["itemName"]);
-    $itemPrice = trim($_POST["itemPrice"]);
-    $itemDescription = trim($_POST["itemDescription"]);
-    @$itemCategory = $_POST["itemCategory"];
+    $categoryName = trim($_POST["categoryName"]);
 
     //Sanitize all the Inputs
-    $itemName = filter_var($itemName, FILTER_SANITIZE_SPECIAL_CHARS);
-    $itemPrice = filter_var($itemPrice, FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
-    $itemDescription = filter_var($itemDescription, FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_HIGH);
-    $itemCategory = filter_var($itemCategory, FILTER_SANITIZE_SPECIAL_CHARS);
+    $categoryName = filter_var($categoryName, FILTER_SANITIZE_SPECIAL_CHARS);
 
-    //An array for easier and faster checking if there is an error in the variable
-    $arrayPost = array("Item Name:" => $itemName, "Item Price:" => $itemPrice, "Item Description:" => $itemDescription, "Item Category:" => $itemCategory);
+    //Error variable checker
     $logsErrorTest = false;
 ?>
 
@@ -30,7 +23,7 @@
 <html lang="en">
     <head>
         <!-- Title of the site  is set in SESSION from the database.php -->
-        <title><?php echo $_SESSION['siteName']?> | Add Item</title>
+        <title><?php echo $_SESSION['siteName']?> | Add Category</title>
 
         <!-- Add a logo for the title head -->
         <link rel="icon" href="../img/logo/logo-test.ico" type="image/ico">
@@ -61,28 +54,26 @@
             <h1 class="text-center mb-2">Add Item</h1>
             <?php
 
-                //This check if the user input a blank input because space count as an input for some reasons.
-                foreach($arrayPost as $label => $value) {
-                    if(empty($value)) {
-                        echo
-                            "<div class='alert alert-danger text-center h2 overflow-auto' role='alert'>"
-                                . $label . " Input Empty/Invalid." .
-                            "</div>
-                        ";
-                        $logsErrorTest = true;
-                    }
+                //This check if the user input a blank input because space count as an input for some reasons.{
+                if(empty($categoryName)) {
+                    echo
+                        "<div class='alert alert-danger text-center h2 overflow-auto' role='alert'>"
+                            . "Category Name: Input Empty/Invalid." .
+                        "</div>
+                    ";
+                    $logsErrorTest = true;
                 }
 
                 //Check if the Name already exist
-                $querySelectItemInfo = "SELECT name FROM tbl_items";
+                $querySelectItemInfo = "SELECT name FROM tbl_category";
                 $executeQuerySelectItemInfo = mysqli_query($con, $querySelectItemInfo);
 
                 while($itemInfo = mysqli_fetch_assoc($executeQuerySelectItemInfo)) {
-                    if($itemName === $itemInfo["name"]) {
+                    if($categoryName === $itemInfo["name"]) {
                         $logsErrorTest = true;
                         echo "
                             <div class='alert alert-danger text-center h2 overflow-auto' role='alert'>
-                                Item Name: Already Exist.
+                                Category Name: Already Exist.
                             </div>
                         ";
                     }
@@ -90,14 +81,14 @@
 
                 //Check if the file type is an image format and if the user upload an image or not
                 //Add an exception so it would not check an empty upload
-                if((@exif_imagetype($_FILES["itemPicture"]['tmp_name']) == false) && (@!empty($_FILES["itemPicture"]['tmp_name']))) {
+                if((@exif_imagetype($_FILES["categoryPicture"]['tmp_name']) == false) && (@!empty($_FILES["categoryPicture"]['tmp_name']))) {
                     echo "
                         <div class='alert alert-danger text-center h2 overflow-auto' role='alert'>
-                            Item Picture: File Uploaded is not an Image Format.
+                            Category Picture: File Uploaded is not an Image Format.
                         </div>
                     ";
                     $logsErrorTest = true;
-                } else if(@empty(exif_imagetype($_FILES["itemPicture"]['tmp_name']))) {
+                } else if(@empty(exif_imagetype($_FILES["categoryPicture"]['tmp_name']))) {
                     $uploadedImage = false;
                 } else {
                     $uploadedImage = true;
@@ -107,12 +98,12 @@
                 if($logsErrorTest == true) {
                     echo "
                         <div class='alert alert-danger text-center h2 overflow-auto' role='alert'>
-                            Database: Add Item Failed.
+                            Database: Add Category Failed.
                         </div>
                     ";
                 } else {
                     //This query is to select find the id increment value for the image name
-                    $queryTableStatus = "SHOW TABLE STATUS LIKE 'tbl_items'";
+                    $queryTableStatus = "SHOW TABLE STATUS LIKE 'tbl_category'";
                     $executeQueryTableStatus = mysqli_query($con, $queryTableStatus);
                     $tableInfo = mysqli_fetch_assoc($executeQueryTableStatus);
                     $nextId = $tableInfo["Auto_increment"];
@@ -120,11 +111,11 @@
 
                     //Moving and naming the img to img/items folder
                     if($uploadedImage == true) {
-                        $target_dir = "../img/items/";
-                        @$fileType = pathinfo($_FILES["itemPicture"]["name"])["extension"];
+                        $target_dir = "../img/category/";
+                        @$fileType = pathinfo($_FILES["categoryPicture"]["name"])["extension"];
                         $fileName = $nextId . "_picture." . $fileType;
                         $target_file = $target_dir . $fileName;
-                        move_uploaded_file($_FILES["itemPicture"]["tmp_name"], $target_file);
+                        move_uploaded_file($_FILES["categoryPicture"]["tmp_name"], $target_file);
                     }
 
 
@@ -132,34 +123,22 @@
                     //This query is for an upload without an image
                     if($uploadedImage == false) {
                         $queryInsert = "
-                        INSERT INTO tbl_items(
-                            name,
-                            price,
-                            description,
-                            category
+                        INSERT INTO tbl_category(
+                            name
                         )
                         VALUES (
-                            '$itemName',
-                            '$itemPrice',
-                            '$itemDescription',
-                            '$itemCategory'
+                            '$categoryName'
                         )
                         ";
                     } else {
                         //Query for the image with an image
                         $queryInsert = "
-                        INSERT INTO tbl_items(
+                        INSERT INTO tbl_category(
                             name,
-                            price,
-                            description,
-                            category,
-                            picture
+                            category_picture
                         )
                         VALUES (
-                            '$itemName',
-                            '$itemPrice',
-                            '$itemDescription',
-                            '$itemCategory',
+                            '$categoryName',
                             '$fileName'
                         )
                         ";
@@ -170,7 +149,7 @@
 
                     echo "
                         <div class='alert alert-success text-center h2 overflow-auto' role='alert'>
-                            Database: Item Added.
+                            Database: Category Added.
                         </div>
                     ";
                 }

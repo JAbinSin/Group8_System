@@ -1,6 +1,7 @@
 <?php
     //Include the database to the webpage to access it
     include_once("../inc/database.php");
+    ob_start();
 
     //Check if the current user is allowed to access the webpage
     //Need input from the previous form
@@ -21,6 +22,9 @@
     <head>
         <!-- Title of the site  is set in SESSION from the database.php -->
         <title><?php echo $_SESSION['siteName']?> | </title>
+
+        <!-- Add a logo for the title head -->
+        <link rel="icon" href="../img/logo/logo-test.ico" type="image/ico">
 
         <!-- The meta tags used in the webpage -->
         <!-- charset="utf-8" to use almost all the character and symbol in the world -->
@@ -73,8 +77,8 @@
 
                         //Used to replace the current Quantity of Cart with the additional Quantity from the form
                         $_SESSION["cartItemQuantity"][$idTmp] = $valueReplace;
-
                         header("Location: cart.php");
+                        exit();
                     } else {
                         echo "
                             <div class='alert alert-danger text-center h2' role='alert'>
@@ -89,8 +93,8 @@
                     $idTmp = array_search($itemId, $_SESSION["cartItemId"]);
                     unset($_SESSION["cartItemId"][$idTmp]); //Clear the Session for cartItemId
                     unset($_SESSION["cartItemQuantity"][$idTmp]); //Clear the Session for cartItemQuantity
-
                     header("Location: cart.php");
+                    exit();
                 }
             ?>
         </div>

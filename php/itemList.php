@@ -1,13 +1,30 @@
 <?php
     //Include the database to the webpage to access it
     include_once("../inc/database.php");
+
+    //Check if the current session allowed the user to acces this site and redirect if not
+    if(empty($_GET["category"])) {
+        header("Location: ../index.php");
+    }
+
+    //Get the id from the url
+    $categoryName = $_GET["category"];
+
+    //Error handling
+    $itemEmpty = true;
 ?>
 
 <!doctype html>
 <html lang="en">
     <head>
         <!-- Title of the site  is set in SESSION from the database.php -->
-        <title><?php echo $_SESSION['siteName']?> | Home</title>
+        <title><?php echo $_SESSION['siteName']?> | Items</title>
+
+        <!-- Add a logo for the title head -->
+        <link rel="icon" href="../img/logo/logo-test.ico" type="image/ico">
+
+        <!-- Add a logo for the title head -->
+        <link rel="icon" href="../img/logo/logo-test.ico" type="image/ico">
 
         <!-- The meta tags used in the webpage -->
         <!-- charset="utf-8" to use almost all the character and symbol in the world -->
@@ -31,15 +48,23 @@
         <?php include_once("../inc/navBar.php"); ?>
 
         <!-- Container for the whole list of items -->
-        <div class="container p-3 mb-2 bg-dark text-white rounded-3">
-            <h1 class="text-center mb-2 text-white">Menu</h1>
-            <div class="row row-cols-1 row-cols-md-3 g-4">
+        <div class="container p-3 mb-2 bg-normal-92 text-white rounded-3">
+            <div class="row g-0">
+                <div class="col-sm-6 col-md-8 ps-3">
+                    <h1><?php echo $categoryName?></h1>
+                </div>
+                <div class="col-6 col-md-4 text-end pe-3">
+                    <h1><a href="categoryList.php" class="text-reset text-decoration-none"><i class="bi bi-arrow-counterclockwise"></i>Back</a></h1>
+                </div>
+            </div>
+            <div class="row row-cols-1 row-cols-md-4 g-4">
                 <?php
                     //Query and Execute for the user information
-                    $querySelectItem = "SELECT * FROM tbl_items";
+                    $querySelectItem = "SELECT * FROM tbl_items WHERE category = '$categoryName'";
                     $executeQuerySelectItem = mysqli_query($con, $querySelectItem);
 
                     while($itemInfo = mysqli_fetch_assoc($executeQuerySelectItem)){
+                        $itemEmpty = false;
                         $itemId = $itemInfo["id"];
                         $itemName = $itemInfo["name"];
                         $itemPrice = $itemInfo["price"];
@@ -83,6 +108,12 @@
                         }
                     }
 
+                    if($itemEmpty) {
+                        echo "
+                          <div class='alert alert-warning text-center h2 w-100' role='alert'>
+                              No Available Item Yet.
+                          </div>";
+                    }
                 ?>
             </div>
         </div>

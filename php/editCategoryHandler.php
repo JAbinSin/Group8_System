@@ -10,18 +10,13 @@
     }
 
     //Set the variable names for the values receive from the itemEdit.php
-    $itemName = trim($_POST["itemName"]);
-    $itemPrice = trim($_POST["itemPrice"]);
-    $itemDescription = trim($_POST["itemDescription"]);
-    $itemId = $_POST["itemId"];
+    $categoryName = trim($_POST["categoryName"]);
+    $categoryId = $_POST["categoryId"];
 
     //Sanitize all the Inputs
-    $itemName = filter_var($itemName, FILTER_SANITIZE_SPECIAL_CHARS);
-    $itemPrice = filter_var($itemPrice, FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
-    $itemDescription = filter_var($itemDescription, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+    $categoryName = filter_var($categoryName, FILTER_SANITIZE_SPECIAL_CHARS);
 
-    //An array for easier and faster checking if there is an error in the variable
-    $arrayPost = array("Item Name:" => $itemName, "Item Price:" => $itemPrice,  "Item Description:" => $itemDescription);
+    //Error handler
     $logsErrorTest = false;
     $uploadedImage = false;
 ?>
@@ -30,7 +25,7 @@
 <html lang="en">
     <head>
         <!-- Title of the site  is set in SESSION from the database.php -->
-        <title><?php echo $_SESSION['siteName']?> | Item Edit</title>
+        <title><?php echo $_SESSION['siteName']?> | Edit Category</title>
 
         <!-- Add a logo for the title head -->
         <link rel="icon" href="../img/logo/logo-test.ico" type="image/ico">
@@ -58,30 +53,28 @@
 
         <!-- Container for the output messafe of the edit handler -->
         <div class="container p-3 mb-2 bg-dark text-white rounded-3 w-25">
-            <h1 class="text-center mb-2">Item Edit</h1>
+            <h1 class="text-center mb-2">Edit Category</h1>
             <?php
                 //This check if the user input a blank input because space count as an input for some reasons.
-                foreach($arrayPost as $label => $value) {
-                    if(empty($value)) {
-                        echo
-                            "<div class='alert alert-danger text-center h2 overflow-auto' role='alert'>"
-                                . $label . " Input Empty/Invalid." .
-                            "</div>
-                        ";
-                        $logsErrorTest = true;
-                    }
+                if(empty($categoryName)) {
+                    echo
+                        "<div class='alert alert-danger text-center h2 overflow-auto' role='alert'>
+                            Category Name: Input is Invalid/Empty.
+                        </div>
+                    ";
+                    $logsErrorTest = true;
                 }
 
                 //Check if the Name already exist
-                $querySelectItemInfo = "SELECT id ,name FROM tbl_items";
-                $executeQuerySelectItemInfo = mysqli_query($con, $querySelectItemInfo);
+                $querySelectCategoryInfo = "SELECT id ,name FROM tbl_category";
+                $executeQuerySelectCategoryInfo = mysqli_query($con, $querySelectCategoryInfo);
 
-                while($itemInfo = mysqli_fetch_assoc($executeQuerySelectItemInfo)) {
-                    if(($itemName === $itemInfo["name"]) && ($itemId != $itemInfo["id"])) {
+                while($categoryInfo = mysqli_fetch_assoc($executeQuerySelectCategoryInfo)) {
+                    if(($categoryName === $categoryInfo["name"]) && ($categoryId != $categoryInfo["id"])) {
                         $logsErrorTest = true;
                         echo "
                             <div class='alert alert-danger text-center h2 overflow-auto' role='alert'>
-                                Item Name: Already Exist.
+                                Category Name: Already Exist.
                             </div>
                         ";
                     }
@@ -89,14 +82,14 @@
 
                 //Check if the file type is an image format and if the user upload an image or not
                 //Add an exception so it would not check an empty upload
-                if((@exif_imagetype($_FILES["itemPicture"]['tmp_name']) == false) && (@!empty($_FILES["itemPicture"]['tmp_name']))) {
+                if((@exif_imagetype($_FILES["categoryPicture"]['tmp_name']) == false) && (@!empty($_FILES["categoryPicture"]['tmp_name']))) {
                     echo "
                         <div class='alert alert-danger text-center h2 overflow-auto' role='alert'>
-                            Item Picture: File Uploaded is not an Image Format.
+                            Category Picture: File Uploaded is not an Image Format.
                         </div>
                     ";
                     $logsErrorTest = true;
-                } else if(@empty(exif_imagetype($_FILES["itemPicture"]['tmp_name']))) {
+                } else if(@empty(exif_imagetype($_FILES["categoryPicture"]['tmp_name']))) {
                     $uploadedImage = false;
                 } else {
                     $uploadedImage = true;
@@ -106,7 +99,7 @@
                 if($logsErrorTest == true) {
                     echo "
                         <div class='alert alert-danger text-center h2 overflow-auto' role='alert'>
-                            Database: Item Update Failed.
+                            Database: Category Update Failed.
                         </div>
                         <div class='col text-center'>
                             <a class='btn btn-secondary rounded-pill' href='itemEdit.php?=$itemId' role='button'>Return</a>
@@ -114,23 +107,23 @@
                     ";
                 } else {
                     //Select the profile image then delete the old profile
-                    $queryProfile = "SELECT picture FROM tbl_items WHERE id = '$itemId'";
+                    $queryProfile = "SELECT category_picture FROM tbl_category WHERE id = '$categoryId'";
                     $executeQueryProfile = mysqli_query($con, $queryProfile);
                     $infoProfilePicture = mysqli_fetch_assoc($executeQueryProfile);
-                    $path = "../img/items/" . $infoProfilePicture["picture"];
+                    $path = "../img/category/" . $infoProfilePicture["category_picture"];
 
                     //Delete the profile picture if they change from an image that is not a default
-                    if(($infoProfilePicture["picture"] != "default.png") && ($uploadedImage == true)) {
+                    if(($infoProfilePicture["category_picture"] != "default.png") && ($uploadedImage == true)) {
                         unlink($path);
                     }
 
-                    //Moving and naming the img to img/items folder
+                    //Moving and naming the img to img/category folder
                     if($uploadedImage == true) {
-                        $target_dir = "../img/items/";
-                        @$fileType = pathinfo($_FILES["itemPicture"]["name"])["extension"];
-                        $fileName = $itemId . "_picture." . $fileType;
+                        $target_dir = "../img/category/";
+                        @$fileType = pathinfo($_FILES["categoryPicture"]["name"])["extension"];
+                        $fileName = $categoryId . "_picture." . $fileType;
                         $target_file = $target_dir . $fileName;
-                        move_uploaded_file($_FILES["itemPicture"]["tmp_name"], $target_file);
+                        move_uploaded_file($_FILES["categoryPicture"]["tmp_name"], $target_file);
                     }
 
 
@@ -138,51 +131,46 @@
                     //This is the Query for the edit with image upload
                     if($uploadedImage == true) {
                         $queryUpdate = "UPDATE
-                                            tbl_items
+                                            tbl_category
                                         SET
-                                            name = '$itemName',
-                                            price = '$itemPrice',
-                                            description = '$itemDescription',
-                                            picture = '$fileName'
+                                            name = '$categoryName',
+                                            category_picture = '$fileName'
                                         WHERE
-                                            id = '$itemId'
+                                            id = '$categoryId'
                                         ";
 
                         $executeQuery = mysqli_query($con, $queryUpdate);
 
                         echo "
                             <div class='alert alert-success text-center h2 overflow-auto' role='alert'>
-                                Database: Item Updated.
+                                Database: Category Update.
                             </div>
                             <div class='col text-center'>
-                                <a class='btn btn-secondary rounded-pill' href='itemList.php' role='button'>Home</a>
+                                <a class='btn btn-secondary rounded-pill' href='../index.php' role='button'>Home</a>
                             </div>
                         ";
                     } else {
                         //This is the Query for the edit without image upload
                         $queryUpdate = "UPDATE
-                                            tbl_items
+                                            tbl_category
                                         SET
-                                            name = '$itemName',
-                                            price = '$itemPrice',
-                                            description = '$itemDescription'
+                                            name = '$categoryName'
                                         WHERE
-                                            id = '$itemId'
+                                            id = '$categoryId'
                                         ";
 
                         $executeQuery = mysqli_query($con, $queryUpdate);
 
                         echo "
                             <div class='alert alert-success text-center h2 overflow-auto' role='alert'>
-                                Database: Item Updated.
+                                Database: Category Updated.
                             </div>
                             <div class='col text-center'>
-                                <a class='btn btn-secondary' href='itemList.php' role='button'>Home</a>
+                                <a class='btn btn-secondary' href='../index.php' role='button'>Home</a>
                             </div>
                         ";
                     }
                 }
-
             ?>
         </div>
     </body>

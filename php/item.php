@@ -16,18 +16,14 @@
 
     $itemInfo = mysqli_fetch_assoc($executeQuerySelectItemInfo);
 
-    $itemPicture = $itemInfo["picture"];
-    $itemName = $itemInfo["name"];
-    $itemPrice = $itemInfo["price"];
-    $itemDescription = $itemInfo["description"];
+    @$itemPicture = $itemInfo["picture"];
+    @$itemName = $itemInfo["name"];
+    @$itemPrice = $itemInfo["price"];
+    @$itemDescription = $itemInfo["description"];
+    @$itemCategory = $itemInfo["category"];
 
     //Make variable to Number Format
     $itemPriceNumber = number_format($itemPrice, 2, '.', ',');
-
-    //Redirect the user if the id is invalid
-    if(is_null($itemName)) {
-        header("Location: ../index.php");
-    }
 ?>
 
 <!doctype html>
@@ -35,6 +31,9 @@
     <head>
         <!-- Title of the site  is set in SESSION from the database.php -->
         <title><?php echo $_SESSION['siteName']?> | Menu</title>
+
+        <!-- Add a logo for the title head -->
+        <link rel="icon" href="../img/logo/logo-test.ico" type="image/ico">
 
         <!-- The meta tags used in the webpage -->
         <!-- charset="utf-8" to use almost all the character and symbol in the world -->
@@ -59,12 +58,26 @@
 
         <!-- Container for the item details -->
         <div class="container p-3 mb-2 bg-dark text-white rounded-3 w-50 opacity-1">
-            <h1 class="text-center mb-5">Item</h1>
-
+            <?php
+                if(is_null($itemName)) {
+                    echo "
+                        <div class='alert alert-danger text-center h2' role='alert'>
+                            Item no longer exist.
+                        </div>
+                        <div class='col text-center'>
+                            <a class='btn btn-primary' href='../index.php' role='button'>HOME</a>
+                        </div>
+                      </div>
+                      </body>
+                    ";
+                    exit();
+                }
+            ?>
+            <h1 class="text-end pe-3"><a href="itemList.php?category=<?php echo "$itemCategory"?>" class="text-reset text-decoration-none"><i class="bi bi-arrow-counterclockwise"></i>Back</a></h1>
             <div class="card mb-3 text-dark bg-transparent mx-auto" style="max-width: 50rem; border: 0;">
                 <div class="row g-0">
                     <div class="col-md-4 p-0 bg-transparent mb-3" style="max-height: 16rem; min-height: 16rem;">
-                        <img src="../img/items/<?php echo "$itemPicture"?>" alt="Image Unavailable" style="width: 100%; height: 100%">
+                        <img class='border border-4 border-secondary' src="../img/items/<?php echo "$itemPicture"?>" alt="Image Unavailable" style="width: 100%; height: 100%">
                     </div>
                     <div class="col-md-8">
                         <div class="card-body text-break text-white">
@@ -84,7 +97,7 @@
                                             </div>
                                             <div>
                                                 <input type='hidden' name='itemId' value='$itemId'>
-                                                <button type='submit' class='btn btn-primary btn-lg mt-2'><i class='bi bi-cart-plus'></i> Add to Cart</button>
+                                                <button type='submit' class='btn btn-primary mt-2'><i class='bi bi-cart-plus'></i> Add to Cart</button>
                                             </div>
                                         </form>
                                     ";

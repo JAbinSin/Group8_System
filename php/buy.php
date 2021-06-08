@@ -14,7 +14,7 @@
     $choice = $_POST["btnSubmit"];
 
     //Redirect the user if they pick the clear option
-    if($choice == "Clear") {
+    if($choice == "CLEAR") {
         header("Location: clear.php");
         exit();
     }
@@ -25,6 +25,9 @@
     <head>
         <!-- Title of the site  is set in SESSION from the database.php -->
         <title><?php echo $_SESSION['siteName']?> | Buy</title>
+
+        <!-- Add a logo for the title head -->
+        <link rel="icon" href="../img/logo/logo-test.ico" type="image/ico">
 
         <!-- The meta tags used in the webpage -->
         <!-- charset="utf-8" to use almost all the character and symbol in the world -->
@@ -111,7 +114,7 @@
                           unset($_SESSION["cartItemQuantity"][$i]); //Clear All the Session for cartItemQuantity
                       }
                   }
-                  echo "<div class='alert alert-primary text-center h2 overflow-auto' role='alert'>
+                  echo "<div class='alert alert-success text-center h2 overflow-auto' role='alert'>
                           Items Successfully Purchase.
                         </div>";
                 }

@@ -12,15 +12,15 @@
     $userId = $_GET["id"];
 
     //Query and Execute for the user information
-    $querySelectHistoryInfo = "SELECT id FROM tbl_users WHERE id = $userId";
+    $querySelectHistoryInfo = "SELECT username FROM tbl_users WHERE id = $userId";
     $executeQuerySelectHistoryInfo = mysqli_query($con, $querySelectHistoryInfo);
 
     $historyInfo = mysqli_fetch_assoc($executeQuerySelectHistoryInfo);
 
-    $userDump = $historyInfo["id"];
+    $userUsername = $historyInfo["username"];
 
     //Redirect the user if the id is invalid
-    if(is_null($userDump)) {
+    if(is_null($userUsername)) {
         header("Location: adminListUsers.php");
     }
 ?>
@@ -30,6 +30,9 @@
     <head>
         <!-- Title of the site  is set in SESSION from the database.php -->
         <title><?php echo $_SESSION['siteName']?> | Admin Order Status</title>
+
+        <!-- Add a logo for the title head -->
+        <link rel="icon" href="../img/logo/logo-test.ico" type="image/ico">
 
         <!-- The meta tags used in the webpage -->
         <!-- charset="utf-8" to use almost all the character and symbol in the world -->
@@ -54,7 +57,14 @@
 
         <!-- Container  -->
         <div class="container p-3 mb-2 bg-dark text-white rounded-3 w-50">
-            <h1 class="text-center mb-2">Admin Order Status</h1>
+            <div class="row g-0">
+                <div class="col-sm-6 col-md-8 ps-3">
+                    <h1><?php echo $userUsername?></h1>
+                </div>
+                <div class="col-6 col-md-4 text-end pe-3">
+                    <h1><a href="adminListUsers.php" class="text-reset text-decoration-none"><i class="bi bi-arrow-counterclockwise"></i>Back</a></h1>
+                </div>
+            </div>
             <?php
                 //Query and Execute for the history information
                 $querySelectHistory = "SELECT * FROM tbl_history WHERE user = $userId ORDER BY order_id DESC";
@@ -107,7 +117,7 @@
                                 <div class='row g-0 border border-secondary border-2' style='margin-bottom: 1rem;'>
                                     <div class='col-md-4 p-0 bg-transparent' style='max-height: 18rem; min-height: 18rem;'>
                                         <a href='item.php?id=$historyItem'>
-                                            <img src='../img/items/$historyPicture' alt='Image Unavailable' style='width: 100%; height: 100%;'>
+                                            <img class='border-end border-2 border-secondary' src='../img/items/$historyPicture' alt='Image Unavailable' style='width: 100%; height: 100%;'>
                                         </a>
                                     </div>
                                     <div class='col-md-8'>
@@ -121,7 +131,7 @@
                                                     ($historyStatus == 'pending' ? '<span class="badge bg-warning text-dark">Pending</span>' :
                                                         ($historyStatus == 'processing' ? '<span class="badge bg-info text-dark">Processing</span>' :
                                                             ($historyStatus == 'delivered' ? '<span class="badge bg-success text-dark">Delivered</span>' :
-                                                                '<span class="badge bg-secondary text-dark">Canceled</span>')))
+                                                                '<span class="badge bg-secondary text-dark">Cancelled</span>')))
                                                 ."</h5>
                                                 <div class='border border-secondary'>
                                                     <h5 class='mt-2'>

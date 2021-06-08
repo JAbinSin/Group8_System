@@ -32,6 +32,9 @@
         <!-- Title of the site  is set in SESSION from the database.php -->
         <title><?php echo $_SESSION['siteName']?> | Item Edit</title>
 
+        <!-- Add a logo for the title head -->
+        <link rel="icon" href="../img/logo/logo-test.ico" type="image/ico">
+
         <!-- The meta tags used in the webpage -->
         <!-- charset="utf-8" to use almost all the character and symbol in the world -->
         <!-- viewport to make the webpage more responsive -->
@@ -78,9 +81,9 @@
                 </div>
                 <input type="hidden" name="itemId" value="<?php echo "$itemId"?>">
                 <div class="col text-center">
-                    <input class="btn btn-primary btn-success rounded-pill" type="submit" value="UPDATE ITEM">
+                    <input class="btn btn-primary btn-success" type="submit" value="UPDATE ITEM">
                     <br>
-                    <a class='btn btn-danger mt-2 rounded-pill' href='itemList.php' role='button'>CANCEL</a>
+                    <a class='btn btn-danger mt-2' href='itemList.php' role='button'>CANCEL</a>
                 </div>
             </form>
         </div>

@@ -33,6 +33,9 @@
         <!-- Title of the site  is set in SESSION from the database.php -->
         <title><?php echo $_SESSION['siteName']?> | Profile Edit</title>
 
+        <!-- Add a logo for the title head -->
+        <link rel="icon" href="../img/logo/logo-test.ico" type="image/ico">
+
         <!-- The meta tags used in the webpage -->
         <!-- charset="utf-8" to use almost all the character and symbol in the world -->
         <!-- viewport to make the webpage more responsive -->
@@ -83,9 +86,9 @@
                     <input type="text" class="form-control text-light bg-dark" name="userPhoneNumber" placeholder="<?php echo "$userPhoneNumber"?>" value="<?php echo "$userPhoneNumber"?>" pattern="[0-9]{11}" maxlength="11" minlength="11" required>
                 </div>
                 <div class="col text-center">
-                    <input class="btn btn-primary btn-success rounded-pill" type="submit" value="UPDATE">
+                    <input class="btn btn-primary btn-success" type="submit" value="UPDATE">
                     <br>
-                    <a class='btn btn-secondary mt-2 rounded-pill' href='profile.php' role='button'>CANCEL</a>
+                    <a class='btn btn-secondary mt-2' href='profile.php' role='button'>CANCEL</a>
                 </div>
             </form>
         </div>

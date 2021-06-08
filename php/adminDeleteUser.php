@@ -76,7 +76,7 @@
             <div class="col text-center">
                 <!-- Form used to pass the data to the adminDeleteUserHandler.php -->
                 <form action="adminDeleteUserHandler.php" method="post">
-                    <input class="btn btn-primary btn-danger rounded-pill" type="submit" value="DELETE">
+                    <input class="btn btn-primary btn-danger" type="submit" value="DELETE">
                     <input type="hidden" name="userId" value="<?php echo $userId?>">
                 </form>
                 <a class='btn btn-primary mt-2' href='adminListUsers.php' role='button'>CANCEL</a>

@@ -79,9 +79,13 @@
                                 $categoryName = $categoryInfo["name"];
                                 $categoryId = $categoryInfo["id"];
 
-                                echo "
-                                    <option value='$categoryId|$categoryName'>$categoryName</option>
-                                ";
+                                if($categoryName == "All") {
+
+                                } else {
+                                  echo "
+                                      <option value='$categoryId|$categoryName'>$categoryName</option>
+                                  ";
+                                }
                             }
                           ?>
                       </select>

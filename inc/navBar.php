@@ -19,6 +19,12 @@
               <span class='navbar-toggler-icon'></span>
             </button>
             <div class='collapse navbar-collapse justify-content-end' id='navbarSupportedContent'>
+              <form class='d-flex' action='search.php' method='post'>
+                  <div class='input-group me-2'>
+                      <input type='search' class='form-control bg-dark text-white' name='searchValue' placeholder='Search' aria-label='Search' aria-describedby='basic-addon2'>
+                      <button class='btn btn-primary input-group-text border border-white border-start-0' type='submit' id='basic-addon2'><i class='bi bi-search'></i></button>
+                  </div>
+              </form>
               <ul class='navbar-nav mb-2 mb-lg-0'>
                 <li class='nav-item dropdown'>
                   <a class='nav-link dropdown-toggle' href='#' id='navbarDropdown' role='button' data-bs-toggle='dropdown' aria-expanded='false'>
@@ -64,6 +70,12 @@
               <span class='navbar-toggler-icon'></span>
             </button>
             <div class='collapse navbar-collapse justify-content-end' id='navbarSupportedContent'>
+              <form class='d-flex' action='search.php' method='post'>
+                  <div class='input-group me-2'>
+                      <input type='search' class='form-control bg-dark text-white' name='searchValue' placeholder='Search' aria-label='Search' aria-describedby='basic-addon2'>
+                      <button class='btn btn-primary input-group-text border border-white border-start-0' type='submit' id='basic-addon2'><i class='bi bi-search'></i></button>
+                  </div>
+              </form>
               <ul class='navbar-nav  mb-2 mb-lg-0'>
                 <li class='nav-item dropdown'>
                   <a class='nav-link dropdown-toggle' href='#' id='navbarDropdown' role='button' data-bs-toggle='dropdown' aria-expanded='false'>
@@ -96,6 +108,12 @@
             <span class='navbar-toggler-icon'></span>
           </button>
           <div class='collapse navbar-collapse justify-content-end' id='navbarSupportedContent'>
+            <form class='d-flex' action='search.php' method='post'>
+                <div class='input-group me-2'>
+                    <input type='search' class='form-control bg-dark text-white' name='searchValue' placeholder='Search' aria-label='Search' aria-describedby='basic-addon2'>
+                    <button class='btn btn-primary input-group-text border border-white border-start-0' type='submit' id='basic-addon2'><i class='bi bi-search'></i></button>
+                </div>
+            </form>
             <ul class='navbar-nav  mb-2 mb-lg-0'>
               <li class='nav-item'>
                 <a class='nav-link' href='login.php'><i class='bi bi-person-check'></i> Login</i></a>

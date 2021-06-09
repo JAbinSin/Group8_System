@@ -61,8 +61,9 @@
         <!-- Container for the message output of the handler -->
         <div class="container p-3 mb-2 bg-dark text-white rounded-3 w-25">
             <h1 class="text-center mb-2">Category Delete</h1>
-            <div class="alert alert-success text-center h2 overflow-auto" role="alert">
-                Database: Category Deleted.
+            <div class="alert alert-success text-center overflow-auto" role="alert">
+                <h2>Database:</h2>
+                <h4 class="fw-normal">Category Deleted.</h4>
             </div>
             <div class="col text-center">
                 <a class='btn btn-secondary' href='../index.php' role='button'>HOME</a>

@@ -30,6 +30,4 @@
     } else {
         echo "<h1>Unexpected Error Please go Back.<h1>";
     }
-
-
 ?>

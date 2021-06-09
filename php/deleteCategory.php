@@ -54,10 +54,11 @@
         <!-- Container for the confirmation of deletion -->
         <div class="container p-3 mb-2 bg-normal-92 text-white rounded-3 w-25">
             <h1 class="text-center mb-2">Delete Category</h1>
-            <div class="alert alert-danger text-center overflow-auto h2" role="alert">
+            <div class="alert alert-danger text-center overflow-auto" role="alert">
                 <?php
                     echo "
-                        Delete Category: <strong>" . $categoryName . "</strong>"
+                        <h2>Delete Category:</h2>
+                        <h3><strong>" . $categoryName . "</strong></h3>"
                     ;
                 ?>
             </div>
@@ -65,7 +66,7 @@
             <div class="col text-center">
                 <!-- Form used to pass the data to the deleteCategoryHandler.php -->
                 <form action="deleteCategoryHandler.php" method="post">
-                    <input class="btn btn-primary btn-danger rounded-pill" type="submit" value="DELETE">
+                    <input class="btn btn-primary btn-danger" type="submit" value="DELETE">
                     <input type="hidden" name="categoryId" value="<?php echo $categoryId?>">
                 </form>
                 <a class='btn btn-primary mt-2' href='categorySelector.php?op=delete' role='button'>CANCEL</a>

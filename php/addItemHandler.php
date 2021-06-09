@@ -65,8 +65,9 @@
                 foreach($arrayPost as $label => $value) {
                     if(empty($value)) {
                         echo
-                            "<div class='alert alert-danger text-center h2 overflow-auto' role='alert'>"
-                                . $label . " Input Empty/Invalid." .
+                            "<div class='alert alert-danger text-center overflow-auto' role='alert'>
+                                <h2>" . $label . " </h2>
+                                <h4 class='fw-normal'>Input Empty/Invalid.</h4>" .
                             "</div>
                         ";
                         $logsErrorTest = true;
@@ -81,8 +82,9 @@
                     if($itemName === $itemInfo["name"]) {
                         $logsErrorTest = true;
                         echo "
-                            <div class='alert alert-danger text-center h2 overflow-auto' role='alert'>
-                                Item Name: Already Exist.
+                            <div class='alert alert-danger text-center overflow-auto' role='alert'>
+                                <h2>Item Name:</h2>
+                                <h4 class='fw-normal'>Already Exist.</h4>
                             </div>
                         ";
                     }
@@ -92,8 +94,9 @@
                 //Add an exception so it would not check an empty upload
                 if((@exif_imagetype($_FILES["itemPicture"]['tmp_name']) == false) && (@!empty($_FILES["itemPicture"]['tmp_name']))) {
                     echo "
-                        <div class='alert alert-danger text-center h2 overflow-auto' role='alert'>
-                            Item Picture: File Uploaded is not an Image Format.
+                        <div class='alert alert-danger text-center overflow-auto' role='alert'>
+                            <h2>Item Picture:</h2>
+                            <h4 class='fw-normal'>File Uploaded is not an Image Format.</h4>
                         </div>
                     ";
                     $logsErrorTest = true;
@@ -106,8 +109,9 @@
                 //If the following Inputs are valid it would enter the database, and if not it would not.
                 if($logsErrorTest == true) {
                     echo "
-                        <div class='alert alert-danger text-center h2 overflow-auto' role='alert'>
-                            Database: Add Item Failed.
+                        <div class='alert alert-danger text-center overflow-auto' role='alert'>
+                            <h2>Database</h2>
+                            <h4 class='fw-normal'>Add Item Failed.</h4>
                         </div>
                     ";
                 } else {
@@ -169,8 +173,9 @@
                     $executeQueryInsert = mysqli_query($con, $queryInsert);
 
                     echo "
-                        <div class='alert alert-success text-center h2 overflow-auto' role='alert'>
-                            Database: Item Added.
+                        <div class='alert alert-success text-center overflow-auto' role='alert'>
+                            <h2>Database:</h2>
+                            <h4 class='fw-normal'>Item Added.</h4>
                         </div>
                     ";
                 }

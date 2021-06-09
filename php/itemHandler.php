@@ -53,8 +53,9 @@
                 //This is just a safety measure if it happens
                 if(empty($itemQuantity)) {
                     echo "
-                        <div class='alert alert-danger text-center h2 overflow-auto' role='alert'>
-                            Quantity: Invalid Input/Value.
+                        <div class='alert alert-danger text-center overflow-auto' role='alert'>
+                            <h2>Quantity</h2>
+                            <h4 class='fw-normal'>Invalid Input/Value.</h4>
                         </div>
                     ";
                     $testError = true;
@@ -89,14 +90,16 @@
                     }
 
                     echo "
-                        <div class='alert alert-success text-center h2 overflow-auto' role='alert'>
-                            Item: Added to Cart.
+                        <div class='alert alert-success text-center overflow-auto' role='alert'>
+                            <h2>Item:</h2>
+                            <h4 class='fw-normal'>Added to Cart.</h4>
                         </div>
                     ";
                 } else {
                     echo "
-                        <div class='alert alert-danger text-center h2 overflow-auto' role='alert'>
-                            Item: Failed to add in Cart.
+                        <div class='alert alert-danger text-center overflow-auto' role='alert'>
+                            <h2>Item:</h2>
+                            <h4 class='fw-normal'>Failed to add in Cart.</h4>
                         </div>
                     ";
                 }

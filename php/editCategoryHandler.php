@@ -58,8 +58,9 @@
                 //This check if the user input a blank input because space count as an input for some reasons.
                 if(empty($categoryName)) {
                     echo
-                        "<div class='alert alert-danger text-center h2 overflow-auto' role='alert'>
-                            Category Name: Input is Invalid/Empty.
+                        "<div class='alert alert-danger text-center overflow-auto' role='alert'>
+                            <h2>Category Name:</h2>
+                            <h4 class='fw-normal'>Input is Ivalid/Empty</h4>
                         </div>
                     ";
                     $logsErrorTest = true;
@@ -73,8 +74,9 @@
                     if(($categoryName === $categoryInfo["name"]) && ($categoryId != $categoryInfo["id"])) {
                         $logsErrorTest = true;
                         echo "
-                            <div class='alert alert-danger text-center h2 overflow-auto' role='alert'>
-                                Category Name: Already Exist.
+                            <div class='alert alert-danger text-center overflow-auto' role='alert'>
+                                <h2>Category Name:</h2>
+                                <h4 class='fw-lighter'>Already Exist.</h4>
                             </div>
                         ";
                     }
@@ -84,8 +86,9 @@
                 //Add an exception so it would not check an empty upload
                 if((@exif_imagetype($_FILES["categoryPicture"]['tmp_name']) == false) && (@!empty($_FILES["categoryPicture"]['tmp_name']))) {
                     echo "
-                        <div class='alert alert-danger text-center h2 overflow-auto' role='alert'>
-                            Category Picture: File Uploaded is not an Image Format.
+                        <div class='alert alert-danger text-center overflow-auto' role='alert'>
+                            <h2>Category Picture:</h2>
+                            <h4 class='fw-lighter'>File Uploaded is not an Image Format.</h4>
                         </div>
                     ";
                     $logsErrorTest = true;
@@ -98,11 +101,12 @@
                 //If the following Inputs are valid it would enter the database, and if not it would not.
                 if($logsErrorTest == true) {
                     echo "
-                        <div class='alert alert-danger text-center h2 overflow-auto' role='alert'>
-                            Database: Category Update Failed.
+                        <div class='alert alert-danger text-center overflow-auto' role='alert'>
+                            <h2>Database:</h2>
+                            <h4 class='fw-lighter'>Category Update Failed.</h4>
                         </div>
                         <div class='col text-center'>
-                            <a class='btn btn-secondary rounded-pill' href='itemEdit.php?=$itemId' role='button'>Return</a>
+                            <a class='btn btn-secondary' href='itemEdit.php?=$itemId' role='button'>Return</a>
                         </div>
                     ";
                 } else {
@@ -142,11 +146,12 @@
                         $executeQuery = mysqli_query($con, $queryUpdate);
 
                         echo "
-                            <div class='alert alert-success text-center h2 overflow-auto' role='alert'>
-                                Database: Category Update.
+                            <div class='alert alert-success text-center overflow-auto' role='alert'>
+                                <h2>Database:</h2>
+                                <h4 class='fw-lighter'>Category Update.</h4>
                             </div>
                             <div class='col text-center'>
-                                <a class='btn btn-secondary rounded-pill' href='../index.php' role='button'>Home</a>
+                                <a class='btn btn-secondary' href='../index.php' role='button'>Home</a>
                             </div>
                         ";
                     } else {
@@ -162,8 +167,9 @@
                         $executeQuery = mysqli_query($con, $queryUpdate);
 
                         echo "
-                            <div class='alert alert-success text-center h2 overflow-auto' role='alert'>
-                                Database: Category Updated.
+                            <div class='alert alert-success text-center overflow-auto' role='alert'>
+                                <h2>Database:</h2>
+                                <h4 class='fw-lighter'>Category Updated.</h4>
                             </div>
                             <div class='col text-center'>
                                 <a class='btn btn-secondary' href='../index.php' role='button'>Home</a>

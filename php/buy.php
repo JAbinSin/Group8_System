@@ -58,11 +58,12 @@
                 $itemStatus = "pending";
 
                 if(empty($_SESSION["cartItemId"])) {
-                  echo "<div class='alert alert-warning text-center h2 overflow-auto' role='alert'>
+                  echo "<div class='alert alert-warning text-center overflow-auto' role='alert'>
                           Items Failed to Purchase.
+                          <h2>Item Failed to Purchase.</h2>
                         </div>
                         <div class='col text-center'>
-                            <a class='btn btn-secondary rounded-pill' href='itemList.php' role='button'>Home</a>
+                            <a class='btn btn-secondary' href='itemList.php' role='button'>Home</a>
                         </div>";
                   exit();
                 } else {
@@ -114,13 +115,14 @@
                           unset($_SESSION["cartItemQuantity"][$i]); //Clear All the Session for cartItemQuantity
                       }
                   }
-                  echo "<div class='alert alert-success text-center h2 overflow-auto' role='alert'>
+                  echo "<div class='alert alert-success text-center overflow-auto' role='alert'>
                           Items Successfully Purchase.
+                          <h2>Items Successfully Purchase.</h2>
                         </div>";
                 }
             ?>
             <div class="col text-center">
-                <a class='btn btn-secondary rounded-pill' href='itemList.php' role='button'>Home</a>
+                <a class='btn btn-secondary' href='itemList.php' role='button'>Home</a>
             </div>
         </div>
     </body>

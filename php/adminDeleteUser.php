@@ -68,7 +68,8 @@
             <div class="alert alert-danger text-center overflow-auto h2" role="alert">
                 <?php
                     echo "
-                        Delete User: <strong>" . $userUsername . "</strong>"
+                    <h2>Delete Category:</h2>
+                    <h3><strong>" . $userUsername . "</strong></h3>"
                     ;
                 ?>
             </div>

@@ -57,16 +57,18 @@
                 if(empty($userUsername)) {
                     $logsErrorTest = true;
                     echo "
-                        <div class='alert alert-danger text-center h2 text-wrap overflow-auto' role='alert'>
-                            Username: Input Empty/Invalid.
+                        <div class='alert alert-danger text-center text-wrap overflow-auto' role='alert'>
+                            <h2>Username:</h2>
+                            <h4 class='fw-normal'>Input Empty/Invalid</h4>
                         </div>
                         ";
                 }
                 if(empty($userPassword)) {
                     $logsErrorTest = true;
                     echo "
-                        <div class='alert alert-danger text-center h2 overflow-auto' role='alert'>
-                            Password: Input Empty/Invalid.
+                        <div class='alert alert-danger text-center overflow-auto' role='alert'>
+                            <h2>Password:</h2>
+                            <h4 class='fw-normal'>Input Empty/Invalid.</h4>
                         </div>
                     ";
                 }
@@ -100,15 +102,17 @@
                             exit();
                         } else {
                             echo "
-                                <div class='alert alert-danger text-center h2 overflow-auto' role='alert'>
-                                    Password: Incorect.
+                                <div class='alert alert-danger text-center overflow-auto' role='alert'>
+                                    <h2>Password:</h2>
+                                    <h4 class='fw-normal'>Incorrect.</h4>
                                 </div>
                             ";
                         }
                     } else {
                         echo "
-                            <div class='alert alert-danger text-center h2 overflow-auto' role='alert'>
-                                Username: Does not Exist.
+                            <div class='alert alert-danger text-center overflow-auto' role='alert'>
+                                <h2>Username:</h2>
+                                <h4 class='fw-normal'>Does not Exist.</h4>
                             </div>
                         ";
                     }

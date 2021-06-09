@@ -39,7 +39,13 @@
             <div class="row row-cols-1 row-cols-md-3 g-4 text-center justify-content-md-center">
                 <?php
                     //Query and Execute for the user information
-                    $querySelectCategory = "SELECT * FROM tbl_category";
+                    $querySelectCategory = "SELECT *
+                                            FROM tbl_category
+                                            ORDER BY CASE name
+                                                WHEN 'All' THEN 1
+                                                ELSE 2
+                                            END;
+                                            ";
                     $executeQuerySelectCategory = mysqli_query($con, $querySelectCategory);
 
                     while($categoryInfo = mysqli_fetch_assoc($executeQuerySelectCategory)){

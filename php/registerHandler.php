@@ -85,8 +85,9 @@
                 foreach($arrayPost as $label => $value) {
                     if(empty($value)) {
                         echo
-                            "<div class='alert alert-danger text-center h2 overflow-auto' role='alert'>"
-                                . $label . " Input Empty/Invalid." .
+                            "<div class='alert alert-danger text-center overflow-auto' role='alert'>
+                                <h2>" . $label . " </h2>
+                                <h4 class='fw-normal'>Input Empty/Invalid.</h4>" .
                             "</div>
                         ";
                         $logsErrorTest = true;
@@ -96,8 +97,9 @@
                 //Check if the password and confirmed password is the same.
                 if(!($userPassword === $userConfirmPassword)) {
                     echo "
-                        <div class='alert alert-danger text-center h2 overflow-auto' role='alert'>
-                            Confirm Password: Does not Match.
+                        <div class='alert alert-danger text-center overflow-auto' role='alert'>
+                            <h2>Confirm Password:</h2>
+                            <h4 class='fw-lighter'>Does not Match.</h4>
                         </div>
                     ";
                     $logsErrorTest = true;
@@ -111,24 +113,27 @@
                     if($userEmail === $userInfo["email"]) {
                         $logsErrorTest = true;
                         echo "
-                            <div class='alert alert-danger text-center h2 overflow-auto' role='alert'>
-                                Email: Already Exist.
+                            <div class='alert alert-danger text-center overflow-auto' role='alert'>
+                                <h2>Email:</h2>
+                                <h4 class='fw-lighter'>Already Exist.</h4>
                             </div>
                         ";
                     }
                     if($userUsername === $userInfo["username"]) {
                         $logsErrorTest = true;
                         echo "
-                            <div class='alert alert-danger text-center h2 overflow-auto' role='alert'>
-                                Username: Already Exist.
+                            <div class='alert alert-danger text-center overflow-auto' role='alert'>
+                                <h2>Username:</h2>
+                                <h4 class='fw-lighter'>Already Exist.</h4>
                             </div>
                         ";
                     }
                     if($userPhoneNumber === $userInfo["phone_number"]) {
                         $logsErrorTest = true;
                         echo "
-                            <div class='alert alert-danger text-center h2 overflow-auto' role='alert'>
-                                Cellphone Number: Already Exist.
+                            <div class='alert alert-danger text-center overflow-auto' role='alert'>
+                                <h2>Cellphone Number:</h2>
+                                <h4 class='fw-lighter'>Already Exist.</h4>
                             </div>
                         ";
                     }
@@ -138,16 +143,18 @@
                 if((strlen($userPassword) < 8) && !empty($userPassword)) {
                     $logsErrorTest = true;
                     echo "
-                        <div class='alert alert-danger text-center h2 overflow-auto' role='alert'>
-                            Password: Must be 8 Character and Above.
+                        <div class='alert alert-danger text-center overflow-auto' role='alert'>
+                            <h2>Password:</h2>
+                            <h4 class='fw-lighter'>Must be 8 Characters and Above.</h4>
                         </div>
                     ";
                 }
                 if((strlen($userUsername) < 8) && !empty($userUsername)) {
                     $logsErrorTest = true;
                     echo "
-                        <div class='alert alert-danger text-center h2 overflow-auto' role='alert'>
-                            Username: Must be 8 Character and Above.
+                        <div class='alert alert-danger text-center overflow-auto' role='alert'>
+                            <h2>Username:</h2>
+                            <h4 class='fw-lighter'>Must be 8 Characters and Above.</h4>
                         </div>
                     ";
                 }
@@ -157,8 +164,9 @@
                 if((strlen($userPhoneNumber) != 11) && !empty($userPhoneNumber)) {
                     $logsErrorTest = true;
                     echo "
-                        <div class='alert alert-danger text-center h2 overflow-auto' role='alert'>
-                            Cellphone Number: Must be 11 Digits.
+                        <div class='alert alert-danger text-center overflow-auto' role='alert'>
+                            <h2>Cellphone Number:</h2>
+                            <h4 class='fw-lighter'>Must be exactly 11 Digits.</h4>
                         </div>
                     ";
                 }
@@ -166,8 +174,9 @@
                 //If the following Inputs are valid it would enter the database, and if not it would not.
                 if($logsErrorTest == true) {
                     echo "
-                        <div class='alert alert-danger text-center h2 overflow-auto' role='alert'>
-                            Database: No Changes are Made.
+                        <div class='alert alert-danger text-center overflow-auto' role='alert'>
+                            <h2>Database:</h2>
+                            <h4 class='fw-lighter'>No Changes are Made.</h4>
                         </div>
 
                         <div class='col text-center'>
@@ -176,8 +185,9 @@
                     ";
                 } else {
                     echo "
-                        <div class='alert alert-success text-center h2 overflow-auto' role='alert'>
-                            Database: User Registered.
+                        <div class='alert alert-success text-center overflow-auto' role='alert'>
+                            <h2>Database:</h2>
+                            <h4 class='fw-lighter'>User Registered.</h4>
                         </div>
 
                         <div class='col text-center'>

@@ -71,8 +71,9 @@
                 foreach($arrayPost as $label => $value) {
                     if(empty($value)) {
                         echo
-                            "<div class='alert alert-danger text-center h2 overflow-auto' role='alert'>"
-                                . $label . " Input Empty/Invalid." .
+                            "<div class='alert alert-danger text-center overflow-auto' role='alert'>
+                                <h2>" . $label . " </h2>
+                                <h4 class='fw-normal'>Input Empty/Invalid.</h4>" .
                             "</div>
                         ";
                         $logsErrorTest = true;
@@ -87,24 +88,27 @@
                     if(($userUsername === $userInfo["username"]) && ($id != $userInfo["id"])) {
                         $logsErrorTest = true;
                         echo "
-                            <div class='alert alert-danger text-center h2 overflow-auto' role='alert'>
-                                Username: Already Exist.
+                            <div class='alert alert-danger text-center overflow-auto' role='alert'>
+                                <h2>Username:</h2>
+                                <h4 class='fw-normal'>Already Exist.</h4>
                             </div>
                         ";
                     }
                     if(($userEmail === $userInfo["email"]) && ($id != $userInfo["id"])) {
                         $logsErrorTest = true;
                         echo "
-                            <div class='alert alert-danger text-center h2 overflow-auto' role='alert'>
-                                Email: Already Exist.
+                            <div class='alert alert-danger text-center overflow-auto' role='alert'>
+                                <h2>Email:</h2>
+                                <h4 class='fw-normal'>Already Exist.</h4>
                             </div>
                         ";
                     }
                     if(($userPhoneNumber === $userInfo["phone_number"]) && ($id != $userInfo["id"])) {
                         $logsErrorTest = true;
                         echo "
-                            <div class='alert alert-danger text-center h2 overflow-auto' role='alert'>
-                                Cellphone Number: Already Exist.
+                            <div class='alert alert-danger text-center overflow-auto' role='alert'>
+                                <h2>Cellphone Number:</h2>
+                                <h4 class='fw-normal'>Already Exist.</h4>
                             </div>
                         ";
                     }
@@ -114,8 +118,9 @@
                 //Add an exception so it would not check an empty upload
                 if((@exif_imagetype($_FILES["profilePicture"]['tmp_name']) == false) && (@!empty($_FILES["profilePicture"]['tmp_name']))) {
                     echo "
-                        <div class='alert alert-danger text-center h2 overflow-auto' role='alert'>
-                            Profile Picture: File Uploaded is not an Image Format.
+                        <div class='alert alert-danger text-center overflow-auto' role='alert'>
+                            <h2>Profile Picture:</h2>
+                            <h4 class='fw-normal'>File Uploaded is not an Image Format.</h4>
                         </div>
                     ";
                     $logsErrorTest = true;
@@ -167,8 +172,9 @@
                         $executeQuery = mysqli_query($con, $queryUpdate);
 
                         echo "
-                            <div class='alert alert-success text-center h2 overflow-auto' role='alert'>
-                                Database: Account Updated.
+                            <div class='alert alert-success text-center overflow-auto' role='alert'>
+                                <h2>Database:</h2>
+                                <h4 class='fw-normal'>Account Updated</h4>
                             </div>
                             <div class='col text-center'>
                                 <a class='btn btn-primary' href='profile.php' role='button'>PROFILE</a>
@@ -191,8 +197,9 @@
                         $executeQuery = mysqli_query($con, $queryUpdate);
 
                         echo "
-                            <div class='alert alert-success text-center h2' role='alert'>
-                                Database: Account Updated.
+                            <div class='alert alert-success text-center' role='alert'>
+                                <h2>Database:</h2>
+                                <h4 class='fw-normal'>Account Updated.</h4>
                             </div>
                             <div class='col text-center'>
                                 <a class='btn btn-primary' href='profile.php' role='button'>PROFILE</a>
@@ -201,8 +208,9 @@
                     }
                 } else {
                     echo "
-                        <div class='alert alert-danger text-center h2' role='alert'>
-                            Database: Account Updated Failed.
+                        <div class='alert alert-danger text-center' role='alert'>
+                            <h2>Database:</h2>
+                            <h4 class='fw-normal'>Account Update Failed.</h4>
                         </div>
                         <div class='col text-center'>
                             <a class='btn btn-primary' href='profileEdit.php' role='button'>RETURN</a>

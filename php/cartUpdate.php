@@ -57,8 +57,9 @@
                     //This is just a safety measure if it happens
                     if(empty($itemQuantity)) {
                         echo "
-                            <div class='alert alert-danger text-center h2' role='alert'>
-                                Quantity: Invalid Input/Value.
+                            <div class='alert alert-danger text-center' role='alert'>
+                                <h2>Quantity</h2>
+                                <h4 class='fw-normal'>Invalid Input/Value</h4>
                             </div>
                         ";
                         $testError = true;
@@ -81,8 +82,9 @@
                         exit();
                     } else {
                         echo "
-                            <div class='alert alert-danger text-center h2' role='alert'>
-                                Item: Failed to Updated.
+                            <div class='alert alert-danger text-center' role='alert'>
+                                <h2>Item: Failed to Update.</h2>
+                                <h4 class='fw-normal'></h4>
                             </div>
                             <div class='col text-center'>
                                 <a class='btn btn-primary' href='cart.php' role='button'>RETURN</a>

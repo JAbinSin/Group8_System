@@ -61,7 +61,8 @@
             <div class="alert alert-danger text-center h2 overflow-auto" role="alert">
                 <?php
                     echo "
-                        Delete Item: <strong>" . $itemName . "</strong>"
+                    <h2>Delete Category:</h2>
+                    <h3><strong>" . $itemName . "</strong></h3>"
                     ;
                 ?>
             </div>

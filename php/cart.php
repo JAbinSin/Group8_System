@@ -47,8 +47,8 @@
             //Check if the Cart is Empty
             if(empty($_SESSION["cartItemId"])) {
                 echo "
-                    <div class='alert alert-warning text-center h2' role='alert'>
-                        Cart is Empty.
+                    <div class='alert alert-warning text-center' role='alert'>
+                        <h2>Cart is Empty.</h2>
                     </div>";
             }
 

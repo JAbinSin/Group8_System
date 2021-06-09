@@ -57,9 +57,10 @@
                 //This check if the user input a blank input because space count as an input for some reasons.{
                 if(empty($categoryName)) {
                     echo
-                        "<div class='alert alert-danger text-center h2 overflow-auto' role='alert'>"
-                            . "Category Name: Input Empty/Invalid." .
-                        "</div>
+                        "<div class='alert alert-danger text-center overflow-auto' role='alert'>
+                            <h2>Category Name:</h2>
+                            <h4 class='fw-normal'>Input Empty/Invalid.</h4>
+                        </div>
                     ";
                     $logsErrorTest = true;
                 }
@@ -72,8 +73,9 @@
                     if($categoryName === $itemInfo["name"]) {
                         $logsErrorTest = true;
                         echo "
-                            <div class='alert alert-danger text-center h2 overflow-auto' role='alert'>
-                                Category Name: Already Exist.
+                            <div class='alert alert-danger text-center overflow-auto' role='alert'>
+                                <h2>Category Name</h2>
+                                <h4 class='fw-normal'>Already Exist.</h4>
                             </div>
                         ";
                     }
@@ -83,8 +85,9 @@
                 //Add an exception so it would not check an empty upload
                 if((@exif_imagetype($_FILES["categoryPicture"]['tmp_name']) == false) && (@!empty($_FILES["categoryPicture"]['tmp_name']))) {
                     echo "
-                        <div class='alert alert-danger text-center h2 overflow-auto' role='alert'>
-                            Category Picture: File Uploaded is not an Image Format.
+                        <div class='alert alert-danger text-center overflow-auto' role='alert'>
+                            <h2>Category Picture:</h2>
+                            <h4 class='fw-normal'>File Uploaded is not an Image Format.</h4>
                         </div>
                     ";
                     $logsErrorTest = true;
@@ -97,8 +100,9 @@
                 //If the following Inputs are valid it would enter the database, and if not it would not.
                 if($logsErrorTest == true) {
                     echo "
-                        <div class='alert alert-danger text-center h2 overflow-auto' role='alert'>
-                            Database: Add Category Failed.
+                        <div class='alert alert-danger text-center overflow-auto' role='alert'>
+                            <h2>Database:</h2>
+                            <h4 class='fw-normal'>Add Category Failed.</h4>
                         </div>
                     ";
                 } else {
@@ -148,8 +152,9 @@
                     $executeQueryInsert = mysqli_query($con, $queryInsert);
 
                     echo "
-                        <div class='alert alert-success text-center h2 overflow-auto' role='alert'>
-                            Database: Category Added.
+                        <div class='alert alert-success text-center overflow-auto' role='alert'>
+                            <h2>Database:</h2>
+                            <h4 class='fw-normal'>Category Added.</h4>
                         </div>
                     ";
                 }

@@ -170,8 +170,8 @@
                 //Show an Error for History is Empty
                 if($isEmpty) {
                     echo "
-                        <div class='alert alert-warning text-center h2' role='alert'>
-                            History is Empty.
+                        <div class='alert alert-warning text-center' role='alert'>
+                            <h2>History is Empty.</h2>
                         </div>";
                 } else {
                   echo "

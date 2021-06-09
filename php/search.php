@@ -3,12 +3,12 @@
     include_once("../inc/database.php");
 
     //Check if the current session allowed the user to acces this site and redirect if not
-    if(empty($_GET["category"])) {
+    if(empty($_POST["searchValue"])) {
         header("Location: ../index.php");
     }
 
-    //Get the id from the url
-    $categoryName = $_GET["category"];
+    //Get search value from the post
+    $searchValue = $_POST["searchValue"];
 
     //Error handling
     $itemEmpty = true;
@@ -51,7 +51,7 @@
         <div class="container p-3 mb-2 bg-normal-92 text-white rounded-3">
             <div class="row g-0">
                 <div class="col-sm-6 col-md-8 ps-3">
-                    <h1><?php echo $categoryName?></h1>
+                    <h1><?php echo @$categoryName?></h1>
                 </div>
                 <div class="col-6 col-md-4 text-end pe-3">
                     <h1><a href="categoryList.php" class="text-reset text-decoration-none"><i class="bi bi-arrow-counterclockwise"></i>Back</a></h1>
@@ -60,11 +60,7 @@
             <div class="row row-cols-1 row-cols-md-4 g-4 row justify-content-md-center">
                 <?php
                     //Query and Execute for the item information
-                    if($categoryName == "All") {
-                        $querySelectItem = "SELECT * FROM tbl_items ORDER BY name";
-                    } else {
-                        $querySelectItem = "SELECT * FROM tbl_items WHERE category = '$categoryName' ORDER BY name";
-                    }
+                    $querySelectItem = "SELECT * FROM tbl_items WHERE name LIKE '%$searchValue%' ORDER BY name";
                     $executeQuerySelectItem = mysqli_query($con, $querySelectItem);
 
                     while($itemInfo = mysqli_fetch_assoc($executeQuerySelectItem)){
@@ -115,7 +111,8 @@
                     if($itemEmpty) {
                         echo "
                           <div class='alert alert-warning text-center w-100' role='alert'>
-                              <h2>No Available Item Yet.</h2>
+                              <h2>Search No Result.</h2>
+                              <h4 class='fw-normal'>We're sorry. We cannot find any matches for your search term.</h4>
                           </div>";
                     }
                 ?>

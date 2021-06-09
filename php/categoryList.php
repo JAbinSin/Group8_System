@@ -36,7 +36,7 @@
         <!-- Container for the whole list of items -->
         <div class="container p-3 mb-2 bg-normal-92 text-white rounded-3">
             <h1 class="text-center mb-2 text-white">Menu</h1>
-            <div class="row row-cols-1 row-cols-md-3 g-4 text-center">
+            <div class="row row-cols-1 row-cols-md-3 g-4 text-center justify-content-md-center">
                 <?php
                     //Query and Execute for the user information
                     $querySelectCategory = "SELECT * FROM tbl_category";

@@ -57,7 +57,7 @@
                     <h1><a href="categoryList.php" class="text-reset text-decoration-none"><i class="bi bi-arrow-counterclockwise"></i>Back</a></h1>
                 </div>
             </div>
-            <div class="row row-cols-1 row-cols-md-4 g-4">
+            <div class="row row-cols-1 row-cols-md-4 g-4 row justify-content-md-center">
                 <?php
                     //Query and Execute for the user information
                     $querySelectItem = "SELECT * FROM tbl_items WHERE category = '$categoryName'";
@@ -75,7 +75,7 @@
 
                         if(@$_SESSION['userType'] == "admin") {
                             echo"
-                                <div class='col text-center mx-auto itemList-card-admin'>
+                                <div class='col text-center itemList-card-admin'>
                                     <div class='card h-100 border border-secondary border-3 card-color'>
                                             <a href='item.php?id=$itemId'><img src='../img/items/$itemPicture' class='card-img-top m-2 rounded-3 itemList-card-image-admin' alt='Image Unavailable'></a>
                                         <div class='card-body text-break'>
@@ -93,7 +93,7 @@
                             ";
                         } else {
                             echo"
-                                <div class='col text-center mx-auto itemList-card-client'>
+                                <div class='col text-center itemList-card-client'>
                                     <div class='card h-100 border border-secondary border-3 card-color'>
                                             <a href='item.php?id=$itemId'><img src='../img/items/$itemPicture' class='card-img-top m-2 rounded-3 itemList-card-image-client' alt='Image Unavailable'></a>
                                         <div class='card-body text-break'>

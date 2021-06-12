@@ -23,7 +23,7 @@
     @$itemCategory = $itemInfo["category"];
 
     //Make variable to Number Format
-    $itemPriceNumber = number_format($itemPrice, 2, '.', ',');
+    $itemPrice = number_format($itemPrice, 2, '.', ',');
 ?>
 
 <!doctype html>
@@ -83,7 +83,7 @@
                         <div class="card-body text-break text-white">
                             <h2 class="card-title text-primary"><?php echo "$itemName"?></h2>
                             <hr>
-                            <p class="h5">Item Price: ₱<?php echo "$itemPriceNumber"?></p>
+                            <p class="h5">Item Price: ₱<?php echo "$itemPrice"?></p>
                             <?php
                                 //Only the admin and client can see the Add to cart button and the Quantity Input
                                 if((@$_SESSION["userType"] == "admin") || (@$_SESSION["userType"] == "client")) {

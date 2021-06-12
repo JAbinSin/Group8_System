@@ -75,7 +75,7 @@
                         $itemPicture = $itemInfo["picture"];
 
                         //Make variable to Number Format
-                        $itemPriceNumber = number_format($itemPrice, 2, '.', ',');
+                        $itemPrice = number_format($itemPrice, 2, '.', ',');
 
                         if(@$_SESSION['userType'] == "admin") {
                             echo"
@@ -86,7 +86,7 @@
                                             <h5 class='card-title module line-clamp p-1'><a href='item.php?id=$itemId' class='text-reset text-decoration-none'>$itemName</a></h5>
                                         </div>
                                         <div class='card-footer'>
-                                            <strong>₱$itemPriceNumber</strong>
+                                            <strong>₱$itemPrice</strong>
                                         </div>
                                         <div class='card-footer'>
                                             <a href='itemEdit.php?id=$itemId' class='link-primary'>Edit</a> |

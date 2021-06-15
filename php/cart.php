@@ -40,8 +40,8 @@
         <?php include_once("../inc/navBar.php"); ?>
 
         <!-- Container  -->
-        <div class="container p-3 mb-2 bg-dark text-white rounded-3 w-50 opacity-1">
-            <h1 class="text-center mb-2">Cart</h1>
+        <div class="container p-3 mb-2 bg-normal-92 text-white rounded-3 w-75 table-responsive">
+            <h1 class="text-start mb-2">Cart</h1>
 
             <?php
             //Check if the Cart is Empty
@@ -50,74 +50,91 @@
                     <div class='alert alert-warning text-center' role='alert'>
                         <h2>Cart is Empty.</h2>
                     </div>";
+            } else {
+              echo "
+              <form action='cartUpdate.php' method='post' id=formCart>
+                  <table class='table table-dark  border-white align-middle'>
+                      <thead class='text-center'>
+                          <tr>
+                              <th class='col-1'>REMOVE</th>
+                              <th class='col-1'>PICTURE</th>
+                              <th class='col-2'>NAME</th>
+                              <th class='col-1'>PRICE</th>
+                              <th class='col-1'>QUANTITY</th>
+                              <th class='col-1'>TOTAL</th>
+                          </tr>
+                      </thead>
+
+                      <tbody>
+              ";
+
+              //If the Cart is not empty, list all the current item in cart
+              for($i=0; $i < (1 + @max(array_keys($_SESSION["cartItemId"]))); $i++) {
+                  if(isset($_SESSION["cartItemId"][$i])) {
+                      $sessItemId = $_SESSION["cartItemId"][$i];
+                      $sessItemQuantity = $_SESSION["cartItemQuantity"][$i];
+
+                      //Query and Execute for the item information
+                      $querySelectItemInfo = "SELECT * FROM tbl_items WHERE id = $sessItemId";
+                      $executeQuerySelectItemInfo = mysqli_query($con, $querySelectItemInfo);
+
+                      $itemInfo = mysqli_fetch_assoc($executeQuerySelectItemInfo);
+
+                      $itemPicture = $itemInfo["picture"];
+                      $itemName = $itemInfo["name"];
+                      $itemPrice = $itemInfo["price"] * $sessItemQuantity;
+                      $itemUnitPrice = $itemInfo["price"];
+                      $itemDescription = $itemInfo["description"];
+                      @$totalPrice = $totalPrice + $itemPrice;
+
+                      //Make variable to Number Format
+                      $totalPriceNumber = number_format($totalPrice, 2, '.', ',');
+                      $itemPriceNumber = number_format($itemPrice, 2, '.', ',');
+                      $itemUnitPriceNumber = number_format($itemUnitPrice, 2, '.', ',');
+
+                      echo "
+                          <tr class='text-center'>
+                              <td class='h2 border-start border-end border-white'><button type='submit' form='formCart' value='REMOVE|$sessItemId' name='btnSubmit'><i class='bi bi-trash'></i></button></td>
+                              <td class='border-start border-end'><a href='item.php?id=$sessItemId'><img src='../img/items/$itemPicture' class='rounded mx-auto d-block img-fluid cart-img' alt='$itemName'></a></td>
+                              <td class='h5 border-start border-end'><a href='item.php?id=$sessItemId' class='text-reset text-decoration-none'>$itemName</a></td>
+                              <td class='h5 border-start border-end'>₱ $itemUnitPriceNumber</td>
+                              <td class='border-start border-end'>
+                                  <div class='quantity quantity-center'> "
+                                  . ($sessItemQuantity == 1 ? "<button class='btn dec disabled' value='UPDATE' name='btnSubmit'>-</button>" : "<button class='btn dec' value='UPDATE|$sessItemId' name='btnSubmit'>-</button>"). "
+                                      <input class='quantity-input bg-dark h5' type='number' id='$i' name='Qty_$sessItemId' value='$sessItemQuantity' pattern='/^-?\d+\.?\d*$/' onKeyPress='if(this.value.length==2) return false;' onkeypress='return event.charCode >= 48 && event.charCode <= 57' title='Item Quantity' required>
+                                      <button class='btn inc' value='UPDATE|$sessItemId' name='btnSubmit'>+</button>
+                                      <input type='submit' hidden id='submitEnter$i' name='btnSubmit' class='submitEnter' value='UPDATE|$sessItemId'>
+                                  </div>
+                              </td>
+                              <td class='h5 border-start border-end'>₱ $itemPriceNumber</td>
+                          </tr>
+                      ";
+                  }
+              }
+              echo "
+                      </tbody>
+
+                      <tfoot class='text-center'>
+                          <tr>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <td class='text-end h5'>Grand Total:</td>
+                              <td class='h5'>₱ $totalPriceNumber</td>
+                          </tr>
+                      </tfoot>
+                  </table>
+              </form>
+              ";
             }
 
-            //If the Cart is not empty, list all the current item in cart
-            for($i=0; $i < (1 + @max(array_keys($_SESSION["cartItemId"]))); $i++) {
-                if(isset($_SESSION["cartItemId"][$i])) {
-                    $sessItemId = $_SESSION["cartItemId"][$i];
-                    $sessItemQuantity = $_SESSION["cartItemQuantity"][$i];
-
-                    //Query and Execute for the item information
-                    $querySelectItemInfo = "SELECT * FROM tbl_items WHERE id = $sessItemId";
-                    $executeQuerySelectItemInfo = mysqli_query($con, $querySelectItemInfo);
-
-                    $itemInfo = mysqli_fetch_assoc($executeQuerySelectItemInfo);
-
-                    $itemPicture = $itemInfo["picture"];
-                    $itemName = $itemInfo["name"];
-                    $itemPrice = $itemInfo["price"] * $sessItemQuantity;
-                    $itemUnitPrice = $itemInfo["price"];
-                    $itemDescription = $itemInfo["description"];
-                    @$totalPrice = $totalPrice + $itemPrice;
-
-                    //Make variable to Number Format
-                    $totalPriceNumber = number_format($totalPrice, 2, '.', ',');
-                    $itemPriceNumber = number_format($itemPrice, 2, '.', ',');
-                    $itemUnitPriceNumber = number_format($itemUnitPrice, 2, '.', ',');
-
-
-                    echo "
-                        <form action='cartUpdate.php' method='post'>
-                            <div class='card mb-3 text-dark bg-transparent mx-auto' style='max-width: 50rem; border: 0;'>
-                                <div class='row g-0 border border-secondary border-2' style='margin-bottom: 1rem;'>
-                                    <div class='col-md-4 p-0 bg-transparent' style='max-height: 16rem; min-height: 17rem;'>
-                                        <a href='item.php?id=$sessItemId'>
-                                            <img class='border-end border-2 border-secondary' src='../img/items/$itemPicture' alt='Image Unavailable' style='width: 100%; height: 100%;'>
-                                        </a>
-                                    </div>
-                                    <div class='col-md-8'>
-                                        <div class='card-body text-break text-white'>
-                                            <h2 class='card-title text-primary'>$itemName</h2>
-                                            <hr>
-                                            <p class='h5'>Item Unit Price: ₱$itemUnitPriceNumber</p>
-                                            <p class='h5'>Item Total Price: ₱$itemPriceNumber</p>
-                                            <div class='row mt-4'>
-                                                <label for='itemQuantity' class='col-sm-3 col-form-label h5'>Item Quantity:</label>
-                                                <div class='col-sm-1'>
-                                                    <input type='number' class='form-control text-light bg-dark' style='width: 4rem;' name='itemQuantity' value='$sessItemQuantity' step='1' min='1' max='99' pattern='/^-?\d+\.?\d*$/' onKeyPress='if(this.value.length==2) return false;' onkeypress='return event.charCode >= 48 && event.charCode <= 57' title='Item Quantity' required>
-                                                </div>
-                                            </div>
-                                            <div>
-                                                <input type='hidden' name='itemId' value='$sessItemId'>
-                                                <input class='btn btn-primary btn-danger btn-sm mt-3' type='submit' name='btnSubmit' value='REMOVE'>
-                                                <input class='btn btn-primary btn-primary btn-sm mt-3 ms-3' type='submit' name='btnSubmit' value='UPDATE'>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    ";
-                }
-            }
 
             //If the cart is empty the option for Clear and Buy would not be visible/available
             if(!empty(@array_keys($_SESSION["cartItemId"]))) {
                 echo "
-                    <h2 class='text-center'>Total Price: ₱$totalPriceNumber</h2>
                     <form action='buy.php' method='post'>
-                        <div class='col text-center'>
+                        <div class='col text-end me-5'>
                             <input class='btn btn-primary btn-danger btn-lg mt-3' type='submit' name='btnSubmit' value='CLEAR'>
                             <input class='btn btn-primary btn-primary btn-lg mt-3 ms-3' type='submit' name='btnSubmit' value='BUY'>
                         </div>
@@ -125,6 +142,63 @@
                 ";
             }
             ?>
+
         </div>
+
+        <script>
+            //default value
+            document.querySelector(".dec").setAttribute("disabled", "disabled");
+
+            //variables
+            var incrementButton = document.getElementsByClassName('inc');
+            var decrementButton = document.getElementsByClassName('dec');
+            var input = document.getElementsByClassName('quantity-input');
+
+            //for enter
+            for(var i = 0; i < input.length; i++) {
+                var enter = input[i];
+                var id = "submitEnter" + i;
+
+                enter.addEventListener("keyup", function(event) {
+                    var buttonClicked = event.target;
+                    var input = buttonClicked.parentElement.children[3];
+
+                    if (event.keyCode === 13) {
+                        event.preventDefault();
+                        document.getElementById(id).click();
+                    }
+                });
+            }
+
+            //for increment button
+            for(var i = 0; i < incrementButton.length; i++) {
+                var button = incrementButton[i];
+                button.addEventListener('click', function(event){
+                    var buttonClicked = event.target;
+                    var input = buttonClicked.parentElement.children[1];
+                    var inputValue = input.value;
+
+                    var newValue = parseInt(inputValue) + 1;
+
+                    input.value = newValue;
+                });
+            }
+
+            //for decrement button
+            for(var i = 0; i < decrementButton.length; i++) {
+                var button = decrementButton[i];
+                button.addEventListener('click', function(event){
+                    var buttonClicked = event.target;
+                    var input = buttonClicked.parentElement.children[1];
+                    var inputValue = input.value;
+
+                    var newValue = parseInt(inputValue) - 1;
+
+                    if(newValue > 0) {
+                       input.value = newValue;
+                    }
+                });
+            }
+        </script>
     </body>
 </html>

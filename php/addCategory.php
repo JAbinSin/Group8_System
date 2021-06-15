@@ -49,8 +49,9 @@
                     <input class="form-control text-light bg-dark" type="file" accept="image/*" name="categoryPicture">
                 </div>
                 <div class="mb-3">
-                    <label for="categoryName" class="form-label">Category Name (Only Characters and Number Are Allowed)</label>
+                    <label for="categoryName" class="form-label">Category Name</label>
                     <input type="text" class="form-control text-light bg-dark" name="categoryName" placeholder="e.g Hotdog" pattern="[A-z0-9À-ž\s]+" required>
+                    <div class="form-text">(Only Characters and Number Are Allowed)</div>
                 </div>
                 <div class="col text-center">
                     <button type="submit" class="btn btn-primary mt-2">ADD CATEGORY</button>

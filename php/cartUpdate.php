@@ -12,9 +12,13 @@
 
     //Get the input from the POST
     $testError = false;
-    $itemId = $_POST["itemId"];
-    $itemQuantity = trim($_POST["itemQuantity"]);
-    $choice = $_POST["btnSubmit"];
+
+    $choice = filter_input(INPUT_POST, 'btnSubmit');
+    $exploded_value = explode('|', $choice);
+    $choiceSelect = $exploded_value[0];
+    $choiceId = $exploded_value[1];
+
+    $choiceQty = $_POST["Qty_$choiceId"];
 ?>
 
 <!doctype html>
@@ -52,10 +56,10 @@
             <h1 class="text-center mb-2">Cart</h1>
 
             <?php
-                if($choice == "UPDATE") {
+                if($choiceSelect == "UPDATE") {
                     //Check if the input is blank
                     //This is just a safety measure if it happens
-                    if(empty($itemQuantity)) {
+                    if(empty($choiceId)) {
                         echo "
                             <div class='alert alert-danger text-center' role='alert'>
                                 <h2>Quantity</h2>
@@ -68,8 +72,8 @@
                     //If there is no error update the item in the cart array
                     if($testError == false) {
                        //Declare a temporary variable for the keyholder
-                        $idTmp = array_search($itemId, $_SESSION["cartItemId"]);
-                        $valueReplace =  $itemQuantity;
+                        $idTmp = array_search($choiceId, $_SESSION["cartItemId"]);
+                        $valueReplace =  $choiceQty;
 
                         //So that the Quantity can't exceed the maximum limit of 99
                         if($valueReplace > 99) {
@@ -91,8 +95,8 @@
                             </div>
                         ";
                     }
-                } elseif($choice == "REMOVE") {
-                    $idTmp = array_search($itemId, $_SESSION["cartItemId"]);
+                } elseif($choiceSelect == "REMOVE") {
+                    $idTmp = array_search($choiceId, $_SESSION["cartItemId"]);
                     unset($_SESSION["cartItemId"][$idTmp]); //Clear the Session for cartItemId
                     unset($_SESSION["cartItemQuantity"][$idTmp]); //Clear the Session for cartItemQuantity
                     header("Location: cart.php");

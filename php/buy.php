@@ -59,8 +59,8 @@
 
                 if(empty($_SESSION["cartItemId"])) {
                   echo "<div class='alert alert-warning text-center overflow-auto' role='alert'>
-                          Items Failed to Purchase.
-                          <h2>Item Failed to Purchase.</h2>
+                          <h2>Items Failed to Purchase.</h2>
+                          <h4>Item Failed to Purchase.</h4>
                         </div>
                         <div class='col text-center'>
                             <a class='btn btn-secondary' href='itemList.php' role='button'>Home</a>
@@ -116,8 +116,8 @@
                       }
                   }
                   echo "<div class='alert alert-success text-center overflow-auto' role='alert'>
-                          Items Successfully Purchase.
                           <h2>Items Successfully Purchase.</h2>
+                          <h4>Items Successfully Purchase.</h4>
                         </div>";
                 }
             ?>

@@ -1,4 +1,8 @@
 <?php
+    //So that you won't need to resubmit when going back to this form
+    header('Cache-Control: no cache');
+    session_cache_limiter('private_no_expire');
+
     //Include the database to the webpage to access it
     include_once("../inc/database.php");
 
@@ -54,7 +58,7 @@
                     <h1><?php echo @$categoryName?></h1>
                 </div>
                 <div class="col-6 col-md-4 text-end pe-3">
-                    <h1><a href="categoryList.php" class="text-reset text-decoration-none"><i class="bi bi-arrow-counterclockwise"></i>Back</a></h1>
+                    <h1><a href="categoryList.php" class="text-reset text-decoration-none" onclick="window.history.go(-1); return false;"><i class="bi bi-arrow-counterclockwise"></i>Back</a></h1>
                 </div>
             </div>
             <div class="row row-cols-1 row-cols-md-4 g-4 row justify-content-md-center">

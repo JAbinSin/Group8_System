@@ -49,8 +49,9 @@
                     <input class="form-control text-light bg-dark" type="file" accept="image/*" name="itemPicture">
                 </div>
                 <div class="mb-3">
-                    <label for="itemName" class="form-label">Item Name (Only Characters and Number Are Allowed)</label>
+                    <label for="itemName" class="form-label">Item Name</label>
                     <input type="text" class="form-control text-light bg-dark" name="itemName" placeholder="e.g Hotdog" pattern="[A-z0-9À-ž\s]+" required>
+                    <div class="form-text">(Only Characters and Number Are Allowed)</div>
                 </div>
                 <div class="mb-3">
                     <label for="itemCategory" class="form-label">Item Category</label>

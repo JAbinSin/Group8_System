@@ -73,7 +73,7 @@
                     exit();
                 }
             ?>
-            <h1 class="text-end pe-3"><a href="itemList.php?category=<?php echo "$itemCategory"?>" class="text-reset text-decoration-none"><i class="bi bi-arrow-counterclockwise"></i>Back</a></h1>
+            <h1 class="text-end pe-3"><a href="itemList.php?category=<?php echo "$itemCategory"?>" class="text-reset text-decoration-none" onclick="window.history.go(-1); return false;"><i class="bi bi-arrow-counterclockwise"></i>Back</a></h1>
             <div class="card mb-3 text-dark bg-transparent mx-auto" style="max-width: 50rem; border: 0;">
                 <div class="row g-0">
                     <div class="col-md-4 p-0 bg-transparent mb-3" style="max-height: 16rem; min-height: 16rem;">
@@ -91,8 +91,10 @@
                                         <form action='itemHandler.php' method='post'>
                                             <div class='row mt-4'>
                                                 <label for='itemQuantity' class='col-sm-3 col-form-label h5'>Item Quantity</label>
-                                                <div class='col-sm-1'>
-                                                    <input type='number' class='form-control text-light bg-dark' style='width: 4rem;' name='itemQuantity' value='1' step='1' min='1' max='99' pattern='/^-?\d+\.?\d*$/' onKeyPress='if(this.value.length==2) return false;' onkeypress='return event.charCode >= 48 && event.charCode <= 57' title='Item Quantity' required>
+                                                <div class='quantity '>
+                                                    <div class='btn dec'>-</div>
+                                                    <input class='quantity-input bg-dark h5' type='number' id='0' name='itemQuantity' value='1' step='1' min='1' max='99' pattern='/^-?\d+\.?\d*$/' onKeyPress='if(this.value.length==2) return false;' onkeypress='return event.charCode >= 48 && event.charCode <= 57' title='Item Quantity' required>
+                                                    <div class='btn inc'>+</div>
                                                 </div>
                                             </div>
                                             <div>
@@ -125,5 +127,41 @@
                 </div>
             </div>
         </div>
+
+        <script>
+            //variables
+            var incrementButton = document.getElementsByClassName('inc');
+            var decrementButton = document.getElementsByClassName('dec');
+
+            //for increment button
+            for(var i = 0; i < incrementButton.length; i++) {
+                var button = incrementButton[i];
+                button.addEventListener('click', function(event){
+                    var buttonClicked = event.target;
+                    var input = buttonClicked.parentElement.children[1];
+                    var inputValue = input.value;
+
+                    var newValue = parseInt(inputValue) + 1;
+
+                    input.value = newValue;
+                });
+            }
+
+            //for decrement button
+            for(var i = 0; i < decrementButton.length; i++) {
+                var button = decrementButton[i];
+                button.addEventListener('click', function(event){
+                    var buttonClicked = event.target;
+                    var input = buttonClicked.parentElement.children[1];
+                    var inputValue = input.value;
+
+                    var newValue = parseInt(inputValue) - 1;
+
+                    if(newValue > 0) {
+                       input.value = newValue;
+                    }
+                });
+            }
+        </script>
     </body>
 </html>

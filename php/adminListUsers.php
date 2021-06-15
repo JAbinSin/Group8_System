@@ -42,7 +42,7 @@
         <!-- Container for the table of the user list -->
         <div class="container p-3 mb-2 bg-dark text-white table-responsive rounded-3">
             <h1 class="text-center mb-2">User List</h1>
-            <table class="table table-dark table-striped align-middle table-bordered">
+            <table class="table table-dark table-striped align-middle table-bordered table-responsive">
                 <thead class="text-center">
                     <tr>
                         <th>Profile Picture</th>

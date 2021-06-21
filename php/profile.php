@@ -29,6 +29,8 @@
     $userEmail = $userInfo["email"];
     $userUsername = $userInfo["username"];
     $userAddress = $userInfo["address"];
+    $userCity = $userInfo["city"];
+    $userRegion = $userInfo["region"];
     $userZipCode = $userInfo["zip_code"];
     $userPhoneNumber = $userInfo["phone_number"];
     $userValidated = $userInfo["validated"];
@@ -113,6 +115,10 @@
                         <dl class="row h5">
                             <dt class="col-sm-4 mt-3">Address: </dt>
                             <dd class="col-sm-8 mt-3"><?php echo $userAddress?></dd>
+                            <dt class="col-sm-4 mt-3">City: </dt>
+                            <dd class="col-sm-8 mt-3"><?php echo $userCity?></dd>
+                            <dt class="col-sm-4 mt-3">Region: </dt>
+                            <dd class="col-sm-8 mt-3"><?php echo $userRegion?></dd>
                             <dt class="col-sm-4 mt-3">Zip Code: </dt>
                             <dd class="col-sm-8 mt-3"><?php echo $userZipCode?></dd>
                             <dt class="col-sm-4 mt-3">Cellphone: </dt>

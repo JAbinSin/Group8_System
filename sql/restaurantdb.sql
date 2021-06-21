@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 19, 2021 at 03:57 AM
+-- Generation Time: Jun 21, 2021 at 05:24 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.10
 
@@ -20,6 +20,29 @@ SET time_zone = "+00:00";
 --
 -- Database: `restaurantdb`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_category`
+--
+
+CREATE TABLE `tbl_category` (
+  `id` int(25) NOT NULL COMMENT 'int(25)',
+  `name` varchar(255) NOT NULL COMMENT 'varchar(255)',
+  `category_picture` varchar(255) NOT NULL DEFAULT 'default.png' COMMENT 'varchar(255)'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tbl_category`
+--
+
+INSERT INTO `tbl_category` (`id`, `name`, `category_picture`) VALUES
+(1, 'Hotdog', '1_picture.jpg'),
+(2, 'Pizza', '2_picture.png'),
+(3, 'Burger', '3_picture.jpg'),
+(4, 'Rice Meal', '4_picture.jpeg'),
+(10, 'All', 'default.png');
 
 -- --------------------------------------------------------
 
@@ -45,11 +68,13 @@ CREATE TABLE `tbl_history` (
 --
 
 INSERT INTO `tbl_history` (`id`, `user`, `picture`, `name`, `item`, `quantity`, `price`, `time`, `status`, `order_id`) VALUES
-(84, 6, '11_picture.jpg', 'Burger', 11, 1, '35.00', '2021-05-18 16:58:54', 'pending', 1),
-(85, 6, '10_picture.jpg', 'Siomai', 10, 1, '20.00', '2021-05-18 16:58:54', 'pending', 1),
-(86, 6, '12_picture.jpg', 'Pizza', 12, 1, '100.00', '2021-05-18 16:58:54', 'pending', 1),
-(87, 6, '10_picture.jpg', 'Siomai', 10, 1, '20.00', '2021-05-18 23:41:07', 'pending', 2),
-(88, 6, '11_picture.jpg', 'Burger', 11, 1, '35.00', '2021-05-18 23:41:07', 'pending', 2);
+(116, 7, '61_picture.jpg', 'Korean Corn Dog', 61, 1, '30.00', '2021-06-08 16:52:26', 'pending', 1),
+(117, 7, '60_picture.jpg', 'Chili Dog', 60, 1, '50.00', '2021-06-08 16:53:54', 'pending', 2),
+(118, 7, '62_picture.jpg', 'Sonora Hotdog', 62, 1, '50.00', '2021-06-08 17:41:07', 'pending', 3),
+(119, 6, '62_picture.jpg', 'Sonora Hotdog', 62, 1, '50.00', '2021-06-08 17:44:45', 'pending', 4),
+(120, 6, '61_picture.jpg', 'Korean Corn Dog', 61, 1, '30.00', '2021-06-08 17:44:58', 'pending', 5),
+(121, 6, '30_picture.jpg', 'Kimchi Rice', 30, 1, '50.00', '2021-06-15 14:47:51', 'pending', 6),
+(122, 6, '62_picture.jpg', 'Sonora Hotdog', 62, 1, '50.00', '2021-06-15 14:47:51', 'pending', 6);
 
 -- --------------------------------------------------------
 
@@ -62,18 +87,20 @@ CREATE TABLE `tbl_items` (
   `name` varchar(255) NOT NULL COMMENT 'varchar(255)',
   `description` text NOT NULL COMMENT 'text',
   `price` decimal(11,2) NOT NULL COMMENT 'decimal(11,2)',
-  `picture` varchar(255) NOT NULL DEFAULT 'default.png' COMMENT 'varchar(255)'
+  `picture` varchar(255) NOT NULL DEFAULT 'default.png' COMMENT 'varchar(255)',
+  `category` varchar(255) NOT NULL COMMENT 'varchar(255)'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `tbl_items`
 --
 
-INSERT INTO `tbl_items` (`id`, `name`, `description`, `price`, `picture`) VALUES
-(8, 'Hotdog', 'Masarap na Hotdog Mainit-init at magulay pa', '25.00', '8_picture.jpg'),
-(10, 'Siomai', 'Pork Siomai Na may Chili Sauce', '20.00', '10_picture.jpg'),
-(11, 'Burger', 'The Best Burger in Town', '35.00', '11_picture.jpg'),
-(12, 'Pizza', 'The Best Family Pizza', '100.00', '12_picture.jpg');
+INSERT INTO `tbl_items` (`id`, `name`, `description`, `price`, `picture`, `category`) VALUES
+(30, 'Kimchi Rice', 'Made From Korea\r\nAuthentic Cuisine', '50.00', '30_picture.jpg', 'Rice Meal'),
+(60, 'Chili Dog', 'American classic chili dog, grilled hot dog on a bun, smothered in ground beef chili sauce, sprinkled with cheddar cheese and onions.', '50.00', '60_picture.jpg', 'Hotdog'),
+(61, 'Korean Corn Dog', 'Korean corn dogs are hot dogs, rice cakes, fish cakes, or mozzarella cheese coated in a batter (and sometimes panko, french fry pieces, or ramen) and deep fried.', '30.00', '61_picture.jpg', 'Hotdog'),
+(62, 'Sonora Hotdog', 'A hot dog that is wrapped in bacon and grilled, served on a bolillo-style hot dog bun, and topped with pinto beans, onions, tomatoes, and a variety of additional condiments, often including mayonnaise, mustard, and jalape&#195;&#177;o salsa.', '50.00', '62_picture.jpg', 'Hotdog'),
+(64, 'Peperoni Pizza', 'American Style Pizza', '100.00', '64_picture.jpg', 'Pizza');
 
 -- --------------------------------------------------------
 
@@ -86,28 +113,44 @@ CREATE TABLE `tbl_users` (
   `first_name` varchar(255) NOT NULL COMMENT 'varchar(255)',
   `last_name` varchar(255) NOT NULL COMMENT 'varchar(255)',
   `username` varchar(255) NOT NULL COMMENT 'varchar(255)',
+  `address` varchar(255) NOT NULL COMMENT 'varchar(255)',
+  `city` varchar(255) NOT NULL COMMENT 'varchar(255)',
+  `region` varchar(255) NOT NULL COMMENT 'varchar(255)',
+  `zip_code` int(25) NOT NULL COMMENT 'int(25)',
   `password` varchar(255) NOT NULL COMMENT 'varchar(255)',
   `email` varchar(255) NOT NULL COMMENT 'varchar(255)',
   `phone_number` varchar(255) NOT NULL COMMENT 'varchar(255)',
   `profile_picture` varchar(255) NOT NULL DEFAULT 'default.png' COMMENT 'varchar(255)',
-  `user_type` varchar(255) NOT NULL COMMENT 'varchar(255)'
+  `user_type` varchar(255) NOT NULL COMMENT 'varchar(255)',
+  `validated` varchar(255) NOT NULL DEFAULT 'no' COMMENT 'varchar(255)'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `tbl_users`
 --
 
-INSERT INTO `tbl_users` (`id`, `first_name`, `last_name`, `username`, `password`, `email`, `phone_number`, `profile_picture`, `user_type`) VALUES
-(6, 'boop', 'beep', 'user123123', '$2y$10$yoRKELcTsVZD9j/V0qg2GOdvzhruXAFABf6Ju2htMN/JJieTyhuP2', 'kdsofksdokso@wekofdksfl', '09123123123', '6_profile.jpg', 'client'),
-(7, 'Severino', 'Norbert', 'admin123123', '$2y$10$wKj6Gjq0gvWW3yCHPXcdNuMq8M7LlCfWm9tq3tFo7XSsNBdYdeXT2', 'admin@admin123', '11111111110', 'default.png', 'admin'),
-(8, 'Leonardo', 'Da Vinci', 'LeonardoDaVinci', '$2y$10$h30oCJbperkS3EVjHHeHdeDCiNFrPIhSLvEvf9/j53qfnFesN/WCO', 'leonardodavinci123@gmai.com', '09333059211', 'default.png', 'client'),
-(9, 'Severino', 'Norbert', 'admin', '$2y$10$qd9wmNeI4YuW1VOje7rE7.MovFYmGBSSg7q4K5fd2AP0z19zwawcK', 'admin@admin', '11111111111', 'default.png', 'admin'),
-(10, 'Severino', 'Norbert', 'admin123456', '$2y$10$h.VvajekjcYOMrqlJ6clRuSl6TOb8qFu8C9eO73jh7QjlvqeBn9wy', 'admin123456@admin', '11111123421', 'default.png', 'admin'),
-(11, 'booper', 'beeper', 'BooperBeeper', '$2y$10$A9CJCeq0IxxRgLEH5BNvROPmwbBRMscnwA4GWyYyr6zb8U3HASwAe', 'boop@beeper.com', '12392371845', 'default.png', 'client');
+INSERT INTO `tbl_users` (`id`, `first_name`, `last_name`, `username`, `address`, `city`, `region`, `zip_code`, `password`, `email`, `phone_number`, `profile_picture`, `user_type`, `validated`) VALUES
+(6, 'Kizuna', 'Ai', 'user123123', 'Malakas Street.', 'taytay', 'rizal', 1870, '$2y$10$yoRKELcTsVZD9j/V0qg2GOdvzhruXAFABf6Ju2htMN/JJieTyhuP2', 'kdsofksdokso@wekofdksfl.com', '09123123123', '6_profile.jpg', 'client', 'yes'),
+(7, 'Severino', 'Norbert', 'admin123123', 'yatyat', '', '', 2, '$2y$10$wKj6Gjq0gvWW3yCHPXcdNuMq8M7LlCfWm9tq3tFo7XSsNBdYdeXT2', 'admin@admin123', '11111111110', 'default.png', 'admin', 'no'),
+(9, 'Severino', 'Norbert', 'admin', 'moscow', '', '', 4, '$2y$10$qd9wmNeI4YuW1VOje7rE7.MovFYmGBSSg7q4K5fd2AP0z19zwawcK', 'admin@admin', '11111111111', 'default.png', 'admin', 'no'),
+(10, 'Severino', 'Norbert', 'admin123456', 'bangtan', '', '', 5, '$2y$10$h.VvajekjcYOMrqlJ6clRuSl6TOb8qFu8C9eO73jh7QjlvqeBn9wy', 'admin123456@admin', '11111123421', 'default.png', 'admin', 'no'),
+(14, 'DD', 'Dalida', 'MinroDDD', 'seoul', '', '', 6, '$2y$10$PmIreiTCAEC34vrwbN72e.TYuDY0PylQHgkG1su6kk87zdiTqTYgG', 'gwapoako@gmail.com', '09099999556', 'default.png', 'client', 'no'),
+(17, 'Mofu', 'Shesh', 'TheOneTheTwoTheThree', 'rizal', '', '', 9, '$2y$10$vv8a9nL..aXzG8Ycin0gjuJmVgAJv3.GCzdVGfc7RB5YbuwgRncne', 'marcoliver0924@gmail.com', '09164172182', 'default.png', 'client', 'no'),
+(18, 'Sarah', 'Fortune', 'ButasMan', 'Demonyo Land', '', '', 1800, '$2y$10$WsXAI/k8ATbGWfCBkdHh5O3rTZrp5INNQl35GctvHS7MqTtIzt/TW', 'Fortune@butasmail.com', '12312312312', '18_profile.png', 'client', 'no'),
+(19, 'Aaron', 'Arriola', 'YokoiRima', '69titikomalake', '', '', 1600, '$2y$10$C24sQp6bLKNSP.s9ZkyMVeoqqnDXoLsOvMsdu/2fLv89.6pHYV64u', 'ughugh@gmail.com', '12345678901', 'default.png', 'client', 'no'),
+(22, 'Trafalgar D', 'Law', 'JullieBee', 'Jollibee Cainta', '', '', 8700, '$2y$10$leIMmgOZ..IAepYbUV94GO3lfB9KNsoZzlidSnIgBAIyjp1JThKzS', 'TDWL@gmail.com', '87000000000', '22_profile.jpg', 'client', 'no'),
+(24, 'aaron', 'arriola', 'michaeng', 'putakadyyanyon', '', '', 1234, '$2y$10$lGMu5JzlbMauipoVgDdD8utXGgLxLpMSKRuErmUdYUSmeBTSZCc8y', 'michaeng@gmail.com', '90909090909', '24_profile.jpeg', 'client', 'no'),
+(25, 'ughh', 'hhgu', 'ughhhhhhhh', '123333', '', '', 911, '$2y$10$iWOP7eU2e6dPfCWT8KXqQ.to40Bttlm5xC2dO0V9szkLqVzAPO1Fu', 'ughh@gamil.com', '12121211212', 'default.png', 'client', 'no');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `tbl_category`
+--
+ALTER TABLE `tbl_category`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `tbl_history`
@@ -132,22 +175,28 @@ ALTER TABLE `tbl_users`
 --
 
 --
+-- AUTO_INCREMENT for table `tbl_category`
+--
+ALTER TABLE `tbl_category`
+  MODIFY `id` int(25) NOT NULL AUTO_INCREMENT COMMENT 'int(25)', AUTO_INCREMENT=13;
+
+--
 -- AUTO_INCREMENT for table `tbl_history`
 --
 ALTER TABLE `tbl_history`
-  MODIFY `id` int(25) NOT NULL AUTO_INCREMENT COMMENT 'int(25)', AUTO_INCREMENT=89;
+  MODIFY `id` int(25) NOT NULL AUTO_INCREMENT COMMENT 'int(25)', AUTO_INCREMENT=123;
 
 --
 -- AUTO_INCREMENT for table `tbl_items`
 --
 ALTER TABLE `tbl_items`
-  MODIFY `id` int(25) NOT NULL AUTO_INCREMENT COMMENT 'int(25)', AUTO_INCREMENT=27;
+  MODIFY `id` int(25) NOT NULL AUTO_INCREMENT COMMENT 'int(25)', AUTO_INCREMENT=68;
 
 --
 -- AUTO_INCREMENT for table `tbl_users`
 --
 ALTER TABLE `tbl_users`
-  MODIFY `id` int(25) NOT NULL AUTO_INCREMENT COMMENT 'int(25)', AUTO_INCREMENT=12;
+  MODIFY `id` int(25) NOT NULL AUTO_INCREMENT COMMENT 'int(25)', AUTO_INCREMENT=27;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

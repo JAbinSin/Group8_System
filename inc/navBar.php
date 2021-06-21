@@ -53,7 +53,7 @@
                   <a class='nav-link' href='profile.php'><i class='bi bi-person-circle'></i> Profile</i></a>
                 </li>
                 <li class='nav-item'>
-                  <a class='nav-link me-2' href='logout.php'><i class='bi bi-box-arrow-in-right'></i> Logout</i></a>
+                  <a class='nav-link me-2' href='logout.php'><i class='bi bi-box-arrow-right'></i> Logout</i></a>
                 </li>
               </ul>
           </div>
@@ -90,7 +90,7 @@
                   <a class='nav-link' href='profile.php'><i class='bi bi-person-circle'></i> Profile</i></a>
                 </li>
                 <li class='nav-item'>
-                  <a class='nav-link me-2' href='logout.php'><i class='bi bi-box-arrow-in-right'></i> Logout</i></a>
+                  <a class='nav-link me-2' href='logout.php'><i class='bi bi-box-arrow-right'></i> Logout</i></a>
                 </li>
               </ul>
           </div>

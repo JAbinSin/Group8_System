@@ -17,6 +17,8 @@
     $userConfirmPassword = trim($_POST['userConfirmPassword']);
     $userEmail = trim($_POST['userEmail']);
     $userAddress = trim($_POST['userAddress']);
+    $userCity = trim($_POST['userCity']);
+    $userRegion = trim($_POST['userRegion']);
     $userZipCode = trim($_POST['userZipCode']);
     $userPhoneNumber = trim($_POST['userPhoneNumber']);
     $userUserType = $_POST['userUsertype'];
@@ -28,13 +30,15 @@
     $userPassword = filter_var($userPassword, FILTER_SANITIZE_SPECIAL_CHARS);
     $userConfirmPassword = filter_var($userConfirmPassword, FILTER_SANITIZE_SPECIAL_CHARS);
     $userEmail = filter_var($userEmail, FILTER_SANITIZE_EMAIL);
-    $userAddress = filter_var($userAddress, FILTER_SANITIZE_SPECIAL_CHARS);
+    $userAddress = filter_var($userAddress, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+    $userCity = filter_var($userCity, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+    $userRegion = filter_var($userRegion, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
     $userZipCode = filter_var($userZipCode, FILTER_SANITIZE_NUMBER_INT);
     $userPhoneNumber = filter_var($userPhoneNumber, FILTER_SANITIZE_NUMBER_INT);
-    $userUserType = filter_var($userUserType, FILTER_SANITIZE_SPECIAL_CHARS);
+    $userUserType = filter_var($userUserType, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 
     //An array for easier and faster checking if there is an error in the variable
-    $arrayPost = array("First Name:" => $userFirstName, "Last Name:" => $userLastName, "Username:" => $userUsername, "Password:" => $userPassword, "Confirm Password:" => $userConfirmPassword, "Email:" => $userEmail, "Address:" => $userAddress, "Zip Code:" =>$userZipCode, "Cellphone Number:" => $userPhoneNumber);
+    $arrayPost = array("First Name:" => $userFirstName, "Last Name:" => $userLastName, "Username:" => $userUsername, "Password:" => $userPassword, "Confirm Password:" => $userConfirmPassword, "Email:" => $userEmail, "Address:" => $userAddress, "City: " => $userCity, "Region: " => $userRegion, "Zip Code: " => $userZipCode, "Cellphone Number:" => $userPhoneNumber);
 
     //Used as a bool to check if there is an error in the whole validation
     $logsErrorTest = false;
@@ -204,6 +208,8 @@
                         password,
                         email,
                         address,
+                        city,
+                        region,
                         zip_code,
                         phone_number,
                         user_type
@@ -215,6 +221,8 @@
                         '$passwordHashed',
                         '$userEmail',
                         '$userAddress',
+                        '$userCity',
+                        '$userRegion',
                         '$userZipCode',
                         '$userPhoneNumber',
                         '$userUserType'

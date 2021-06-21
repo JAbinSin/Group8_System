@@ -19,6 +19,10 @@
     $userLastName = $userInfo["last_name"];
     $userEmail = $userInfo["email"];
     $userUsername = $userInfo["username"];
+    $userAddress = $userInfo["address"];
+    $userCity = $userInfo["city"];
+    $userRegion = $userInfo["region"];
+    $userZipCode = $userInfo["zip_code"];
     $userPhoneNumber = $userInfo["phone_number"];
 
     //Redirect the user if the id is invalid
@@ -80,6 +84,22 @@
                 <div class="mb-3">
                     <label for="userEmail" class="form-label">Email</label>
                     <input type="text" class="form-control text-light bg-dark" name="userEmail" placeholder="<?php echo "$userEmail"?>" value="<?php echo "$userEmail"?>" required>
+                </div>
+                <div class="mb-3">
+                    <label for="userAddress" class="form-label">Address</label>
+                    <input type="text" class="form-control text-light bg-dark" name="userAddress" placeholder="<?php echo "$userAddress"?>" value="<?php echo "$userAddress"?>" required>
+                </div>
+                <div class="mb-3">
+                    <label for="userCity" class="form-label">City</label>
+                    <input type="text" class="form-control text-light bg-dark" name="userCity" placeholder="<?php echo "$userCity"?>" value="<?php echo "$userCity"?>" required>
+                </div>
+                <div class="mb-3">
+                    <label for="userRegion" class="form-label">Region</label>
+                    <input type="text" class="form-control text-light bg-dark" name="userRegion" placeholder="<?php echo "$userRegion"?>" value="<?php echo "$userRegion"?>" required>
+                </div>
+                <div class="mb-3">
+                    <label for="userZipCode" class="form-label">Zip Code</label>
+                    <input type="number" class="form-control text-light bg-dark" name="userZipCode" placeholder="<?php echo "$userZipCode"?>" value="<?php echo "$userZipCode"?>" required>
                 </div>
                 <div class="mb-3">
                     <label for="userPhoneNumber" class="form-label">Cellphone Number (11-Digit)</label>

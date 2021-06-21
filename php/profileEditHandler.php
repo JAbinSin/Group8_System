@@ -14,6 +14,10 @@
     $userLastName = trim($_POST["userLastName"]);
     $userEmail = trim($_POST["userEmail"]);
     $userUsername = trim($_POST["userUsername"]);
+    $userAddress = trim($_POST['userAddress']);
+    $userCity = trim($_POST['userCity']);
+    $userRegion = trim($_POST['userRegion']);
+    $userZipCode = trim($_POST['userZipCode']);
     $userPhoneNumber = ($_POST['userPhoneNumber']);
 
     //Sanitize all the Inputs
@@ -21,13 +25,17 @@
     $userLastName = filter_var($userLastName, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
     $userUsername = filter_var($userUsername, FILTER_SANITIZE_SPECIAL_CHARS);
     $userEmail = filter_var($userEmail, FILTER_SANITIZE_EMAIL);
+    $userAddress = filter_var($userAddress, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+    $userCity = filter_var($userCity, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+    $userRegion = filter_var($userRegion, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+    $userZipCode = filter_var($userZipCode, FILTER_SANITIZE_NUMBER_INT);
     $userPhoneNumber = filter_var($userPhoneNumber, FILTER_SANITIZE_NUMBER_INT);
 
     //Ths is the id from the session, used this style instead of directly using it because of string formatting in conditionals
     $id = $_SESSION["userId"];
 
     //An array for easier and faster checking if there is an error in the variable
-    $arrayPost = array("First Name:" => $userFirstName, "Last Name:" => $userLastName, "Username:" => $userUsername, "Email:" => $userEmail);
+    $arrayPost = array("First Name:" => $userFirstName, "Last Name:" => $userLastName, "Username:" => $userUsername,"Address:" => $userAddress, "City: " => $userCity, "Region: " => $userRegion,"Zip Code:" =>$userZipCode, "Email:" => $userEmail);
     $logsErrorTest = false;
     $uploadedImage = false;
 ?>
@@ -188,6 +196,10 @@
                                             first_name = '$userFirstName',
                                             last_name = '$userLastName',
                                             email = '$userEmail',
+                                            address = '$userAddress',
+                                            city = '$userCity',
+                                            region = '$userRegion',
+                                            zip_code = '$userZipCode',
                                             phone_number = '$userPhoneNumber',
                                             username = '$userUsername'
                                         WHERE

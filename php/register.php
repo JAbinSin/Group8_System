@@ -53,8 +53,9 @@
                     <input type="text" class="form-control text-light bg-dark" name="userLastName" placeholder="Enter Last Name" pattern="[A-zÀ-ž\s]+" required>
                 </div>
                 <div class="mb-3">
-                    <label for="userUsername" class="form-label">Username (Space are not Allowed)</label>
+                    <label for="userUsername" class="form-label">Username</label>
                     <input type="text" class="form-control text-light bg-dark" name="userUsername" placeholder="Enter Username" pattern="[A-z0-9À-ž]+" minlength="8" required>
+                    <div class="form-text">(Space are not Allowed)</div>
                 </div>
                 <div class="mb-3">
                     <label for="userPassword" class="form-label">Password</label>
@@ -71,6 +72,14 @@
                 <div class="mb-3">
                     <label for="userAddress" class="form-label">Address</label>
                     <input type="text" class="form-control text-light bg-dark" name="userAddress" placeholder="Enter Address" required>
+                </div>
+                <div class="mb-3">
+                    <label for="userCity" class="form-label">City</label>
+                    <input type="text" class="form-control text-light bg-dark" name="userCity" placeholder="Enter City" required>
+                </div>
+                <div class="mb-3">
+                    <label for="userRegion" class="form-label">Region</label>
+                    <input type="text" class="form-control text-light bg-dark" name="userRegion" placeholder="Enter Region" required>
                 </div>
                 <div class="mb-3">
                     <label for="userZipCode" class="form-label">Zip Code</label>

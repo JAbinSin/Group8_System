@@ -99,10 +99,10 @@
                               <td class='h5 border-start border-end'><a href='item.php?id=$sessItemId' class='text-reset text-decoration-none'>$itemName</a></td>
                               <td class='h5 border-start border-end'>₱ $itemUnitPriceNumber</td>
                               <td class='border-start border-end'>
-                                  <div class='quantity quantity-center'> "
-                                  . ($sessItemQuantity == 1 ? "<button class='btn dec disabled' value='UPDATE' name='btnSubmit'>-</button>" : "<button class='btn dec' value='UPDATE|$sessItemId' name='btnSubmit'>-</button>"). "
+                                  <div class='quantity quantity-center'>
+                                      ".($sessItemQuantity <= 1 ? "<button class='btn dec disabled' name='btnSubmit'>-</button>" : "<button class='btn dec' value='UPDATE|$sessItemId' name='btnSubmit'>-</button>")."
                                       <input class='quantity-input bg-dark h5' type='number' id='$i' name='Qty_$sessItemId' value='$sessItemQuantity' pattern='/^-?\d+\.?\d*$/' onKeyPress='if(this.value.length==2) return false;' onkeypress='return event.charCode >= 48 && event.charCode <= 57' title='Item Quantity' required>
-                                      <button class='btn inc' value='UPDATE|$sessItemId' name='btnSubmit'>+</button>
+                                      ".($sessItemQuantity >= 99 ? "<button class='btn inc disabled' name='btnSubmit'>+</button>" : "<button class='btn inc' value='UPDATE|$sessItemId' name='btnSubmit'>+</button>")."
                                       <input type='submit' hidden id='submitEnter$i' name='btnSubmit' class='submitEnter' value='UPDATE|$sessItemId'>
                                   </div>
                               </td>
@@ -146,9 +146,6 @@
         </div>
 
         <script>
-            //default value
-            document.querySelector(".dec").setAttribute("disabled", "disabled");
-
             //variables
             var incrementButton = document.getElementsByClassName('inc');
             var decrementButton = document.getElementsByClassName('dec');

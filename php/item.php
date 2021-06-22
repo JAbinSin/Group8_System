@@ -132,6 +132,23 @@
             //variables
             var incrementButton = document.getElementsByClassName('inc');
             var decrementButton = document.getElementsByClassName('dec');
+            var input = document.getElementsByClassName('quantity-input');
+
+            //for enter
+            for(var i = 0; i < input.length; i++) {
+                var enter = input[i];
+                var id = "submitEnter" + i;
+
+                enter.addEventListener("keyup", function(event) {
+                    var buttonClicked = event.target;
+                    var input = buttonClicked.parentElement.children[3];
+
+                    if (event.keyCode === 13) {
+                        event.preventDefault();
+                        document.getElementById(id).click();
+                    }
+                });
+            }
 
             //for increment button
             for(var i = 0; i < incrementButton.length; i++) {

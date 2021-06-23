@@ -59,15 +59,19 @@
                         <option value="" disabled selected hidden>Please Choose...</option>
                         <?php
                             //Query and Execute for the category
-                            $querySelectCategoryInfo = "SELECT name FROM tbl_category";
+                            $querySelectCategoryInfo = "SELECT name FROM tbl_category ORDER BY name";
                             $executeQuerySelectCategoryInfo = mysqli_query($con, $querySelectCategoryInfo);
 
                             while($categoryInfo = mysqli_fetch_assoc($executeQuerySelectCategoryInfo)) {
                                 $categoryName = $categoryInfo["name"];
 
-                                echo "
-                                    <option value='$categoryName'>$categoryName</option>
-                                ";
+                                if($categoryName == 'All') {
+
+                                } else {
+                                    echo "
+                                        <option value='$categoryName'>$categoryName</option>
+                                    ";
+                                }
                             }
                         ?>
                     </select>

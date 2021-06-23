@@ -65,7 +65,7 @@
                                                 CASE user_type
                                                     WHEN 'admin'THEN 1
                                                     WHEN 'client' THEN 2
-                                                    ELSE 5
+                                                    ELSE 3
                                                 END
                                             ";
                         $executeQuerySelectInfoUser = mysqli_query($con, $querySelectInfoUser);

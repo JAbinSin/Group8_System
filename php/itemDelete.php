@@ -73,7 +73,7 @@
                     <input class="btn btn-primary btn-danger" type="submit" value="DELETE">
                     <input type="hidden" name="itemId" value="<?php echo $itemId?>">
                 </form>
-                <a class='btn btn-primary mt-2' href='itemList.php' role='button'>CANCEL</a>
+                <a class='btn btn-primary mt-2' href='javascript:history.go(-1)' role='button'>CANCEL</a>
             </div>
         </div>
     </body>

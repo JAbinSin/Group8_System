@@ -68,7 +68,7 @@
                 <h4 class="fw-normal">Item Deleted.</h4>
             </div>
             <div class="col text-center">
-                <a class='btn btn-secondary' href='itemList.php?category=<?php echo $itemCategory?>' role='button'>RETURN</a>
+                <a class='btn btn-secondary' href='javascript:history.go(-2)' role='button'>RETURN</a>
             </div>
         </div>
     </body>

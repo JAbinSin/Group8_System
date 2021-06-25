@@ -69,7 +69,8 @@
                     $historyQuantity = $historyInfo["quantity"];
                     $historyName = $historyInfo["name"];
                     $historyPrice = $historyInfo["price"];
-                    $historyTime = $historyInfo["time"];
+                    $historyTime = strtotime($historyInfo["time"]);
+                    $historyTimeFormatted = date("F j\, Y \of A g\:i", $historyTime);
                     $historyStatus = $historyInfo["status"];
                     $historyPQ = $historyQuantity * $historyPrice;
 
@@ -115,7 +116,7 @@
                                 </table>
 
                                 <div class='card-footer text-center h5 m-0'>
-                                    Time Purchase: $historyTime
+                                    Time Purchase: $historyTimeFormatted
                                 </div>
                                 </div>
                                 <br>
@@ -197,7 +198,7 @@
                       </tfoot>
                       </table>
                       <div class='card-footer text-center h5 m-0'>
-                          Time Purchase: $historyTime
+                          Time Purchase: $historyTimeFormatted
                       </div>
                   ";
                 }

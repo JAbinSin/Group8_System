@@ -7,6 +7,15 @@
     if(!isset($_SESSION['userType'])) {
         header("Location: ../index.php");
     }
+
+    //Use a variable to be able to use it in the Query Conditions
+    $user = $_SESSION["userId"];
+
+    //For the last Order Id
+    $querySelectLast = "SELECT MIN(order_id) AS last FROM tbl_history WHERE user = $user";
+    $executeQuerySelectLast = mysqli_query($con, $querySelectLast);
+    $Last = mysqli_fetch_assoc($executeQuerySelectLast);
+    $lastId = $Last["last"];
 ?>
 
 <!doctype html>
@@ -40,23 +49,30 @@
         <?php include_once("../inc/navBar.php"); ?>
 
         <!-- Container  -->
-        <div class="container p-3 mb-2 bg-dark text-white rounded-3 w-50 opacity-1">
+        <div class="container p-3 mb-2 text-white rounded-3 w-50 bg-normal-92 table-responsive">
             <h1 class="text-center mb-2">History</h1>
-            <?php
-                //Use a variable to be able to use it in the Query Conditions
-                $user = $_SESSION["userId"];
 
+            <?php
                 //Query and Execute for the history information
                 $querySelectHistory = "SELECT * FROM tbl_history WHERE user = $user ORDER BY order_id DESC";
                 $executeQuerySelectHistory = mysqli_query($con, $querySelectHistory);
 
-                //Set a null to hold the Order Id and Change
+                //Set a null to hold the Order Id
                 $historyOrderId = null;
                 $isEmpty = true;
                 $isFirst = true;
-                $change = null;
                 //Uses loop to echo all the items the user selected
                 while($historyInfo = mysqli_fetch_assoc($executeQuerySelectHistory)) {
+                    //Variables
+                    $historyItem = $historyInfo["item"];
+                    $historyPicture = $historyInfo["picture"];
+                    $historyQuantity = $historyInfo["quantity"];
+                    $historyName = $historyInfo["name"];
+                    $historyPrice = $historyInfo["price"];
+                    $historyTime = $historyInfo["time"];
+                    $historyStatus = $historyInfo["status"];
+                    $historyPQ = $historyQuantity * $historyPrice;
+
                     //To Check if there is Data from the tbl_history
                     $isEmpty = false;
 
@@ -65,66 +81,87 @@
                         $oldId = $historyOrderId;//null
                         $historyOrderId = $historyInfo["order_id"];//1
 
+                        //The first oldId would always be null so we need to ignore that
+                        if($oldId != null) {
+                            //For the Grand Total and Total Items
+                            $querySelectTotal = "SELECT SUM(price * quantity) AS totalPrice, SUM(quantity) AS totalQuantity FROM tbl_history WHERE order_id = $oldId";
+                            $executeQuerySelectTotal = mysqli_query($con, $querySelectTotal);
+                            $historyTotal = mysqli_fetch_assoc($executeQuerySelectTotal);
+                            $historyTotalPrice = $historyTotal["totalPrice"];
+                            $historyTotalQuantity = $historyTotal["totalQuantity"];
+                        }
+
                         if($isFirst == false) {
                             echo "
-                                <div class='card-footer text-muted text-center'>
+                                </tbody>
+                                <tfoot class='text-center'>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td class='text-end h5'>Grand Total:</td>
+                                        <td class='h5'>₱ $historyTotalPrice</td>
+                                    </tr>
+                                </tfoot>
+                                <tfoot class='text-center'>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td class='text-end h5'>Total Items:</td>
+                                        <td class='h5'>$historyTotalQuantity</td>
+                                    </tr>
+                                </tfoot>
+                                </table>
+
+                                <div class='card-footer text-center h5 m-0'>
                                     Time Purchase: $historyTime
                                 </div>
                                 </div>
+                                <br>
                             ";
                         }
 
                         echo "
                             <div class='card history-color mb-5'>
-                                <div class='card-header text-center'>
-                                    Order Id: $historyOrderId
+                                <div class='card-header row'>
+                                    <p class='text-start h3 ps-4 m-0 col'>Order Id: $historyOrderId</p>
+                                    <p class='text-end h3 pe-4 m-0 col'>Order Status: ". ($historyStatus == 'pending' ? '<span class="badge bg-warning text-dark">Pending</span>' :
+                                        ($historyStatus == 'processing' ? '<span class="badge bg-info text-dark">Processing</span>' :
+                                            ($historyStatus == 'delivered' ? '<span class="badge bg-success text-dark">Delivered</span>' :
+                                                '<span class="badge bg-secondary text-dark">Cancelled</span>')))
+                                    ."</p>
                                 </div>
+                                <table class='table table-dark  border-white align-middle m-0'>
+                                    <thead class='text-center'>
+                                        <tr>
+                                            <th class='col-1 border'>PICTURE</th>
+                                            <th class='col-2 border'>NAME</th>
+                                            <th class='col-1 border'>PRICE</th>
+                                            <th class='col-1 border'>QUANTITY</th>
+                                            <th class='col-1 border'>TOTAL</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
                         ";
                     }
 
-                    $historyItem = $historyInfo["item"];
-                    $historyPicture = $historyInfo["picture"];
-                    $historyQuantity = $historyInfo["quantity"];
-                    $historyName = $historyInfo["name"];
-                    $historyPrice = $historyInfo["price"];
-                    $historyTime = $historyInfo["time"];
-                    $historyStatus = $historyInfo["status"];
-
                     echo "
-                        <div class='card-body'>
-                            <div class='card text-dark bg-transparent mx-auto' style='max-width: 50rem; border: 0;'>
-                                <div class='row g-0 border border-secondary border-2' style='margin-bottom: 1rem;'>
-                                    <div class='col-md-4 p-0 bg-transparent' style='max-height: 16rem; min-height: 16rem;'>
-                                        <a href='item.php?id=$historyItem'>
-                                            <img class='border-end border-2 border-secondary' src='../img/items/$historyPicture' alt='Image Unavailable' style='width: 100%; height: 100%;'>
-                                        </a>
-                                    </div>
-                                    <div class='col-md-8'>
-                                        <div class='card-body text-break text-white'>
-                                            <h2 class='card-title text-primary'>$historyName</h2>
-                                            <hr>
-                                            <div class='row mt-4'>
-                                                <h5>Item Total Price: ₱$historyPrice</h5>
-                                                <h5>Item Quantity: $historyQuantity</h5>
-                                                <h5>Order Status: ".
-                                                ($historyStatus == 'pending' ? '<span class="badge bg-warning text-dark">Pending</span>' :
-                                                    ($historyStatus == 'processing' ? '<span class="badge bg-info text-dark">Processing</span>' :
-                                                        ($historyStatus == 'delivered' ? '<span class="badge bg-success text-dark">Delivered</span>' :
-                                                            '<span class="badge bg-secondary text-dark">Cancelled</span>')))
-                                                ."</h5>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <tr class='text-center'>
+                            <td class='border-start border-end'><a href='item.php?id=$historyItem'><img src='../img/items/$historyPicture' class='rounded mx-auto d-block img-fluid cart-img' alt='$historyName'></a></td>
+                            <td class='h5 border-start border-end'><a href='item.php?id=$historyItem' class='text-reset text-decoration-none'>$historyName</a></td>
+                            <td class='h5 border-start border-end'>₱ $historyPrice</td>
+                            <td class='h5 border-start border-end'>$historyQuantity</td>
+                            <td class='h5 border-start border-end'>₱ $historyPQ</td>
+                        </tr>
                     ";
                     //Check if the fetch is the first data
                     if($isFirst == true) {
                         $isFirst = false;
                     }
                 }
-                //Show an Error for History is Empty
+
                 //Show an Error for History is Empty
                 if($isEmpty) {
                     echo "
@@ -132,8 +169,34 @@
                             History is Empty.
                         </div>";
                 } else {
+                  $querySelectTotal = "SELECT SUM(price * quantity) AS totalPrice, SUM(quantity) AS totalQuantity FROM tbl_history WHERE order_id = $lastId";
+                  $executeQuerySelectTotal = mysqli_query($con, $querySelectTotal);
+                  $historyTotal = mysqli_fetch_assoc($executeQuerySelectTotal);
+                  $historyTotalPrice = $historyTotal["totalPrice"];
+                  $historyTotalQuantity = $historyTotal["totalQuantity"];
+
                   echo "
-                      <div class='card-footer text-muted text-center'>
+                      </tbody>
+                      <tfoot class='text-center'>
+                          <tr>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <td class='text-end h5'>Grand Total:</td>
+                              <td class='h5'>₱ $historyTotalPrice</td>
+                          </tr>
+                      </tfoot>
+                      <tfoot class='text-center'>
+                          <tr>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <td class='text-end h5'>Total Items:</td>
+                              <td class='h5'>$historyTotalQuantity</td>
+                          </tr>
+                      </tfoot>
+                      </table>
+                      <div class='card-footer text-center h5 m-0'>
                           Time Purchase: $historyTime
                       </div>
                   ";

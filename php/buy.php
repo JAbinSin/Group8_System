@@ -82,7 +82,7 @@
                           $querySelectItemInfo = "SELECT * FROM tbl_items WHERE id = $sessItemId";
                           $executeQuerySelectItemInfo = mysqli_query($con, $querySelectItemInfo);
                           $itemInfo = mysqli_fetch_assoc($executeQuerySelectItemInfo);
-                          $itemPrice = $itemInfo["price"] * $sessItemQuantity;
+                          $itemPrice = $itemInfo["price"];
                           $itemPicture = $itemInfo["picture"];
                           $itemName = $itemInfo["name"];
 
@@ -117,7 +117,6 @@
                   }
                   echo "<div class='alert alert-success text-center overflow-auto' role='alert'>
                           <h2>Items Successfully Purchase.</h2>
-                          <h4>Items Successfully Purchase.</h4>
                         </div>";
                 }
             ?>

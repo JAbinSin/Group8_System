@@ -20,7 +20,7 @@
                     SET
                         status = '$orderStatus'
                     WHERE
-                        id = '$orderId'
+                        order_id = '$orderId'
                     ";
 
     $executeQuery = mysqli_query($con, $queryUpdate);

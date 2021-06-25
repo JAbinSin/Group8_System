@@ -98,7 +98,7 @@
 
                                 $user = $userInfo['id'];
 
-                                $queryHistory = "SELECT count(id) AS number FROM tbl_history WHERE (user = $user) AND (status = 'pending' OR status = 'processing')";
+                                $queryHistory = "SELECT count(DISTINCT order_id) AS number FROM tbl_history WHERE (user = $user) AND (status = 'pending' OR status = 'processing')";
                                 $executeQueryHistory = mysqli_query($con, $queryHistory);
                                 $historyInfo = mysqli_fetch_assoc($executeQueryHistory);
                                 @$orderNumber = $historyInfo["number"];

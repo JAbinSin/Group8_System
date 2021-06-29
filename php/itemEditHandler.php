@@ -14,14 +14,16 @@
     $itemPrice = trim($_POST["itemPrice"]);
     $itemDescription = trim($_POST["itemDescription"]);
     $itemId = $_POST["itemId"];
+    @$itemCategory = $_POST["itemCategory"];
 
     //Sanitize all the Inputs
     $itemName = filter_var($itemName, FILTER_SANITIZE_SPECIAL_CHARS);
     $itemPrice = filter_var($itemPrice, FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
     $itemDescription = filter_var($itemDescription, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+    $itemCategory = filter_var($itemCategory, FILTER_SANITIZE_SPECIAL_CHARS);
 
     //An array for easier and faster checking if there is an error in the variable
-    $arrayPost = array("Item Name:" => $itemName, "Item Price:" => $itemPrice,  "Item Description:" => $itemDescription);
+    $arrayPost = array("Item Name:" => $itemName, "Item Price:" => $itemPrice,  "Item Description:" => $itemDescription, "Item Category:" => $itemCategory);
     $logsErrorTest = false;
     $uploadedImage = false;
 ?>
@@ -147,7 +149,8 @@
                                             name = '$itemName',
                                             price = '$itemPrice',
                                             description = '$itemDescription',
-                                            picture = '$fileName'
+                                            picture = '$fileName',
+                                            category = '$itemCategory'
                                         WHERE
                                             id = '$itemId'
                                         ";
@@ -170,7 +173,8 @@
                                         SET
                                             name = '$itemName',
                                             price = '$itemPrice',
-                                            description = '$itemDescription'
+                                            description = '$itemDescription',
+                                            category = '$itemCategory'
                                         WHERE
                                             id = '$itemId'
                                         ";

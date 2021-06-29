@@ -18,10 +18,6 @@
     $executeQueryPicture = mysqli_query($con, $queryPictureDelete);
     $infoCategoryPicture = mysqli_fetch_assoc($executeQueryPicture);
     $path = "../img/category/" . $infoCategoryPicture["category_picture"];
-    //This remove the image if the image is not the default.png
-    if(($infoCategoryPicture["category_picture"] != "default.png")) {
-        unlink($path);
-    }
 
     //Ready the query and execute it to delete the item
     $deleteQuery = "DELETE FROM tbl_category WHERE id = '$categoryId'";

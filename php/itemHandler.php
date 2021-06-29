@@ -105,7 +105,7 @@
                 }
             ?>
             <div class="col text-center">
-                <a class='btn btn-secondary' href='itemList.php' role='button'>HOME</a>
+                <a class='btn btn-primary' onclick="window.history.go(-1); return false;" role='button'>RETURN</a>
             </div>
         </div>
     </body>

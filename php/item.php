@@ -73,7 +73,7 @@
                     exit();
                 }
             ?>
-            <h1 class="text-end pe-3"><a href="itemList.php?category=<?php echo "$itemCategory"?>" class="text-reset text-decoration-none" onclick="window.history.go(-1); return false;"><i class="bi bi-arrow-counterclockwise"></i>Back</a></h1>
+            <h1 class="text-end pe-3"><a href='#'class="text-reset text-decoration-none" onclick="window.history.go(-1); return false;"><i class="bi bi-arrow-counterclockwise"></i>Back</a></h1>
             <div class="card mb-3 text-dark bg-transparent mx-auto" style="max-width: 50rem; border: 0;">
                 <div class="row g-0">
                     <div class="col-md-4 p-0 bg-transparent mb-3" style="max-height: 16rem; min-height: 16rem;">

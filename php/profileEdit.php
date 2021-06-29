@@ -24,6 +24,7 @@
     $userRegion = $userInfo["region"];
     $userZipCode = $userInfo["zip_code"];
     $userPhoneNumber = $userInfo["phone_number"];
+    $userValidated = $userInfo["validated"];
 
     //Redirect the user if the id is invalid
     if(is_null($userFirstName)) {
@@ -110,6 +111,7 @@
                     <br>
                     <a class='btn btn-secondary mt-2' href='profile.php' role='button'>CANCEL</a>
                 </div>
+                <input type="hidden" name="userValidated" value="<?php echo "$userValidated"?>">
             </form>
         </div>
     </body>

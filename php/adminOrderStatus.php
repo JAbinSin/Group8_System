@@ -12,12 +12,14 @@
     $userId = $_GET["id"];
 
     //Query and Execute for the user information
-    $querySelectHistoryInfo = "SELECT username FROM tbl_users WHERE id = $userId";
+    $querySelectHistoryInfo = "SELECT username, email, validated FROM tbl_users WHERE id = $userId";
     $executeQuerySelectHistoryInfo = mysqli_query($con, $querySelectHistoryInfo);
 
     $historyInfo = mysqli_fetch_assoc($executeQuerySelectHistoryInfo);
 
     $userUsername = $historyInfo["username"];
+    $userEmail = $historyInfo["email"];
+    $userValidated = $historyInfo["validated"];
 
     //Redirect the user if the id is invalid
     if(is_null($userUsername)) {
@@ -65,7 +67,7 @@
         <div class="container p-3 mb-2 bg-normal-92 table-responsive text-white rounded-3 w-50">
             <div class="row g-0">
                 <div class="col-sm-6 col-md-8 ps-3">
-                    <h1><?php echo $userUsername?></h1>
+                    <h1><?php echo "@$userUsername"?></h1>
                 </div>
                 <div class="col-6 col-md-4 text-end pe-3">
                     <h1><a href="adminListUsers.php" class="text-reset text-decoration-none"><i class="bi bi-arrow-counterclockwise"></i>Back</a></h1>
@@ -168,6 +170,8 @@
                                         <div class='order-3'>
                                             <input type='hidden' name='orderId' value='$historyOrderId'>
                                             <input type='hidden' name='userId' value='$userId'>
+                                            <input type='hidden' name='userEmail' value='$userEmail'>
+                                            <input type='hidden' name='userValidated' value='$userValidated'>
                                             <button type='submit' class='btn btn-primary btn-sm' style='width: 10rem;'>Update Status</button>
                                         </div>
                                     </div>

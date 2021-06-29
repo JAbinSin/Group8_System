@@ -75,7 +75,7 @@
 
 
                 //Query for the user
-                $querySelectInfoUser = "SELECT id, username, password, user_type FROM tbl_users WHERE username = '$userUsername'";
+                $querySelectInfoUser = "SELECT id, username, password, email, user_type, validated FROM tbl_users WHERE username = '$userUsername'";
 
                 //Set a temporary variable for comparison
                 if($executeQuerySelectInfoUser = mysqli_query($con, $querySelectInfoUser)) {
@@ -97,6 +97,8 @@
                             //Set a session for usertype and id used when accessing webpages
                             $_SESSION["userType"] = $userInfo["user_type"];
                             $_SESSION["userId"] = $userInfo["id"];
+                            $_SESSION["userValidated"] = $userInfo["validated"];
+                            $_SESSION["userEmail"] = $userInfo["email"];
 
                             header("Location: itemList.php");
                             exit();

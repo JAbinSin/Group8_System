@@ -18,7 +18,8 @@
     $userCity = trim($_POST['userCity']);
     $userRegion = trim($_POST['userRegion']);
     $userZipCode = trim($_POST['userZipCode']);
-    $userPhoneNumber = ($_POST['userPhoneNumber']);
+    $userPhoneNumber = trim($_POST['userPhoneNumber']);
+    $userValidated = trim($_POST['userValidated']);
 
     //Sanitize all the Inputs
     $userFirstName = filter_var($userFirstName, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
@@ -38,6 +39,7 @@
     $arrayPost = array("First Name:" => $userFirstName, "Last Name:" => $userLastName, "Username:" => $userUsername,"Address:" => $userAddress, "City: " => $userCity, "Region: " => $userRegion,"Zip Code:" =>$userZipCode, "Email:" => $userEmail);
     $logsErrorTest = false;
     $uploadedImage = false;
+    $newEmail = false;
 ?>
 
 <!doctype html>
@@ -111,6 +113,9 @@
                             </div>
                         ";
                     }
+                    if(($userEmail != $userInfo["email"]) && ($id == $userInfo["id"])) {
+                        $newEmail = true;
+                    }
                     if(($userPhoneNumber === $userInfo["phone_number"]) && ($id != $userInfo["id"])) {
                         $logsErrorTest = true;
                         echo "
@@ -161,6 +166,17 @@
                         move_uploaded_file($_FILES["profilePicture"]["tmp_name"], $target_file);
                     }
 
+                    //For the validation of new email/old
+                    if($newEmail == true) {
+                        $validated = "no";
+                    } elseif($userValidated == "yes") {
+                        $validated = "yes";
+                    } else {
+                        $validated = "no";
+                    }
+                    $_SESSION["userEmail"] = $userEmail;
+                    $_SESSION["userValidated"] = $validated;
+
                     //Query for the Update of the User
                     //This is the Query for the edit with image upload
                     if($uploadedImage == true) {
@@ -172,7 +188,8 @@
                                             email = '$userEmail',
                                             username = '$userUsername',
                                             phone_number = '$userPhoneNumber',
-                                            profile_picture = '$fileName'
+                                            profile_picture = '$fileName',
+                                            validated = '$validated'
                                         WHERE
                                             id = '$id'
                                         ";
@@ -201,7 +218,8 @@
                                             region = '$userRegion',
                                             zip_code = '$userZipCode',
                                             phone_number = '$userPhoneNumber',
-                                            username = '$userUsername'
+                                            username = '$userUsername',
+                                            validated = '$validated'
                                         WHERE
                                             id = '$id'
                                         ";

@@ -59,13 +59,16 @@
                     <?php
                         //Query for users in the tbl_users
                         $querySelectInfoUser = "
-                                            SELECT *
+                                            SELECT DISTINCT tbl_users.*
                                             FROM tbl_users
+                                            LEFT JOIN tbl_history ON tbl_users.id = tbl_history.user
                                             ORDER BY
-                                                CASE user_type
-                                                    WHEN 'admin'THEN 1
-                                                    WHEN 'client' THEN 2
-                                                    ELSE 3
+                                                CASE
+                                                    WHEN tbl_users.user_type = 'admin' AND tbl_history.order_id > 0 THEN 1
+                                                    WHEN tbl_users.user_type = 'admin' AND tbl_history.order_id IS NULL THEN 2
+                                                    WHEN tbl_users.user_type = 'client' AND tbl_history.order_id > 0 THEN 3
+                                                    WHEN tbl_users.user_type = 'client' AND tbl_history.order_id IS NULL THEN 4
+                                                    ELSE 5
                                                 END
                                             ";
                         $executeQuerySelectInfoUser = mysqli_query($con, $querySelectInfoUser);

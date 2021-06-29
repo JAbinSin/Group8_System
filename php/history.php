@@ -69,10 +69,12 @@
                     $historyQuantity = $historyInfo["quantity"];
                     $historyName = $historyInfo["name"];
                     $historyPrice = $historyInfo["price"];
+                    $historyPriceFormat = number_format($historyPrice, 2, '.', ',');
                     $historyTime = strtotime($historyInfo["time"]);
                     $historyTimeFormatted = date("F j\, Y \of A g\:i", $historyTime);
                     $historyStatus = $historyInfo["status"];
                     $historyPQ = $historyQuantity * $historyPrice;
+                    $historyPQFormat = number_format($historyPQ, 2, '.', ',');
 
                     //To Check if there is Data from the tbl_history
                     $isEmpty = false;
@@ -152,9 +154,9 @@
                         <tr class='text-center'>
                             <td class='border-start border-end'><a href='item.php?id=$historyItem'><img src='../img/items/$historyPicture' class='rounded mx-auto d-block img-fluid cart-img' alt='$historyName'></a></td>
                             <td class='h5 border-start border-end'><a href='item.php?id=$historyItem' class='text-reset text-decoration-none'>$historyName</a></td>
-                            <td class='h5 border-start border-end'>₱ $historyPrice</td>
+                            <td class='h5 border-start border-end'>₱ $historyPriceFormat</td>
                             <td class='h5 border-start border-end'>$historyQuantity</td>
-                            <td class='h5 border-start border-end'>₱ $historyPQ</td>
+                            <td class='h5 border-start border-end'>₱ $historyPQFormat</td>
                         </tr>
                     ";
                     //Check if the fetch is the first data

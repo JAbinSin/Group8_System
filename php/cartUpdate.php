@@ -73,10 +73,10 @@
                     if($testError == false) {
                        //Declare a temporary variable for the keyholder
                         $idTmp = array_search($choiceId, $_SESSION["cartItemId"]);
-                        $valueReplace =  $choiceQty;
+                        $valueReplace = $choiceQty;
 
                         //So that the Quantity can't exceed the maximum limit of 99
-                        if($valueReplace > 99) {
+                        if($valueReplace >= 99) {
                             $valueReplace = 99;
                         }
 

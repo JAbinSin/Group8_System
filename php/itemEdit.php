@@ -69,6 +69,25 @@
                     <input type="text" class="form-control text-light bg-dark" name="itemName" placeholder="<?php echo "$itemName"?>" value="<?php echo "$itemName"?>" pattern="[A-z0-9À-ž\s]+" required>
                 </div>
                 <div class="mb-3">
+                    <label for="itemCategory" class="form-label">Item Category</label>
+                    <select class='form-select bg-dark text-white mt-1' name='itemCategory' required>
+                        <option value="" disabled selected hidden>Please Choose...</option>
+                        <?php
+                            //Query and Execute for the category
+                            $querySelectCategoryInfo = "SELECT name FROM tbl_category WHERE name NOT LIKE 'All' ORDER BY name";
+                            $executeQuerySelectCategoryInfo = mysqli_query($con, $querySelectCategoryInfo);
+
+                            while($categoryInfo = mysqli_fetch_assoc($executeQuerySelectCategoryInfo)) {
+                                $categoryName = $categoryInfo["name"];
+
+                                echo "
+                                    <option value='$categoryName'>$categoryName</option>
+                                ";
+                            }
+                        ?>
+                    </select>
+                </div>
+                <div class="mb-3">
                     <label for="itemPrice" class="form-label">Item Price</label>
                     <div class="input-group mb-3">
                         <span class="input-group-text">₱</span>

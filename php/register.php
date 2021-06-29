@@ -55,7 +55,7 @@
                 <div class="mb-3">
                     <label for="userUsername" class="form-label">Username</label>
                     <input type="text" class="form-control text-light bg-dark" name="userUsername" placeholder="Enter Username" pattern="[A-z0-9À-ž]+" minlength="8" required>
-                    <div class="form-text">(Space are not Allowed)</div>
+                    <div class="form-text">(Spaces are not Allowed)</div>
                 </div>
                 <div class="mb-3">
                     <label for="userPassword" class="form-label">Password</label>
@@ -92,7 +92,7 @@
                 <input type="hidden" name="userUsertype" value="client">
                 <div class="col text-center">
                     <button type="submit" class="btn btn-secondary mb-3 rounded-pill shadow-lg">REGISTER</button>
-                    <p class="m-0">Already have an account? <a href="register.php">Login now</a></p>
+                    <p class="m-0">Already have an account? <a href="login.php">Login now</a></p>
                 </div>
             </form>
         </div>

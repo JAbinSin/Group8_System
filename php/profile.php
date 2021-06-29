@@ -79,9 +79,35 @@
         <!-- Include the navigation bar to the webpage -->
         <?php include_once("../inc/navBar.php"); ?>
 
+        <?php
+            if(isset($_GET["verify"])) {
+                if($_GET["verify"] == "success") {
+                    echo "
+                        <div class='alert alert-center alert-success d-flex align-items-center w-25 alert-dismissible fade show' role='alert'>
+                            <svg class='bi flex-shrink-0 me-2' width='24' height='24' role='img' aria-label='Success:'><use xlink:href='#check-circle-fill'/></svg>
+                            <div>
+                                Email Verification Sent, Check your Email
+                            </div>
+                            <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+                        </div>
+                    ";
+                }
+            }
+        ?>
+
         <!-- Container for the profile information -->
         <div class="container p-3 mb-2 text-white w-75 overflow-auto">
             <div class="row justify-content-center text-break">
+                <?php
+                    if($_SESSION["userType"] == "admin") {
+                        echo "
+                            <div class='col-11 text-center border-end-0 bg-dark'>
+                                <h1 class='text-end pe-3 pt-1'><a href='#' class='text-reset text-decoration-none' onclick='window.history.go(-1); return false;'><i class='bi bi-arrow-counterclockwise'></i>Back</a></h1>
+                                <hr class='m-0'>
+                            </div>
+                        ";
+                    }
+                ?>
                 <div class="col-4 text-center border-end-0 bg-normal-92">
                     <img src="<?php echo "../img/profile/$userProfilePicture"?>" class="img-fluid rounded-circle mx-auto d-block mt-4 profile-picture border border-5" alt="Picture Unavailable">
                     <p class="mt-3 mb-3 h5">@<?php echo $userUsername?></p>
@@ -127,6 +153,21 @@
                             <dd class="col-sm-8 mt-3"><?php echo $userEmail?></dd>
                             <dt class="col-sm-4 mt-3">Email Status: </dt>
                             <dd class="col-sm-8 mt-3 text-light"><?php echo $userValidated == 'yes' ? '<span class="badge bg-success">Verified</span>' : '<span class="badge bg-danger">Not Yet Verified</span>' ?></dd>
+                            <?php
+                                if($userValidated == "no") {
+                                    echo "
+                                        <form action='../email/verifyEmail.php' method='post'>
+                                            <dt class='col-sm-4 mt-3'></dt>
+                                            <dd class='col-sm-8 mt-3'>
+                                                <div class='col text-center'>
+                                                    <button type='submit' name='verifyBtn' class='btn btn-success'>Verify Email</button>
+                                                </div>
+                                            <dd>
+                                            <input type='hidden' name='email' value='$userEmail'>
+                                        </form>
+                                    ";
+                                }
+                            ?>
                         </dl>
                     </div>
                 <div>

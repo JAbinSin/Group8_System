@@ -2,6 +2,9 @@
     //Include the database to the webpage to access it
     include_once("../inc/database.php");
 
+    //Include the email system
+    include_once("../email/orderEmail.php");
+
     //Check if the current user is allowed to access the webpage
     //Need input from the previous form
     if (empty($_POST)) {
@@ -73,6 +76,12 @@
                   $orderIdInfo = mysqli_fetch_assoc($executeQuerySelectOrderId);
                   @$orderId = $orderIdInfo["order_id"] + 1;
 
+                  //Email Form 1
+                  $mail->Subject = "Restauday Order Status";
+                  $mail->Body = "<p>Order Status: Pending</p>";
+                  $mail->Body .= "<p>Order Id: $orderId</p>";
+                  $mail->Body .= "<table><tr><th>Name</th><th>Quantity</th><th>Price</th></tr>";
+
                   for($i=0; $i < (1 + @max(array_keys($_SESSION["cartItemId"]))); $i++) {
                       if(isset($_SESSION["cartItemId"][$i])) {
                           $sessItemId = $_SESSION["cartItemId"][$i];
@@ -85,6 +94,10 @@
                           $itemPrice = $itemInfo["price"];
                           $itemPicture = $itemInfo["picture"];
                           $itemName = $itemInfo["name"];
+                          @$itemTotalQuantity = $itemTotalQuantity + $sessItemQuantity;
+                          $itemPriceTotal = $itemPrice * $sessItemQuantity;
+                          @$itemPriceGrandTotal = $itemPriceGrandTotal + $itemPriceTotal;
+                          $itemPriceTotalFormat = number_format($itemPriceTotal, 2, '.', ',');
 
                           $queryInsert = "
                           INSERT INTO tbl_history(
@@ -113,11 +126,28 @@
 
                           unset($_SESSION["cartItemId"][$i]); //Clear All the Session for cartItemId
                           unset($_SESSION["cartItemQuantity"][$i]); //Clear All the Session for cartItemQuantity
+
+                          //Email Form2 Table
+                          $mail->Body .= "<tr style='text-align: center'><td style='margin: 5px'>$itemName</td><td style='margin: 5px'>$sessItemQuantity</td><td style='margin: 5px'>₱ $itemPriceTotalFormat</td></tr>";
                       }
                   }
                   echo "<div class='alert alert-success text-center overflow-auto' role='alert'>
                           <h2>Items Successfully Purchase.</h2>
                         </div>";
+
+                  $itemPriceGrandTotalFormat = number_format($itemPriceGrandTotal, 2, '.', ',');
+
+                  //Email Form3 Send
+                  $email = $_SESSION["userEmail"];
+                  $mail->Body .= "<tr><td style='margin: 5px'></td><td style='margin: 5px text-align:end'>Total Items:</td><td style='margin: 5px'>$itemTotalQuantity</td></tr>";
+                  $mail->Body .= "<tr><td style='margin: 5px'></td><td style='margin: 5px text-align:end'>Grand Total:</td><td style='margin: 5px'>₱ $itemPriceGrandTotalFormat</td></tr>";
+                  $mail->Body .= "</table>";
+                  $mail->AddAddress("$email");
+
+                  //Only send the email if the email is validated
+                  if($_SESSION["userValidated"] == "yes") {
+                      $mail->Send();
+                  }
                 }
             ?>
             <div class="col text-center">

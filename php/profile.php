@@ -154,7 +154,7 @@
                             <dt class="col-sm-4 mt-3">Email Status: </dt>
                             <dd class="col-sm-8 mt-3 text-light"><?php echo $userValidated == 'yes' ? '<span class="badge bg-success">Verified</span>' : '<span class="badge bg-danger">Not Yet Verified</span>' ?></dd>
                             <?php
-                                if($userValidated == "no") {
+                                if($userValidated == "no" && !isset($_GET["id"])) {
                                     echo "
                                         <form action='../email/verifyEmail.php' method='post'>
                                             <dt class='col-sm-4 mt-3'></dt>

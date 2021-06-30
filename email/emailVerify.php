@@ -3,8 +3,8 @@
     include_once("../inc/database.php");
 
     //Get the values from the url
-    $selector = $_GET["selector"];
-    $validator = $_GET["validator"];
+    @$selector = $_GET["selector"];
+    @$validator = $_GET["validator"];
     $success = false;
 
     if(empty($selector) || empty($validator)) {
@@ -87,7 +87,7 @@
 <html lang="en">
     <head>
         <!-- Title of the site  is set in SESSION from the database.php -->
-        <title><?php echo $_SESSION['siteName']?> | Login</title>
+        <title><?php echo $_SESSION['siteName']?> | Email Verify</title>
 
         <!-- Add a logo for the title head -->
         <link rel="icon" href="../img/logo/logo-test.ico" type="image/ico">

@@ -91,7 +91,6 @@
                                         <option value='$categoryName'>$categoryName</option>
                                     ";
                                 }
-
                             }
                         ?>
                     </select>

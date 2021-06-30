@@ -41,12 +41,22 @@
 
         <?php
             if(isset($_GET["verify"])) {
-                if($_GET["newpass"] == "success") {
+                if($_GET["verify"] == "success") {
                     echo "
                         <div class='alert alert-center alert-success d-flex align-items-center w-25 alert-dismissible fade show' role='alert'>
                             <svg class='bi flex-shrink-0 me-2' width='24' height='24' role='img' aria-label='Success:'><use xlink:href='#check-circle-fill'/></svg>
                             <div>
-                                Password Change.
+                                Password Reset Request Sent, Check your Email
+                            </div>
+                            <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+                        </div>
+                    ";
+                } elseif($_GET["verify"] == "failed") {
+                    echo "
+                        <div class='alert alert-center alert-danger d-flex align-items-center w-25 alert-dismissible fade show' role='alert'>
+                            <svg class='bi flex-shrink-0 me-2' width='24' height='24' role='img' aria-label='Success:'><use xlink:href='#check-circle-fill'/></svg>
+                            <div>
+                                Email Does not Exist.
                             </div>
                             <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
                         </div>
@@ -57,20 +67,16 @@
 
         <!-- This is the container of the form  -->
         <div class="container p-3 mb-2 bg-normal-92 text-white w-25 rounded-3">
-            <h1 class="text-center mb-2 opacity-1">Login</h1>
+            <h1 class="text-center mb-2 opacity-1">Forgot Password</h1>
             <!-- This is the form that would need inputs that would be passed to the loginHandler.php -->
-            <form action="loginHandler.php" method="post">
+            <form action="../email/forgotPasswordEmail.php" method="post">
                 <div class="mb-3">
-                    <label for="username" class="form-label">Username</label>
-                    <input type="text" class="form-control text-light bg-dark" name="username" placeholder="Enter Username" required>
-                </div>
-                <div class="mb-3">
-                    <label for="password" class="form-label">Password</label>
-                    <input type="password" class="form-control text-light bg-dark" name="password" placeholder="Enter Password" required>
+                    <label for="username" class="form-label">Email</label>
+                    <input type="text" class="form-control text-light bg-dark" name="email" placeholder="Enter Email" required>
                 </div>
                 <div class="col text-center">
-                    <button type="submit" class="btn btn-secondary mb-3 rounded-pill shadow-lg">LOGIN</button>
-                    <p class="m-0">Not a member? <a href="register.php">Register now</a></p>
+                    <button type="submit" class="btn btn-secondary mb-3 rounded-pill shadow-lg">Send</button>
+                    <p class="m-0">Already have an account? <a href="login.php">Login now</a></p>
                 </div>
             </form>
         </div>

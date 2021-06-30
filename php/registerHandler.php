@@ -144,7 +144,7 @@
                 }
 
                 //Verify the password length, and usernamne length because whitespace can bypass the minlength attribute in the input tag
-                if((strlen($userPassword) < 8) && !empty($userPassword)) {
+                if((strlen($userPassword) =< 8) && !empty($userPassword)) {
                     $logsErrorTest = true;
                     echo "
                         <div class='alert alert-danger text-center overflow-auto' role='alert'>
@@ -153,7 +153,7 @@
                         </div>
                     ";
                 }
-                if((strlen($userUsername) < 8) && !empty($userUsername)) {
+                if((strlen($userUsername) =< 8) && !empty($userUsername)) {
                     $logsErrorTest = true;
                     echo "
                         <div class='alert alert-danger text-center overflow-auto' role='alert'>

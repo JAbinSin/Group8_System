@@ -70,7 +70,7 @@
                 </div>
                 <div class="col text-center">
                     <button type="submit" class="btn btn-secondary mb-3 rounded-pill shadow-lg">LOGIN</button>
-                    <p class="m-0">Forgot Password? <a href="forgotPassword.php">Register now</a></p>
+                    <p class="m-0"><a href="forgotPassword.php">Forgot Password?</a></p>
                     <p class="m-0">Not a member? <a href="register.php">Register now</a></p>
                 </div>
             </form>

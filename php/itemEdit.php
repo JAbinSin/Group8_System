@@ -12,13 +12,14 @@
     $itemId = $_GET['id'];
 
     //Query and Execute for the user information
-    $querySelectItemInfo = "SELECT name, price, description FROM tbl_items WHERE id = $itemId";
+    $querySelectItemInfo = "SELECT name, price, description, category FROM tbl_items WHERE id = $itemId";
     $executeQuerySelectItemInfo = mysqli_query($con, $querySelectItemInfo);
     $itemInfo = mysqli_fetch_assoc($executeQuerySelectItemInfo);
 
     $itemName = $itemInfo["name"];
     $itemPrice = $itemInfo["price"];
     $itemDescription = $itemInfo["description"];
+    $itemCategory = $itemInfo["category"];
 
     //Redirect the user if the id is invalid
     if(is_null($itemName)) {
@@ -79,10 +80,18 @@
 
                             while($categoryInfo = mysqli_fetch_assoc($executeQuerySelectCategoryInfo)) {
                                 $categoryName = $categoryInfo["name"];
+                                $itemCategory;
 
-                                echo "
-                                    <option value='$categoryName'>$categoryName</option>
-                                ";
+                                if($itemCategory == $categoryName) {
+                                    echo "
+                                        <option value='$categoryName' selected>$categoryName</option>
+                                    ";
+                                } else {
+                                    echo "
+                                        <option value='$categoryName'>$categoryName</option>
+                                    ";
+                                }
+
                             }
                         ?>
                     </select>
